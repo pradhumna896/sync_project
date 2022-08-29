@@ -6,6 +6,7 @@ import 'package:syncdating/components/custom_button.dart';
 import 'package:syncdating/components/custom_text.dart';
 import 'package:syncdating/helper/constants.dart';
 import 'package:syncdating/screens/mobile_number_screen.dart';
+import 'package:syncdating/screens/my_gmail_screen.dart';
 
 import '../components/custom_logo_container.dart';
 
@@ -41,7 +42,7 @@ class SignUpScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 40),
                       child: CustomButton(
                           title: "Continue with email", onclick: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>MobileNumberScreen()));
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>MyGmailScreen()));
                       }),
                     ),
                     SizedBox(

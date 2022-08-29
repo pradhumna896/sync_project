@@ -25,17 +25,21 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
   Widget build(BuildContext context) {
     final provider = Provider.of<AppController>(context);
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        actions: [CustomSkipButton()],
-      ),
+
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Gap(20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [CustomSkipButton(onclick: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (builder) => IAmScreen()));
+              },)],),
+              Gap(20),
               CustomText(
                   title: "Profile details",
                   fontWeight: FontWeight.w700,
@@ -182,26 +186,25 @@ class CustomTableCalender extends StatelessWidget {
               color: kBlackColor,
               fontSize: 14),
           TableCalendar(
-            onDaySelected: (
-                date,
-                events,
-                ) {
+            onDaySelected: (date,
+                events,) {
               provider.chosenDate = date;
               provider.birthDate = DateFormat('yyyy-MM-dd').format(date);
-           /*   setState(() {
+              /*   setState(() {
                 _chosenDate = date;
 
                 birthDate = DateFormat('yyyy-MM-dd').format(date);
               });*/
             },
             calendarStyle: const CalendarStyle(
-                todayDecoration: BoxDecoration(color: kPrimaryColor,shape:BoxShape.circle ),
+                todayDecoration: BoxDecoration(
+                    color: kPrimaryColor, shape: BoxShape.circle),
                 selectedDecoration: BoxDecoration(
                   color: kPrimaryColor,
                 )),
 
             calendarFormat: CalendarFormat.month,
-            daysOfWeekVisible:false,
+            daysOfWeekVisible: false,
 
             headerStyle: HeaderStyle(
               titleCentered: true,
@@ -214,7 +217,9 @@ class CustomTableCalender extends StatelessWidget {
           ),
           Gap(30),
           CustomButton(
-              title: "Save", onclick: () {Navigator.pop(context);}),
+              title: "Save", onclick: () {
+            Navigator.pop(context);
+          }),
           Gap(30),
         ],
       ),

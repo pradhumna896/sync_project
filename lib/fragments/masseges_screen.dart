@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:syncdating/components/custom_text.dart';
 import 'package:syncdating/helper/constants.dart';
+import 'package:syncdating/screens/chat_screen.dart';
 
 class MassegesScreen extends StatelessWidget {
   const MassegesScreen({Key? key}) : super(key: key);
@@ -54,14 +55,14 @@ class MassegesScreen extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.only(top: 5),
           child: InkWell(
-            onTap: (){},
+            onTap: (){Navigator.push(context, MaterialPageRoute(builder: (builder)=>ChatScreen()));},
             child: Container(child: Row(children: [
               Container(
 
                 height: 48,
                 width: 48,
                 decoration: BoxDecoration(
-                    image: DecorationImage(image: AssetImage("assets/images/circlegirlImaage.png",),fit: BoxFit.fill),
+                    image: DecorationImage(image: const AssetImage("assets/images/circlegirlImaage.png",),fit: BoxFit.fill),
                     borderRadius: BorderRadius.circular(48)),
               ),
               Gap(10),
@@ -73,7 +74,7 @@ class MassegesScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        padding: EdgeInsets.only(top: 5),
+                        padding: const EdgeInsets.only(top: 5),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -93,7 +94,7 @@ class MassegesScreen extends StatelessWidget {
                     ],
                   ),
 
-                  Divider(thickness: 1,)
+                  const Divider(thickness: 1,)
                 ],
               ))
             ],),),

@@ -22,7 +22,11 @@ class FriendsScreen extends StatelessWidget {
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: [CustomSkipButton()],
+                children: [CustomSkipButton(onclick: () {
+                  Navigator.push(context, MaterialPageRoute(
+                      builder: (builder) => NotificationScreen()));
+                },)
+                ],
               ),
               Gap(40),
               Image.asset("assets/images/people.png"),
@@ -35,15 +39,17 @@ class FriendsScreen extends StatelessWidget {
               Gap(10),
               CustomText(
                   title:
-                      "You can find friends from your contact liststo connected",
+                  "You can find friends from your contact liststo connected",
                   textAlign: TextAlign.center,
                   fontWeight: FontWeight.w400,
                   color: kBlackColor,
                   fontSize: 14),
               Spacer(),
-              
-              CustomButton(title: "Access to a contact list", onclick: (){Navigator.push(context,
-                  MaterialPageRoute(builder: (ctx)=>NotificationScreen()));}),
+
+              CustomButton(title: "Access to a contact list", onclick: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (ctx) => NotificationScreen()));
+              }),
               Gap(20)
             ],
           ),

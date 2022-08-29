@@ -26,7 +26,10 @@ class PassionsScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomBackButoon(onclick: () {}),
-                  CustomSkipButton()
+                  CustomSkipButton(onclick: () {
+                    Navigator.push(context, MaterialPageRoute(
+                        builder: (builder) => FriendsScreen()));
+                  },)
                 ],
               ),
               Gap(30),

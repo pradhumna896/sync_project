@@ -13,7 +13,7 @@ class CustomSkipButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-        onPressed: () {},
+        onPressed: onclick,
         child: CustomText(
           title: "Skip",
           fontSize: 16,

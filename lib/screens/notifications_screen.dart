@@ -21,7 +21,11 @@ class NotificationScreen extends StatelessWidget {
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: [CustomSkipButton()],
+                children: [CustomSkipButton(onclick: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (builder) => HomeScreen()));
+                },)
+                ],
               ),
               Gap(40),
               Image.asset("assets/images/chat.png"),
@@ -34,7 +38,7 @@ class NotificationScreen extends StatelessWidget {
               Gap(10),
               CustomText(
                   title:
-                      "Get push-notification when you get the match or receive a message.",
+                  "Get push-notification when you get the match or receive a message.",
                   textAlign: TextAlign.center,
                   fontWeight: FontWeight.w400,
                   color: kBlackColor,

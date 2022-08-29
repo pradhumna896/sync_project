@@ -72,11 +72,14 @@ class OnBoardingScreen extends StatelessWidget {
                     title: 'Already have an account?',
                     fontSize: 16,
                   ),
-                  CustomText(
-                    color: Color(0xffE94057),
-                    fontWeight: FontWeight.w400,
-                    title: ' Sign In',
-                    fontSize: 16,
+                  InkWell(
+                    onTap: (){},
+                    child: CustomText(
+                      color: Color(0xffE94057),
+                      fontWeight: FontWeight.w400,
+                      title: ' Sign In',
+                      fontSize: 16,
+                    ),
                   ),
                 ],
               )),

@@ -7,7 +7,7 @@ class AppController with ChangeNotifier{
     notifyListeners();
   }
 
-  int chooseGender = 0;
+  int chooseGender = 1;
   void chooseGenderStatus(int index){
     chooseGender = index;
     notifyListeners();
@@ -21,4 +21,11 @@ void bottomNavStatus(int index){
 
   String birthDate = "Choose birthday date";
   DateTime chosenDate = DateTime.now();
+
+
+  int filter =0;
+  void filterStatus(int index){
+    filter = index;
+    notifyListeners();
+  }
 }
