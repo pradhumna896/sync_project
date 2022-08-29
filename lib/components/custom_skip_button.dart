@@ -5,7 +5,8 @@ import '../helper/constants.dart';
 import 'custom_text.dart';
 
 class CustomSkipButton extends StatelessWidget {
-  const CustomSkipButton({
+  VoidCallback onclick;
+  CustomSkipButton({ required this.onclick,
     Key? key,
   }) : super(key: key);
 
