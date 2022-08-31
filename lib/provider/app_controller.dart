@@ -21,6 +21,10 @@ void bottomNavStatus(int index){
 
   String birthDate = "Choose birthday date";
   DateTime chosenDate = DateTime.now();
+  void setDOB(String date){
+    birthDate =date;
+    notifyListeners();
+  }
 
 
   int filter =0;

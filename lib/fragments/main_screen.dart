@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:expandable_slider/expandable_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -63,7 +65,13 @@ class _MainScreenState extends State<MainScreen> {
             ),
             InkWell(
               onTap: () {
-               Navigator.push(context, MaterialPageRoute(builder: (builder)=> Filter()));
+
+               showModalBottomSheet(
+                   backgroundColor: Colors.transparent,
+                   isScrollControlled: true,
+                   context: context, builder: (BuildContext ctx){
+                 return Filter();
+               });
               },
               child: Container(
                 height: 52,

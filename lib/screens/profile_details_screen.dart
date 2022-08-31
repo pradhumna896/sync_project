@@ -19,6 +19,7 @@ import 'package:syncdating/screens/i_am_screen.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../components/custom_skip_button.dart';
+import '../widget/custom_calender.dart';
 
 class ProfileDetailsScreen extends StatefulWidget {
   ProfileDetailsScreen({Key? key}) : super(key: key);
@@ -247,63 +248,4 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
   }
 }
 
-class CustomTableCalender extends StatelessWidget {
-  const CustomTableCalender({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    final provider = Provider.of<AppController>(context);
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 40),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Gap(56),
-          CustomText(
-              title: "Birthday",
-              fontWeight: FontWeight.w400,
-              color: kBlackColor,
-              fontSize: 14),
-          TableCalendar(
-            onDaySelected: (
-              date,
-              events,
-            ) {
-              provider.chosenDate = date;
-              provider.birthDate = DateFormat('yyyy-MM-dd').format(date);
-              /*   setState(() {
-                _chosenDate = date;
-
-                birthDate = DateFormat('yyyy-MM-dd').format(date);
-              });*/
-            },
-            calendarStyle: const CalendarStyle(
-                todayDecoration:
-                    BoxDecoration(color: kPrimaryColor, shape: BoxShape.circle),
-                selectedDecoration: BoxDecoration(
-                  color: kPrimaryColor,
-                )),
-            calendarFormat: CalendarFormat.month,
-            daysOfWeekVisible: false,
-            headerStyle: HeaderStyle(
-              titleCentered: true,
-              formatButtonVisible: false,
-            ),
-            focusedDay: provider.chosenDate,
-            firstDay: DateTime.utc(2010, 10, 16),
-            lastDay: DateTime.utc(2030, 3, 14),
-            currentDay: provider.chosenDate,
-          ),
-          Gap(30),
-          CustomButton(
-              title: "Save",
-              onclick: () {
-                Navigator.pop(context);
-              }),
-          Gap(30),
-        ],
-      ),
-    );
-  }
-}
