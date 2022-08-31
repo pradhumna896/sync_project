@@ -213,26 +213,55 @@ class ProfileScreen extends StatelessWidget {
                       child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      FloatingActionButton(
-                          backgroundColor: Colors.white,
-                          child: SvgPicture.asset("assets/svg/closeorange.svg"),
-                          onPressed: () {}),
-                      SizedBox(
-                        height: 99,
-                        width: 99,
-                        child: FloatingActionButton(
-                            backgroundColor: kPrimaryColor,
-                            child: SvgPicture.asset(
+                      Material(borderRadius: BorderRadius.circular(55),
+                        elevation: 5,
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(55),
+                          onTap: (){},
+                          child: Container(
+                            height: 55,
+                            width: 55,
+                            decoration: BoxDecoration(
+                                color: Colors.white,shape: BoxShape.circle),
+                            child: Center(child: SvgPicture.asset("assets/svg/closeorange.svg"),),
+                          ),
+                        ),
+                      ),
+
+
+                      Material(borderRadius: BorderRadius.circular(55),
+                        elevation: 5,
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(55),
+                          onTap: (){},
+                          child: Container(
+                            height: 99,
+                            width: 99,
+                            decoration: BoxDecoration(
+                                color: kPrimaryColor,shape: BoxShape.circle),
+                            child: Center(child: SvgPicture.asset(
                               "assets/svg/dilwale.svg",
                               height: 42,
                               width: 42,
-                            ),
-                            onPressed: () {}),
+                            ),),
+                          ),
+                        ),
                       ),
-                      FloatingActionButton(
-                          backgroundColor: Colors.white,
-                          child: SvgPicture.asset("assets/svg/star.svg"),
-                          onPressed: () {}),
+
+                      Material(borderRadius: BorderRadius.circular(55),
+                        elevation: 5,
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(55),
+                          onTap: (){},
+                          child: Container(
+                            height: 55,
+                            width: 55,
+                            decoration: BoxDecoration(
+                                color: Colors.white,shape: BoxShape.circle),
+                            child: Center(child: SvgPicture.asset("assets/svg/star.svg"),),
+                          ),
+                        ),
+                      ),
                     ],
                   )),
                 ),

@@ -20,7 +20,9 @@ class HomeScreen extends StatelessWidget {
     final data = Provider.of<AppController>(context);
     return Scaffold(
       body: SafeArea(child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 40,vertical: 20),
+        padding:
+        const EdgeInsets.symmetric(
+            horizontal: 0,vertical: 0),
         child: widgetList[data.bottomNavIndex],
       )),
       bottomNavigationBar: HomeBottomNavigation(

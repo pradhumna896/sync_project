@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:syncdating/Screens/on_board_screen.dart';
 import 'package:syncdating/helper/constants.dart';
 import 'package:syncdating/provider/app_controller.dart';
+import 'package:syncdating/provider/card_provider.dart';
 import 'package:syncdating/screens/splash_screen.dart';
 
 void main() {
@@ -17,14 +18,22 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (create)=>AppController())
+        ChangeNotifierProvider(create: (create)=>AppController()),
+        ChangeNotifierProvider(create: (create)=>CardProvider())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
 
-          primarySwatch: MaterialColor(0xffE94057,kColorsMap)
+          primarySwatch: MaterialColor(0xffE94057,kColorsMap),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              elevation: 8,
+              shape: CircleBorder(),
+              minimumSize: Size.square(60)
+            )
+          )
         ),
         home:SplashScreen(),
       ),

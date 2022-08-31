@@ -28,4 +28,10 @@ void bottomNavStatus(int index){
     filter = index;
     notifyListeners();
   }
+
+  int isSelected = 0;
+  void isSelectedStatus(int index){
+    isSelected=index;
+    notifyListeners();
+  }
 }

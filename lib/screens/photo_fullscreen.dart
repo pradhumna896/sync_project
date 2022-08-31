@@ -16,7 +16,8 @@ class PhotoFullScreen extends StatelessWidget {
       Gap(20),
       Expanded(child: PhotoView(
           backgroundDecoration: BoxDecoration(color: Colors.transparent),
-          imageProvider: AssetImage("assets/images/profilepicture.png")))
+          imageProvider: AssetImage("assets/images/profilepicture.png",),filterQuality: FilterQuality.high,)),
+      Container(height: 200,)
     ],),);
   }
 }

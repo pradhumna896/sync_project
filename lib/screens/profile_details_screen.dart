@@ -1,6 +1,14 @@
+
+
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:image_picker/image_picker.dart';
+
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:syncdating/components/custom_button.dart';
@@ -20,12 +28,72 @@ class ProfileDetailsScreen extends StatefulWidget {
 }
 
 class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
+ File? pickedImage;
+
+
+ pickImage(ImageSource imageType) async {
+   try {
+     final photo = await ImagePicker().pickImage(source: imageType);
+     if (photo == null) return;
+     final tempImage = File(photo.path);
+     setState(() {
+       pickedImage = tempImage;
+     });
+
+     Get.back();
+   } catch (error) {
+     debugPrint(error.toString());
+   }
+ }
+  void showImage() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                InkWell(
+                  onTap: (){
+                    pickImage(ImageSource.gallery);
+                    Navigator.pop(context);
+                  },
+                  child: ListTile(
+                    leading: Icon(Icons.photo_camera_back,color: kPrimaryColor,),
+                    title: CustomText(
+                        title: "Gallery",
+                        color: kBlackColor,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14),
+
+                  ),
+                ),
+                InkWell(
+                  onTap: (){
+                    pickImage(ImageSource.camera);
+                    Navigator.pop(context);
+
+                  },
+                  child: ListTile(
+                    leading: Icon(Icons.camera_alt,color: kPrimaryColor,),
+                    title: CustomText(
+                        title: "Camera",
+                        color: kBlackColor,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14),
+
+                  ),
+                )
+              ],
+            ),
+          );
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<AppController>(context);
     return Scaffold(
-
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
         child: SingleChildScrollView(
@@ -35,10 +103,15 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
               Gap(20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: [CustomSkipButton(onclick: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (builder) => IAmScreen()));
-              },)],),
+                children: [
+                  CustomSkipButton(
+                    onclick: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (builder) => IAmScreen()));
+                    },
+                  )
+                ],
+              ),
               Gap(20),
               CustomText(
                   title: "Profile details",
@@ -52,21 +125,29 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                   Container(
                     height: 110,
                     width: 105,
-                    child: LayoutBuilder(builder: (buildContext, context) {
-                      return Stack(
-                        children: [
-                          Image.asset(
-                            "assets/images/profilepic.png",
-                            height: 99,
-                            width: 99,
-                          ),
-                          Positioned(
-                              right: 0,
-                              bottom: 0,
-                              child: SvgPicture.asset("assets/svg/camera.svg"))
-                        ],
-                      );
-                    }),
+                    child:Stack(
+                      children: [
+                        pickedImage != null?ClipRRect(
+                          borderRadius: BorderRadius.circular(15),
+                          child: Image.file(pickedImage!,fit: BoxFit.cover,height: 99,
+                            width: 99,),):Image.asset(
+                          "assets/images/profilepic.png",
+                          height: 99,
+                          width: 99,
+                        ),
+                        Positioned(
+                            right: 0,
+                            bottom: 0,
+                            child: InkWell(
+                                onTap: () {
+                                  showImage();
+
+
+                                },
+                                child: SvgPicture.asset(
+                                    "assets/svg/camera.svg")))
+                      ],
+                    )
                   ),
                 ],
               ),
@@ -173,8 +254,7 @@ class CustomTableCalender extends StatelessWidget {
   Widget build(BuildContext context) {
     final provider = Provider.of<AppController>(context);
     return Padding(
-      padding: const EdgeInsets.symmetric(
-          horizontal: 40),
+      padding: const EdgeInsets.symmetric(horizontal: 40),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         mainAxisSize: MainAxisSize.min,
@@ -186,8 +266,10 @@ class CustomTableCalender extends StatelessWidget {
               color: kBlackColor,
               fontSize: 14),
           TableCalendar(
-            onDaySelected: (date,
-                events,) {
+            onDaySelected: (
+              date,
+              events,
+            ) {
               provider.chosenDate = date;
               provider.birthDate = DateFormat('yyyy-MM-dd').format(date);
               /*   setState(() {
@@ -197,15 +279,13 @@ class CustomTableCalender extends StatelessWidget {
               });*/
             },
             calendarStyle: const CalendarStyle(
-                todayDecoration: BoxDecoration(
-                    color: kPrimaryColor, shape: BoxShape.circle),
+                todayDecoration:
+                    BoxDecoration(color: kPrimaryColor, shape: BoxShape.circle),
                 selectedDecoration: BoxDecoration(
                   color: kPrimaryColor,
                 )),
-
             calendarFormat: CalendarFormat.month,
             daysOfWeekVisible: false,
-
             headerStyle: HeaderStyle(
               titleCentered: true,
               formatButtonVisible: false,
@@ -217,13 +297,13 @@ class CustomTableCalender extends StatelessWidget {
           ),
           Gap(30),
           CustomButton(
-              title: "Save", onclick: () {
-            Navigator.pop(context);
-          }),
+              title: "Save",
+              onclick: () {
+                Navigator.pop(context);
+              }),
           Gap(30),
         ],
       ),
     );
   }
 }
-
