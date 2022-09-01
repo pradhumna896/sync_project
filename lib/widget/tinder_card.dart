@@ -197,8 +197,8 @@ class _TinderCardState extends State<TinderCard> {
       child: Transform.rotate(
         angle: angle,
         child: Container(
-            height: 42,
-            width: 42,
+            height: 60,
+            width: 60,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: Colors.white,

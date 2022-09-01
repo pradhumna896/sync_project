@@ -15,6 +15,7 @@ import 'package:syncdating/components/custom_button.dart';
 import 'package:syncdating/components/custom_text.dart';
 import 'package:syncdating/helper/constants.dart';
 import 'package:syncdating/provider/app_controller.dart';
+import 'package:syncdating/screens/about_me_screen.dart';
 import 'package:syncdating/screens/i_am_screen.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -238,7 +239,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                   title: "Confirm",
                   onclick: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => IAmScreen()));
+                        MaterialPageRoute(builder: (context) => AboutMeScreen()));
                   })
             ],
           ),

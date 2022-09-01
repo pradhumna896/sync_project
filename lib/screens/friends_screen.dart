@@ -45,6 +45,8 @@ class FriendsScreen extends StatelessWidget {
                   color: kBlackColor,
                   fontSize: 14),
               Spacer(),
+              CustomButton(title: " Invite friends and Share", onclick: (){}),
+              Gap(20),
 
               CustomButton(title: "Access to a contact list", onclick: () {
                 Navigator.push(context,

@@ -12,10 +12,17 @@ import 'package:syncdating/model/gender_modal.dart';
 import 'package:syncdating/screens/passions_screen.dart';
 
 import '../provider/app_controller.dart';
+const List<String> list = ["Choose another","Intersex", 'Trans',' Non-Conforming', 'Eunuch'];
 
-class IAmScreen extends StatelessWidget {
+class IAmScreen extends StatefulWidget {
   const IAmScreen({Key? key}) : super(key: key);
 
+  @override
+  State<IAmScreen> createState() => _IAmScreenState();
+}
+
+class _IAmScreenState extends State<IAmScreen> {
+  String dropdownValue = list.first;
   @override
   Widget build(BuildContext context) {
     final data = Provider.of<AppController>(context);
@@ -79,6 +86,58 @@ class IAmScreen extends StatelessWidget {
                       ),
                     ),
                   )),),
+              Gap(20),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                height: 56,
+                width: double.maxFinite,
+                decoration: BoxDecoration(
+                    border: Border.all(color: kgreyColor),
+                    borderRadius: BorderRadius.circular(15)),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<String>(
+                          onTap: (){
+                            data.chooseGenderStatus(-1);
+                          },
+                          value: dropdownValue,
+                          icon: const Icon(Icons.keyboard_arrow_down),
+                          elevation: 16,
+                          style: const TextStyle(color: Colors.deepPurple),
+                          underline: Container(
+                            height: 2,
+                            color: Colors.deepPurpleAccent,
+                          ),
+                          onChanged: (String? value) {
+
+                            // This is called when the user selects an item.
+                            setState(() {
+
+                              dropdownValue = value!;
+                            });
+                          },
+                          items:
+                          list.map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: CustomText(
+                                title: value,
+                                color: kBlackColor,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+
               Spacer(),
 
               CustomButton(title: "Continue", onclick: () {
