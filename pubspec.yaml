@@ -48,6 +48,7 @@ dependencies:
   grouped_list: ^5.1.2
   expandable_slider: ^2.0.0
   image_picker: ^0.8.5+3
+  google_fonts: ^3.0.1
 flutter_native_splash:
 
   image: assets/images/synclogo.png

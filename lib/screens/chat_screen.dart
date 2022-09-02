@@ -6,6 +6,7 @@ import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
 import 'package:syncdating/components/custom_text.dart';
 import 'package:syncdating/helper/constants.dart';
+import 'package:syncdating/screens/photo_fullscreen.dart';
 
 import '../model/message_modal.dart';
 
@@ -44,27 +45,32 @@ class ChatScreen extends StatelessWidget {
             Gap(20),
             Row(
               children: [
-                Container(
-                  height: 56,
-                  width: 56,
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      gradient: LinearGradient(colors: [
-                        Color(0xffF27121),
-                        Color(0xffE94057),
-                        Color(0xff8A2387)
-                      ])),
-                  child: Card(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50)),
-                      margin: EdgeInsets.all(2),
-                      child: Padding(
-                        padding: const EdgeInsets.all(2),
-                        child: Image.asset(
-                          "assets/images/chatphoto.png",
-                          fit: BoxFit.fill,
-                        ),
-                      )),
+                InkWell(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (builder)=>PhotoFullScreen()));
+                  },
+                  child: Container(
+                    height: 56,
+                    width: 56,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        gradient: LinearGradient(colors: [
+                          Color(0xffF27121),
+                          Color(0xffE94057),
+                          Color(0xff8A2387)
+                        ])),
+                    child: Card(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50)),
+                        margin: EdgeInsets.all(2),
+                        child: Padding(
+                          padding: const EdgeInsets.all(2),
+                          child: Image.asset(
+                            "assets/images/chatphoto.png",
+                            fit: BoxFit.fill,
+                          ),
+                        )),
+                  ),
                 ),
                 Gap(15),
                 Expanded(

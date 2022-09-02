@@ -10,14 +10,28 @@ import 'package:syncdating/components/custom_text.dart';
 import 'package:syncdating/helper/constants.dart';
 import 'package:syncdating/provider/app_controller.dart';
 
+import '../model/Intrest_modal.dart';
 import 'friends_screen.dart';
 
-class PassionsScreen extends StatelessWidget {
+class PassionsScreen extends StatefulWidget {
   const PassionsScreen({Key? key}) : super(key: key);
+
+  @override
+  State<PassionsScreen> createState() => _PassionsScreenState();
+}
+
+class _PassionsScreenState extends State<PassionsScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Provider.of<AppController>(context, listen: false).interestsListContent();
+  }
 
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<AppController>(context);
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -28,11 +42,15 @@ class PassionsScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  CustomBackButoon(onclick: () {}),
-                  CustomSkipButton(onclick: () {
-                    Navigator.push(context, MaterialPageRoute(
-                        builder: (builder) => FriendsScreen()));
-                  },)
+                  CustomBackButoon(onclick: () {Navigator.pop(context);}),
+                  CustomSkipButton(
+                    onclick: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (builder) => FriendsScreen()));
+                    },
+                  )
                 ],
               ),
               Gap(30),
@@ -46,13 +64,65 @@ class PassionsScreen extends StatelessWidget {
                 fontWeight: FontWeight.w400,
                 color: kBlackColor,
                 title:
-                'Select a few of your interests and let everyone know what you’re passionate about.',
+                    'Select a few of your interests and let everyone know what you’re passionate about.',
                 fontSize: 14,
               ),
               Gap(30),
               Expanded(
-                child: GridView.builder(
-                    itemCount: 25, shrinkWrap: true,
+                child: Wrap(
+                  runSpacing: 5,
+                  spacing: 10,
+                  children: List.generate(
+                      provider.interestsList.length,
+                      (index) => InkWell(
+                            onTap: () {
+                              provider.updateInterestList(
+                                  provider.interestsList[index]);
+                            },
+                            child: Card(
+                              color: provider.interestsList[index].isSelected
+                                  ? kPrimaryColor
+                                  : Colors.white,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15)),
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(provider.interestsList[index].icon),
+                                    Gap(10),
+                                    CustomText(
+                                        title:
+                                            provider.interestsList[index].title,
+                                        fontWeight: FontWeight.w400,
+                                        color: kBlackColor,
+                                        fontSize: 14)
+                                  ],
+                                ),
+                              ),
+                            ),
+                          )),
+                ),
+              ),
+              Gap(10),
+              CustomButton(
+                  title: "Continue",
+                  onclick: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (ctx) => FriendsScreen()));
+                  })
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+/*
+GridView.builder(
+                    itemCount: provider.interestsList.length, shrinkWrap: true,
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         crossAxisSpacing: 5,
@@ -62,40 +132,28 @@ class PassionsScreen extends StatelessWidget {
                     itemBuilder: (BuildContext context, index) {
                       return InkWell(
                         onTap: (){
-                          provider.isSelectedStatus(index);
+                          provider.updateInterestList(provider.interestsList[index]);
 
                         },
                         child: Card(
-                          color: provider.isSelected==index?kPrimaryColor:Color(0xffffffff),
+                          color:provider.interestsList[index].isSelected?kPrimaryColor:Colors.white,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15)),
 
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 10),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                               children: [
-                                SvgPicture.asset("assets/svg/camera2.svg",
-                                  color: provider.isSelected==index?Color(0xffffffff):kPrimaryColor,),
-                                CustomText(title: "Photography",
+                                Icon(provider.interestsList[index].icon),
+                                Gap(10),
+                                CustomText(title: provider.interestsList[index].title,
                                     fontWeight: FontWeight.w400,
-                                    color:provider.isSelected==index?Color(0xffffffff): kBlackColor,
+                                    color: kBlackColor,
                                     fontSize: 14)
                               ],),
                           ),
                         ),
                       );
                     }),
-              ),
-              Gap(10),
-              CustomButton(title: "Continue", onclick: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (ctx) => FriendsScreen()));
-              })
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
+ */

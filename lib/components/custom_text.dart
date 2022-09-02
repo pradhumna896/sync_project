@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 
 class CustomText extends StatelessWidget {
   String title;
@@ -20,11 +22,12 @@ class CustomText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       title,
-      style: TextStyle(
+
+      style:GoogleFonts.nunito(
           fontSize: fontSize,
           fontWeight: fontWeight,
           color: color,
-          fontFamily: "Sk-Modernist"),
+          ),
       textScaleFactor: 1,
       textAlign: textAlign,
     );

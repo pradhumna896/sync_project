@@ -44,6 +44,9 @@ class OtpScreen extends StatelessWidget {
                     textAlign: TextAlign.center),
                 Gap(48),
                 OtpTextField(
+                  // fillColor: kPrimaryColor,
+                  // filled: true,
+                  autoFocus: true,
 
                   onSubmit: (val){
                     if(val.length==4){
@@ -56,9 +59,14 @@ class OtpScreen extends StatelessWidget {
                   showFieldAsBox: true,
                   fieldWidth: 60,
                   decoration: InputDecoration(
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: kPrimaryColor),
+                        borderRadius: BorderRadius.circular(15)),
                       hintText: "0",
                       hintStyle: TextStyle(color: kgreyColor),
+
                       border: OutlineInputBorder(
+                        borderSide: BorderSide(color: kPrimaryColor),
                           borderRadius: BorderRadius.circular(15))),
                 ),
                 Gap(20),

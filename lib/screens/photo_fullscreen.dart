@@ -11,7 +11,7 @@ class PhotoFullScreen extends StatelessWidget {
       Gap(44),
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 40),
-        child: Row(children: [CustomBackButoon(onclick: (){})],),
+        child: Row(children: [CustomBackButoon(onclick: (){Navigator.pop(context);})],),
       ),
       Gap(20),
       Expanded(child: PhotoView(

@@ -35,6 +35,16 @@ class _MainScreenState extends State<MainScreen> {
 
   int counter = 4;
   int filter = 0;
+  @override
+  void initState(){
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      final size = MediaQuery.of(context).size;
+
+      final provider = Provider.of<CardProvider>(context,listen: false);
+      provider.setScreenSize(size);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

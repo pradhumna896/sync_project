@@ -17,8 +17,11 @@ class CustomTableCalender extends StatefulWidget {
 }
 
 class _CustomTableCalenderState extends State<CustomTableCalender> {
-
   var chosenDate = DateTime.now();
+  var focusedYear = DateTime.now();
+
+  String? selectedDate;
+
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<AppController>(context);
@@ -35,23 +38,29 @@ class _CustomTableCalenderState extends State<CustomTableCalender> {
               color: kBlackColor,
               fontSize: 14),
           TableCalendar(
+            // calendarFormat: _calendarFormat,
+            // onFormatChanged: (format) {
+            //   setState(() {
+            //     _calendarFormat = format;
+            //   });
+            // },
 
             onDaySelected: (
-                date,
-                events,
-                ) {
+              date,
+              events,
+            ) {
               provider.chosenDate = date;
-              provider.setDOB(DateFormat('yyyy-MM-dd').format(date));
-                setState(() {
+              selectedDate = DateFormat('dd-MM-yyyy').format(date);
+
+              provider.setDOB(selectedDate!);
+
+              setState(() {
                 chosenDate = date;
-
-                var birthDate = DateFormat('yyyy-MM-dd').format(date);
-
               });
             },
             calendarStyle: const CalendarStyle(
                 todayDecoration:
-                BoxDecoration(color: kPrimaryColor, shape: BoxShape.circle),
+                    BoxDecoration(color: kPrimaryColor, shape: BoxShape.circle),
                 selectedDecoration: BoxDecoration(
                   color: kPrimaryColor,
                 )),
@@ -61,20 +70,41 @@ class _CustomTableCalenderState extends State<CustomTableCalender> {
               titleCentered: true,
               formatButtonVisible: false,
             ),
-            focusedDay: chosenDate,
+            focusedDay: DateTime.now(),
             firstDay: DateTime.utc(2010, 10, 16),
-            lastDay: DateTime.utc(2030, 3, 14),
+            lastDay: DateTime.now(),
             currentDay: chosenDate,
           ),
           Gap(30),
           CustomButton(
               title: "Save",
               onclick: () {
+                bool age = isAdult2(selectedDate!);
+                print(age);
                 Navigator.pop(context);
               }),
           Gap(30),
         ],
       ),
     );
+  }
+
+  bool isAdult2(String birthDateString) {
+    String datePattern = "dd-MM-yyyy";
+
+    // Current time - at this moment
+    DateTime today = DateTime.now();
+
+    // Parsed date to check
+    DateTime birthDate = DateFormat(datePattern).parse(birthDateString);
+
+    // Date to check but moved 18 years ahead
+    DateTime adultDate = DateTime(
+      birthDate.year + 18,
+      birthDate.month,
+      birthDate.day,
+    );
+
+    return adultDate.isBefore(today);
   }
 }

@@ -98,8 +98,21 @@ class MatchesScreen extends StatelessWidget {
                                       "assets/images/matchesgirlimage.png"),
                                   fit: BoxFit.fill)),
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
+
                             children: [
+                              Visibility(
+                                visible: index==2,
+                                child: Align(
+                                  alignment: Alignment.topRight,
+                                  child: Container(
+                                    margin: EdgeInsets.all(5),
+                                    padding: EdgeInsets.all(8),
+                                    decoration: BoxDecoration(shape: BoxShape.circle,color: Colors.white),
+                                    child: Icon(Icons.favorite,color: kPrimaryColor,),
+                                  ),
+                                ),
+                              ),
+                              Spacer(),
                               Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 12),
@@ -202,8 +215,21 @@ class MatchesScreen extends StatelessWidget {
                                     "assets/images/matchesgirlimage.png"),
                                 fit: BoxFit.fill)),
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
+
                           children: [
+                            Visibility(
+                              visible: index==1,
+                              child: Align(
+                                alignment: Alignment.topRight,
+                                child: Container(
+                                  margin: EdgeInsets.all(5),
+                                  padding: EdgeInsets.all(8),
+                                  decoration: BoxDecoration(shape: BoxShape.circle,color: Colors.white),
+                                  child: Icon(Icons.favorite,color: kPrimaryColor,),
+                                ),
+                              ),
+                            ),
+                            Spacer(),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 12),
                               child: Row(
