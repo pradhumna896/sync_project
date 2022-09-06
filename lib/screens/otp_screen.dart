@@ -2,11 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:gap/gap.dart';
-import 'package:syncdating/components/custom_text.dart';
+// import '../../../Dawners/lib/helper/custom_text.dart';
 import 'package:syncdating/helper/constants.dart';
 import 'package:syncdating/screens/profile_details_screen.dart';
 
 import '../components/custom_back_button.dart';
+import '../components/custom_text.dart';
 
 class OtpScreen extends StatelessWidget {
   const OtpScreen({Key? key}) : super(key: key);

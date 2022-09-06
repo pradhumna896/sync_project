@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:syncdating/components/custom_back_button.dart';
 import 'package:syncdating/screens/photo_fullscreen.dart';
 
+// import '../../../Dawners/lib/helper/custom_text.dart';
 import '../components/custom_text.dart';
 import '../helper/constants.dart';
 

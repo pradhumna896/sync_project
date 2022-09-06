@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:syncdating/components/custom_back_button.dart';
-import 'package:syncdating/components/custom_text.dart';
+// import '../../../Dawners/lib/helper/custom_text.dart';
 import 'package:syncdating/helper/constants.dart';
 import 'package:syncdating/model/profile_modal.dart';
+
+import '../components/custom_text.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);

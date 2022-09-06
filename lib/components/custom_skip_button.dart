@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../helper/constants.dart';
+// import '../../../Dawners/lib/helper/custom_text.dart';
 import 'custom_text.dart';
 
 class CustomSkipButton extends StatelessWidget {

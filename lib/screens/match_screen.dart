@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:syncdating/components/custom_button.dart';
-import 'package:syncdating/components/custom_text.dart';
+// import '../../../Dawners/lib/helper/custom_text.dart';
 import 'package:syncdating/helper/constants.dart';
+
+import '../components/custom_text.dart';
 
 class MatchScreen extends StatelessWidget {
   const MatchScreen({Key? key}) : super(key: key);

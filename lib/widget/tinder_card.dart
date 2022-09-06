@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
-import 'package:syncdating/components/custom_text.dart';
+// import '../../../Dawners/lib/helper/custom_text.dart';
 import 'package:syncdating/helper/constants.dart';
+import 'package:syncdating/screens/profile_screen.dart';
 
+import '../components/custom_text.dart';
 import '../provider/card_provider.dart';
 
 class TinderCard extends StatefulWidget {
@@ -86,55 +88,37 @@ class _TinderCardState extends State<TinderCard> {
                 alignment: Alignment(-0.3, 0)),
           ),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Row(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Colors.black54,
-                        borderRadius: BorderRadius.circular(7)),
-                    margin:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                    child: Row(
-                      children: [
-                        SvgPicture.asset("assets/svg/location_icon.svg"),
-                        const Gap(5),
-                        CustomText(
-                            title: "1 km",
-                            fontWeight: FontWeight.w700,
-                            color: Colors.white,
-                            fontSize: 12)
-                      ],
-                    ),
-                  )
-                ],
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 5),
-                width: double.maxFinite,
-                height: 70,
-                decoration: BoxDecoration(
-                    color: Colors.black54,
-                    borderRadius: BorderRadius.only(
-                        bottomRight: Radius.circular(15),
-                        bottomLeft: Radius.circular(15))),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomText(
-                        title: "Jessica Parker, 23",
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white,
-                        fontSize: 24),
-                    CustomText(
-                        title: "Professional model",
-                        fontWeight: FontWeight.w400,
-                        color: Colors.white,
-                        fontSize: 14)
-                  ],
+
+              InkWell(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (ctx)=>ProfileScreen()));
+                },
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+                  width: double.maxFinite,
+                  height: 70,
+                  decoration: BoxDecoration(
+                      color: Colors.black54,
+                      borderRadius: BorderRadius.only(
+                          bottomRight: Radius.circular(15),
+                          bottomLeft: Radius.circular(15))),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CustomText(
+                          title: "Jessica Parker, 23",
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
+                          fontSize: 24),
+                      CustomText(
+                          title: "Professional model",
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white,
+                          fontSize: 14)
+                    ],
+                  ),
                 ),
               )
             ],

@@ -4,10 +4,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
-import 'package:syncdating/components/custom_text.dart';
+// import '../../../Dawners/lib/helper/custom_text.dart';
 import 'package:syncdating/helper/constants.dart';
 import 'package:syncdating/screens/photo_fullscreen.dart';
 
+import '../components/custom_text.dart';
 import '../model/message_modal.dart';
 
 class ChatScreen extends StatelessWidget {

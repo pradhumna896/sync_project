@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:syncdating/components/custom_button.dart';
-import 'package:syncdating/components/custom_text.dart';
+// import '../../../Dawners/lib/helper/custom_text.dart';
 import 'package:syncdating/helper/constants.dart';
 import 'package:syncdating/screens/mobile_number_screen.dart';
 import 'package:syncdating/screens/my_gmail_screen.dart';
 
 import '../components/custom_logo_container.dart';
+import '../components/custom_text.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({Key? key}) : super(key: key);

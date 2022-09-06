@@ -6,10 +6,11 @@ import 'package:provider/provider.dart';
 import 'package:syncdating/components/custom_back_button.dart';
 import 'package:syncdating/components/custom_button.dart';
 import 'package:syncdating/components/custom_skip_button.dart';
-import 'package:syncdating/components/custom_text.dart';
+// import '../../../Dawners/lib/helper/custom_text.dart';
 import 'package:syncdating/helper/constants.dart';
 import 'package:syncdating/provider/app_controller.dart';
 
+import '../components/custom_text.dart';
 import '../model/Intrest_modal.dart';
 import 'friends_screen.dart';
 

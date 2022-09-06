@@ -2,9 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:syncdating/components/custom_button.dart';
-import 'package:syncdating/components/custom_text.dart';
+// import '../../../Dawners/lib/helper/custom_text.dart';
 import 'package:syncdating/helper/constants.dart';
 import 'package:syncdating/screens/otp_screen.dart';
+
+import '../components/custom_text.dart';
 
 class MobileNumberScreen extends StatelessWidget {
   const MobileNumberScreen({Key? key}) : super(key: key);

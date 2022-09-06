@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:syncdating/components/custom_text.dart';
+// import '../../../Dawners/lib/helper/custom_text.dart';
 import 'package:syncdating/helper/constants.dart';
 import 'package:syncdating/model/onboard_model.dart';
 import 'package:syncdating/screens/signup_screen.dart';
 import 'package:syncdating/widget/home_slider.dart';
 
 import '../components/custom_button.dart';
+import '../components/custom_text.dart';
 import '../helper/style.dart';
 import '../provider/app_controller.dart';
 

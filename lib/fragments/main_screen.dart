@@ -11,13 +11,14 @@ import 'package:provider/provider.dart';
 import 'package:swipeable_card_stack/swipeable_card_stack.dart';
 import 'package:syncdating/components/custom_back_button.dart';
 import 'package:syncdating/components/custom_button.dart';
-import 'package:syncdating/components/custom_text.dart';
+// import '../../../Dawners/lib/helper/custom_text.dart';
 import 'package:syncdating/helper/constants.dart';
 import 'package:syncdating/provider/app_controller.dart';
 import 'package:syncdating/provider/card_provider.dart';
 import 'package:syncdating/screens/filtter_screen.dart';
 import 'package:syncdating/screens/match_screen.dart';
 
+import '../components/custom_text.dart';
 import '../widget/tinder_card.dart';
 import 'main_screen.dart';
 import 'main_screen.dart';
@@ -144,10 +145,12 @@ class _MainScreenState extends State<MainScreen> {
   Widget buildCards() {
     final provider = Provider.of<CardProvider>(context);
     final urlImages = provider.urlImage;
-    return urlImages.isEmpty? CustomButton(title: "Restart", onclick: (){
+    return urlImages.isEmpty?
+    CustomButton(title: "Restart", onclick: (){
       final provider = Provider.of<CardProvider>(context,listen: false);
       provider.resetUsers();
-    }):Stack(
+    })
+        :Stack(
       children:
           urlImages.map((urlImage) => TinderCard(urlImage: urlImage,
           isFront: urlImages.last == urlImage,

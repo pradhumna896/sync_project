@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:syncdating/components/custom_button.dart';
 import 'package:syncdating/components/custom_skip_button.dart';
-import 'package:syncdating/components/custom_text.dart';
+// import '../../../Dawners/lib/helper/custom_text.dart';
 import 'package:syncdating/helper/constants.dart';
 import 'package:syncdating/screens/i_am_screen.dart';
+
+import '../components/custom_text.dart';
 
 const List<String> list = ["Current Location","Job", "Study"];
 const List<String> list1 = ["Permanent Location","zone-I", "zone-II"];

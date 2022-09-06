@@ -12,7 +12,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:syncdating/components/custom_button.dart';
-import 'package:syncdating/components/custom_text.dart';
+// import '../../../Dawners/lib/helper/custom_text.dart';
 import 'package:syncdating/helper/constants.dart';
 import 'package:syncdating/provider/app_controller.dart';
 import 'package:syncdating/screens/about_me_screen.dart';
@@ -20,6 +20,7 @@ import 'package:syncdating/screens/i_am_screen.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../components/custom_skip_button.dart';
+import '../components/custom_text.dart';
 import '../widget/custom_calender.dart';
 
 class ProfileDetailsScreen extends StatefulWidget {

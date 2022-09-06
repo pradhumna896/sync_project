@@ -6,11 +6,12 @@ import 'package:provider/provider.dart';
 import 'package:syncdating/components/custom_back_button.dart';
 import 'package:syncdating/components/custom_button.dart';
 import 'package:syncdating/components/custom_skip_button.dart';
-import 'package:syncdating/components/custom_text.dart';
+// import '../../../Dawners/lib/helper/custom_text.dart';
 import 'package:syncdating/helper/constants.dart';
 import 'package:syncdating/model/gender_modal.dart';
 import 'package:syncdating/screens/passions_screen.dart';
 
+import '../components/custom_text.dart';
 import '../provider/app_controller.dart';
 const List<String> list = ["Choose another","Intersex", 'Trans',' Non-Conforming', 'Eunuch'];
 
