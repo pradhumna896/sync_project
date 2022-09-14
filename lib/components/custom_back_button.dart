@@ -15,11 +15,10 @@ class CustomBackButoon extends StatelessWidget {
     return InkWell(
       onTap:onclick,
       child: Container(
-        height: 52,
-        width: 52,
+
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
-            border: Border.all(color: kgreyColor)),
+           ),
         child: Center(child: Icon(Icons.arrow_back_ios,color: iconColor,size: 18,)),
       ),
     );

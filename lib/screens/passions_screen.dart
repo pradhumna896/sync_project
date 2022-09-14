@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:syncdating/components/custom_back_button.dart';
 import 'package:syncdating/components/custom_button.dart';
 import 'package:syncdating/components/custom_skip_button.dart';
+
 // import '../../../Dawners/lib/helper/custom_text.dart';
 import 'package:syncdating/helper/constants.dart';
 import 'package:syncdating/provider/app_controller.dart';
@@ -43,7 +44,9 @@ class _PassionsScreenState extends State<PassionsScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  CustomBackButoon(onclick: () {Navigator.pop(context);}),
+                  CustomBackButoon(onclick: () {
+                    Navigator.pop(context);
+                  }),
                   CustomSkipButton(
                     onclick: () {
                       Navigator.push(
@@ -70,43 +73,46 @@ class _PassionsScreenState extends State<PassionsScreen> {
               ),
               Gap(30),
               Expanded(
-                child: Wrap(
-                  runSpacing: 5,
-                  spacing: 10,
-                  children: List.generate(
-                      provider.interestsList.length,
-                      (index) => InkWell(
-                            onTap: () {
-                              provider.updateInterestList(
-                                  provider.interestsList[index]);
-                            },
-                            child: Card(
-                              color: provider.interestsList[index].isSelected
-                                  ? kPrimaryColor
-                                  : Colors.white,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15)),
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Icon(provider.interestsList[index].icon),
-                                    Gap(10),
-                                    CustomText(
-                                        title:
-                                            provider.interestsList[index].title,
-                                        fontWeight: FontWeight.w400,
-                                        color: kBlackColor,
-                                        fontSize: 14)
-                                  ],
-                                ),
+                  child: GridView.builder(
+                    itemCount: provider.interestsList.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10,
+                        childAspectRatio: 3/2,
+                        mainAxisExtent: 45,
+                          crossAxisCount: 2),
+                      itemBuilder: (BuildContext context,index){
+                        return InkWell(
+                          onTap: () {
+                            provider.updateInterestList(
+                                provider.interestsList[index]);
+
+                          },
+                          child: Card(
+                            color: provider.interestsList[index].isSelected
+                                ? kPrimaryColor : Colors.white,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15)),
+                            child: Padding(
+                              padding:
+                              const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(provider.interestsList[index].icon,color: provider.interestsList[index].isSelected?Colors.white:kBlackColor,),
+                                  Gap(5),
+                                  CustomText(
+                                      title:
+                                      provider.interestsList[index].title,
+                                      fontWeight: FontWeight.w400,
+                                      color: provider.interestsList[index].isSelected?Colors.white:kBlackColor,
+                                      fontSize: 13)
+                                ],
                               ),
                             ),
-                          )),
-                ),
-              ),
+                          ),
+                        );
+                      })),
               Gap(10),
               CustomButton(
                   title: "Continue",

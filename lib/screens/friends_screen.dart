@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:syncdating/components/custom_button.dart';
 // import '../../../Dawners/lib/helper/custom_text.dart';
 import 'package:syncdating/helper/constants.dart';
+import 'package:syncdating/screens/invite_screen.dart';
 import 'package:syncdating/screens/notifications_screen.dart';
 
 import '../components/custom_skip_button.dart';
@@ -46,7 +47,9 @@ class FriendsScreen extends StatelessWidget {
                   color: kBlackColor,
                   fontSize: 14),
               Spacer(),
-              CustomButton(title: " Invite friends and Share", onclick: (){}),
+              CustomButton(title: " Invite friends and Share", onclick: (){
+                Navigator.push(context, MaterialPageRoute(builder: (CTX)=>InviteScreen()));
+              }),
               Gap(20),
 
               CustomButton(title: "Access to a contact list", onclick: () {

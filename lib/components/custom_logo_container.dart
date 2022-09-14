@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:syncdating/helper/constants.dart';
 
 class CustomLogoContainer extends StatelessWidget {
@@ -12,11 +13,12 @@ class CustomLogoContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return InkWell(
       onTap: onclick,
       child: Container(
-        height: 64,
-        width: 64,
+        height: height*0.084,
+        width: height*0.084,
         decoration: BoxDecoration(border: Border.all(color: kgreyColor),
             borderRadius: BorderRadius.circular(15)),
 

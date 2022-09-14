@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:syncdating/components/custom_back_button.dart';
+import 'package:syncdating/screens/chat_screen.dart';
 import 'package:syncdating/screens/photo_fullscreen.dart';
 
 // import '../../../Dawners/lib/helper/custom_text.dart';
@@ -34,7 +35,13 @@ class ProfileScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 40),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [Gap(44), CustomBackButoon(iconColor: Colors.white,onclick: () {Navigator.pop(context);})],
+                          children: [Gap(44),
+                            Row(
+                              children: [
+                                CustomBackButoon(iconColor: kPrimaryColor
+                                    ,onclick: () {Navigator.pop(context);}),
+                              ],
+                            )],
                         ),
                       )),
                 )),
@@ -80,7 +87,9 @@ class ProfileScreen extends StatelessWidget {
                                     ],
                                   ),
                                   InkWell(
-                                    onTap: () {},
+                                    onTap: () {
+                                      Navigator.push(context, MaterialPageRoute(builder: (ctx)=>ChatScreen()));
+                                    },
                                     child: Container(
                                       height: 52,
                                       width: 52,
@@ -115,31 +124,31 @@ class ProfileScreen extends StatelessWidget {
                                           fontSize: 14)
                                     ],
                                   ),
-                                  InkWell(
-                                    onTap: () {},
-                                    child: Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 12, vertical: 10),
-                                      decoration: BoxDecoration(
-                                        color: Color(0xffFDECEE),
-                                        borderRadius: BorderRadius.circular(7),
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          SvgPicture.asset(
-                                            "assets/svg/location_icon.svg",
-                                            color: kPrimaryColor,
-                                          ),
-                                          const Gap(5),
-                                          CustomText(
-                                              title: "1 km",
-                                              fontWeight: FontWeight.w700,
-                                              color: kPrimaryColor,
-                                              fontSize: 12)
-                                        ],
-                                      ),
-                                    ),
-                                  )
+                                  // InkWell(
+                                  //   onTap: () {},
+                                  //   child: Container(
+                                  //     padding: const EdgeInsets.symmetric(
+                                  //         horizontal: 12, vertical: 10),
+                                  //     decoration: BoxDecoration(
+                                  //       color: Color(0xffFDECEE),
+                                  //       borderRadius: BorderRadius.circular(7),
+                                  //     ),
+                                  //     child: Row(
+                                  //       children: [
+                                  //         SvgPicture.asset(
+                                  //           "assets/svg/location_icon.svg",
+                                  //           color: kPrimaryColor,
+                                  //         ),
+                                  //         const Gap(5),
+                                  //         CustomText(
+                                  //             title: "1 km",
+                                  //             fontWeight: FontWeight.w700,
+                                  //             color: kPrimaryColor,
+                                  //             fontSize: 12)
+                                  //       ],
+                                  //     ),
+                                  //   ),
+                                  // )
                                 ],
                               ),
                               Gap(30),

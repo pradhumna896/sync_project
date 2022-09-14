@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 class InterestsModal{
@@ -5,5 +7,6 @@ class InterestsModal{
   IconData icon;
   bool isSelected;
   InterestsModal({required this.title,required this.icon,required this.isSelected});
+
 
 }

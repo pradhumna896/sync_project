@@ -124,20 +124,21 @@ class _MainScreenState extends State<MainScreen> {
               final provider = Provider.of<CardProvider>(context,listen: false);
               provider.dislike();
             }, child: Icon(Icons.close,color: Colors.deepOrange,)),
-        ElevatedButton(
-            style: ButtonStyle(
-                minimumSize: MaterialStateProperty.resolveWith((states) => Size(75, 75)),
-                backgroundColor: MaterialStateColor.resolveWith((states) => kPrimaryColor)),
-            onPressed: (){
-              final provider = Provider.of<CardProvider>(context,listen: false);
-              provider.Like();
-            }, child: Icon(Icons.favorite,color:Colors.white ,size: 40,)),
+
         ElevatedButton(
             style: ButtonStyle(backgroundColor: MaterialStateColor.resolveWith((states) => Colors.white)),
             onPressed: (){
               final provider = Provider.of<CardProvider>(context,listen: false);
               provider.superLike();
-            }, child: Icon(Icons.star,color: Color(0xff8A2387),))
+            }, child: Icon(Icons.star,color: Color(0xff8A2387),)),
+        ElevatedButton(
+            style: ButtonStyle(
+               
+                backgroundColor: MaterialStateColor.resolveWith((states) => kPrimaryColor)),
+            onPressed: (){
+              final provider = Provider.of<CardProvider>(context,listen: false);
+              provider.Like();
+            }, child: Icon(Icons.favorite,color:Colors.white ,size: 40,)),
       ],
     );
   }
@@ -161,169 +162,169 @@ class _MainScreenState extends State<MainScreen> {
 
 
 }
-
-class SyncCard extends StatelessWidget {
-  SyncCard({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height * .2,
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage(
-              "assets/images/synccardimage.png",
-            ),
-            fit: BoxFit.fill),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                    color: Colors.black54,
-                    borderRadius: BorderRadius.circular(7)),
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                child: Row(
-                  children: [
-                    SvgPicture.asset("assets/svg/location_icon.svg"),
-                    const Gap(5),
-                    CustomText(
-                        title: "1 km",
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white,
-                        fontSize: 12)
-                  ],
-                ),
-              )
-            ],
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 5),
-            width: double.maxFinite,
-            height: 70,
-            decoration: BoxDecoration(
-                color: Colors.black54,
-                borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(15),
-                    bottomLeft: Radius.circular(15))),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CustomText(
-                    title: "Jessica Parker, 23",
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white,
-                    fontSize: 24),
-                CustomText(
-                    title: "Professional model",
-                    fontWeight: FontWeight.w400,
-                    color: Colors.white,
-                    fontSize: 14)
-              ],
-            ),
-          )
-        ],
-      ),
-    );
-  }
-}
-/*
-SwipeableCardsSection(
-        cardController: _cardController,
-        enableSwipeUp: false,
-        enableSwipeDown: false,
-        cardHeightBottomMul: 0,
-        cardHeightMiddleMul: 0,
-        context: context,
-        items: List.generate(10, (index) => SyncCard()),
-        onCardSwiped: (dir, index, widget) {
-          //Add the next card
-          if (counter <= 20) {
-            _cardController.addItem(SyncCard());
-            counter++;
-          } else {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (builder) => MatchScreen()));
-          }
-
-          if (dir == Direction.left) {
-            print('onDisliked ${(widget as SyncCard)} $index');
-          } else if (dir == Direction.right) {
-            print('onLiked ${(widget as SyncCard)} $index');
-          } else if (dir == Direction.up) {
-            print('onUp ${(widget as SyncCard)} $index');
-          } else if (dir == Direction.down) {
-            print('onDown ${(widget as SyncCard)} $index');
-          }
-        },
-      ),
-      Container(
-          child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Material(
-            borderRadius: BorderRadius.circular(55),
-            elevation: 5,
-            child: InkWell(
-              borderRadius: BorderRadius.circular(55),
-              onTap: () {_cardController.triggerSwipeLeft();},
-              child: Container(
-                height: 55,
-                width: 55,
-                decoration:
-                    BoxDecoration(color: Colors.white, shape: BoxShape.circle),
-                child: Center(
-                  child: SvgPicture.asset("assets/svg/closeorange.svg"),
-                ),
-              ),
-            ),
-          ),
-          Material(
-            borderRadius: BorderRadius.circular(80),
-            elevation: 5,
-            child: InkWell(
-              borderRadius: BorderRadius.circular(80),
-              onTap: () {_cardController.triggerSwipeRight();},
-              child: Container(
-                height: 80,
-                width: 80,
-                decoration:
-                    BoxDecoration(color: kPrimaryColor, shape: BoxShape.circle),
-                child: Center(
-                  child: SvgPicture.asset(
-                    "assets/svg/dilwale.svg",
-                    height: 30,
-                    width: 30,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Material(
-            borderRadius: BorderRadius.circular(55),
-            elevation: 5,
-            child: InkWell(
-              borderRadius: BorderRadius.circular(55),
-              onTap: () {_cardController.triggerSwipeUp();},
-              child: Container(
-                height: 55,
-                width: 55,
-                decoration:
-                    BoxDecoration(color: Colors.white, shape: BoxShape.circle),
-                child: Center(
-                  child: SvgPicture.asset("assets/svg/star.svg"),
-                ),
-              ),
-            ),
-          ),
-        ],
-      )),
- */
+//
+// class SyncCard extends StatelessWidget {
+//   SyncCard({
+//     Key? key,
+//   }) : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       height: MediaQuery.of(context).size.height * .2,
+//       decoration: const BoxDecoration(
+//         image: DecorationImage(
+//             image: AssetImage(
+//               "assets/images/synccardimage.png",
+//             ),
+//             fit: BoxFit.fill),
+//       ),
+//       child: Column(
+//         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//         children: [
+//           Row(
+//             children: [
+//               Container(
+//                 decoration: BoxDecoration(
+//                     color: Colors.black54,
+//                     borderRadius: BorderRadius.circular(7)),
+//                 margin:
+//                     const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+//                 padding:
+//                     const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+//                 child: Row(
+//                   children: [
+//                     SvgPicture.asset("assets/svg/location_icon.svg"),
+//                     const Gap(5),
+//                     CustomText(
+//                         title: "1 km",
+//                         fontWeight: FontWeight.w700,
+//                         color: Colors.white,
+//                         fontSize: 12)
+//                   ],
+//                 ),
+//               )
+//             ],
+//           ),
+//           Container(
+//             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+//             width: double.maxFinite,
+//             height: 70,
+//             decoration: BoxDecoration(
+//                 color: Colors.black54,
+//                 borderRadius: BorderRadius.only(
+//                     bottomRight: Radius.circular(15),
+//                     bottomLeft: Radius.circular(15))),
+//             child: Column(
+//               crossAxisAlignment: CrossAxisAlignment.start,
+//               children: [
+//                 CustomText(
+//                     title: "Jessica Parker, 23",
+//                     fontWeight: FontWeight.w700,
+//                     color: Colors.white,
+//                     fontSize: 24),
+//                 CustomText(
+//                     title: "Professional model",
+//                     fontWeight: FontWeight.w400,
+//                     color: Colors.white,
+//                     fontSize: 14)
+//               ],
+//             ),
+//           )
+//         ],
+//       ),
+//     );
+//   }
+// }
+// /*
+// SwipeableCardsSection(
+//         cardController: _cardController,
+//         enableSwipeUp: false,
+//         enableSwipeDown: false,
+//         cardHeightBottomMul: 0,
+//         cardHeightMiddleMul: 0,
+//         context: context,
+//         items: List.generate(10, (index) => SyncCard()),
+//         onCardSwiped: (dir, index, widget) {
+//           //Add the next card
+//           if (counter <= 20) {
+//             _cardController.addItem(SyncCard());
+//             counter++;
+//           } else {
+//             Navigator.push(context,
+//                 MaterialPageRoute(builder: (builder) => MatchScreen()));
+//           }
+//
+//           if (dir == Direction.left) {
+//             print('onDisliked ${(widget as SyncCard)} $index');
+//           } else if (dir == Direction.right) {
+//             print('onLiked ${(widget as SyncCard)} $index');
+//           } else if (dir == Direction.up) {
+//             print('onUp ${(widget as SyncCard)} $index');
+//           } else if (dir == Direction.down) {
+//             print('onDown ${(widget as SyncCard)} $index');
+//           }
+//         },
+//       ),
+//       Container(
+//           child: Row(
+//         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//         children: [
+//           Material(
+//             borderRadius: BorderRadius.circular(55),
+//             elevation: 5,
+//             child: InkWell(
+//               borderRadius: BorderRadius.circular(55),
+//               onTap: () {_cardController.triggerSwipeLeft();},
+//               child: Container(
+//                 height: 55,
+//                 width: 55,
+//                 decoration:
+//                     BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+//                 child: Center(
+//                   child: SvgPicture.asset("assets/svg/closeorange.svg"),
+//                 ),
+//               ),
+//             ),
+//           ),
+//           Material(
+//             borderRadius: BorderRadius.circular(80),
+//             elevation: 5,
+//             child: InkWell(
+//               borderRadius: BorderRadius.circular(80),
+//               onTap: () {_cardController.triggerSwipeRight();},
+//               child: Container(
+//                 height: 80,
+//                 width: 80,
+//                 decoration:
+//                     BoxDecoration(color: kPrimaryColor, shape: BoxShape.circle),
+//                 child: Center(
+//                   child: SvgPicture.asset(
+//                     "assets/svg/dilwale.svg",
+//                     height: 30,
+//                     width: 30,
+//                   ),
+//                 ),
+//               ),
+//             ),
+//           ),
+//           Material(
+//             borderRadius: BorderRadius.circular(55),
+//             elevation: 5,
+//             child: InkWell(
+//               borderRadius: BorderRadius.circular(55),
+//               onTap: () {_cardController.triggerSwipeUp();},
+//               child: Container(
+//                 height: 55,
+//                 width: 55,
+//                 decoration:
+//                     BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+//                 child: Center(
+//                   child: SvgPicture.asset("assets/svg/star.svg"),
+//                 ),
+//               ),
+//             ),
+//           ),
+//         ],
+//       )),
+//  */

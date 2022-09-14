@@ -1,6 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:syncdating/model/Intrest_modal.dart';
+
+import '../model/image_modal.dart';
 
 class AppController with ChangeNotifier{
   int homeSliderIndex=0;
@@ -68,4 +75,61 @@ void bottomNavStatus(int index){
     isSelected=index;
     notifyListeners();
   }
+
+  int selectInterest=0;
+  void isSelectInterest(){
+    selectInterest ++;
+  }
+
+  int lookingForSliderIndex=0;
+  void lookingForSliderIndexStatus(int index){
+    lookingForSliderIndex = index;
+    notifyListeners();
+  }
+
+  List<ImageModal> imagesList = [];
+  void imagesListContent(){
+    imagesList = [
+      ImageModal( isSelected: false, imagePath: null, id: 0),
+      ImageModal( isSelected: false, imagePath: null, id: 1),
+      ImageModal( isSelected: false, imagePath: null, id: 2),
+      ImageModal( isSelected: false, imagePath: null, id: 3),
+      ImageModal( isSelected: false, imagePath: null, id: 4),
+      ImageModal( isSelected: false, imagePath: null, id: 5),
+      ImageModal( isSelected: false, imagePath: null, id: 6),
+      ImageModal( isSelected: false, imagePath: null, id: 7),
+      ImageModal( isSelected: false, imagePath: null, id: 8),
+
+    ];
+    notifyListeners();
+
+
+  }
+  updateImagetList(ImageModal item) {
+    print(item.id);
+    print(item.isSelected);
+    int index = imagesList.indexWhere((element) => element.id == item.id);
+    print(index);
+   imagesList[index].isSelected = true;
+    notifyListeners();
+  }
+
+  File? pickedImage;
+
+  pickImage(ImageSource imageType ,ImageModal image) async {
+    try {
+      final photo = await ImagePicker().pickImage(source: imageType);
+      if (photo == null) return;
+      final tempImage = File(photo.path);
+      pickedImage = tempImage;
+      ImageModal newImageModal = ImageModal(isSelected: image.isSelected, imagePath:pickedImage, id: image.id);
+      print(pickedImage);
+      updateImagetList(newImageModal);
+
+
+    } catch (error) {
+      debugPrint(error.toString());
+    }
+  }
 }
+

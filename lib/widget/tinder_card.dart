@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
+
 // import '../../../Dawners/lib/helper/custom_text.dart';
 import 'package:syncdating/helper/constants.dart';
 import 'package:syncdating/screens/profile_screen.dart';
@@ -25,15 +26,16 @@ class TinderCard extends StatefulWidget {
 
 class _TinderCardState extends State<TinderCard> {
   @override
-  void initState(){
+  void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_){
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       final size = MediaQuery.of(context).size;
 
-      final provider = Provider.of<CardProvider>(context,listen: false);
+      final provider = Provider.of<CardProvider>(context, listen: false);
       provider.setScreenSize(size);
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox.expand(
@@ -58,14 +60,15 @@ class _TinderCardState extends State<TinderCard> {
               duration: Duration(milliseconds: milliseconds),
               transform: rotatedMatrix..translate(position.dx, position.dy),
               child: Stack(
-                children: [
-                  buildCard(),
-                  buildStamps()],
+                children: [buildCard(), buildStamps()],
               ));
         }),
         onPanStart: (details) {
           print("object");
-          final provider = Provider.of<CardProvider>(context, listen: false,);
+          final provider = Provider.of<CardProvider>(
+            context,
+            listen: false,
+          );
           provider.startPosition(details);
         },
         onPanUpdate: (details) {
@@ -90,10 +93,10 @@ class _TinderCardState extends State<TinderCard> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-
               InkWell(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (ctx)=>ProfileScreen()));
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (ctx) => ProfileScreen()));
                 },
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 5),
@@ -134,36 +137,33 @@ class _TinderCardState extends State<TinderCard> {
     switch (status) {
       case CardStatus.Like:
         final child = buildStamp(
-            angle: -0.5,
-            color: kPrimaryColor,
-            iconImage: Icon(Icons.favorite,color: kPrimaryColor,),
-            iconColor: kPrimaryColor,
-            opacity:opacity,
+          angle: -0.5,
+          color: kPrimaryColor,
+          title: "LIKE",
+          iconColor: kPrimaryColor,
+          opacity: opacity,
         );
 
-        return Align(
-            alignment: Alignment.center,
-            child: child);
+        return Positioned(left: 20, top: 40, child: child);
       case CardStatus.Dislike:
         final child = buildStamp(
-            angle: 0.5,
-            color: kPrimaryColor,
-            iconImage: Icon(Icons.close,color: Colors.deepOrange,),
-            iconColor: Colors.deepOrange,
-          opacity:opacity,
+          angle: 0.5,
+          color: kPrimaryColor,
+          title: "NOPE",
+          iconColor: Colors.deepOrange,
+          opacity: opacity,
         );
 
-        return Align(alignment: Alignment.center, child: child);
+        return Positioned(top: 40,right: 20, child: child);
       case CardStatus.SuperLike:
         final child = buildStamp(
-
-            color: kPrimaryColor,
-            iconImage: Icon(Icons.star),
-            iconColor: Colors.deepOrange,
-          opacity:opacity,
+          color: kPrimaryColor,
+          title: "SHORTLISTED",
+          iconColor: Colors.deepOrange,
+          opacity: opacity,
         );
 
-        return Align(alignment: Alignment.center, child: child);
+        return Positioned(top: 20,left: 60, child: child);
       default:
         return Container();
     }
@@ -172,7 +172,7 @@ class _TinderCardState extends State<TinderCard> {
   Widget buildStamp({
     double angle = 0,
     required Color color,
-    required Icon iconImage,
+    required String title,
     required Color iconColor,
     required double opacity,
   }) {
@@ -181,13 +181,25 @@ class _TinderCardState extends State<TinderCard> {
       child: Transform.rotate(
         angle: angle,
         child: Container(
-            height: 60,
-            width: 60,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.white,
-            ),
-            child: iconImage, ),
+          decoration: BoxDecoration(
+              border: Border.all(color: kPrimaryColor),
+              ),
+          child: Row(
+            children: [
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, ),
+                child: Center(
+                  child: CustomText(
+                      title: title,
+                      color: kPrimaryColor,
+                      fontSize: 24,
+                      fontWeight: FontWeight.w800),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
