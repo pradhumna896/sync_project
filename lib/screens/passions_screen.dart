@@ -75,15 +75,15 @@ class _PassionsScreenState extends State<PassionsScreen> {
                   spacing: 10,
                   children: List.generate(
                       provider.interestsList.length,
-                      (index) => InkWell(
+                      (index) =>InkWell(
                             onTap: () {
                               provider.updateInterestList(
                                   provider.interestsList[index]);
+
                             },
                             child: Card(
                               color: provider.interestsList[index].isSelected
-                                  ? kPrimaryColor
-                                  : Colors.white,
+                                  ? kPrimaryColor : Colors.white,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(15)),
                               child: Padding(
@@ -92,13 +92,13 @@ class _PassionsScreenState extends State<PassionsScreen> {
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Icon(provider.interestsList[index].icon),
+                                    Icon(provider.interestsList[index].icon,color: provider.interestsList[index].isSelected?Colors.white:kBlackColor,),
                                     Gap(10),
                                     CustomText(
                                         title:
                                             provider.interestsList[index].title,
                                         fontWeight: FontWeight.w400,
-                                        color: kBlackColor,
+                                        color: provider.interestsList[index].isSelected?Colors.white:kBlackColor,
                                         fontSize: 14)
                                   ],
                                 ),

@@ -10,21 +10,20 @@ import 'package:syncdating/components/custom_skip_button.dart';
 import 'package:syncdating/helper/constants.dart';
 import 'package:syncdating/model/gender_modal.dart';
 import 'package:syncdating/screens/about_me_screen.dart';
-import 'package:syncdating/screens/looking_for.dart';
 import 'package:syncdating/screens/passions_screen.dart';
 
 import '../components/custom_text.dart';
 import '../provider/app_controller.dart';
 const List<String> list = ["Choose another","Intersex", 'Trans',' Non-Conforming', 'Eunuch'];
 
-class IAmScreen extends StatefulWidget {
-  const IAmScreen({Key? key}) : super(key: key);
+class LookingFor extends StatefulWidget {
+  const LookingFor({Key? key}) : super(key: key);
 
   @override
-  State<IAmScreen> createState() => _IAmScreenState();
+  State<LookingFor> createState() => _LookingForState();
 }
 
-class _IAmScreenState extends State<IAmScreen> {
+class _LookingForState extends State<LookingFor> {
   String dropdownValue = list.first;
   @override
   Widget build(BuildContext context) {
@@ -49,7 +48,7 @@ class _IAmScreenState extends State<IAmScreen> {
                 ],
               ),
               Gap(30),
-              CustomText(title: "I am a",
+              CustomText(title: "Looking For",
                   fontWeight: FontWeight.w700,
                   color: kBlackColor,
                   fontSize: 34),
@@ -84,7 +83,7 @@ class _IAmScreenState extends State<IAmScreen> {
                                     0xffFFFFFF) : kBlackColor,
                                 fontSize: 16),
                             SvgPicture.asset(
-                                GenderModal.genderModalList[index].image,color: data.chooseGender == index ? Color(
+                              GenderModal.genderModalList[index].image,color: data.chooseGender == index ? Color(
                                 0xffFFFFFF) : kBlackColor,)
                           ],),
                       ),
@@ -96,7 +95,7 @@ class _IAmScreenState extends State<IAmScreen> {
                 height: 56,
                 width: double.maxFinite,
                 decoration: BoxDecoration(
-                  color: data.chooseGender==-1? kPrimaryColor : Colors.white,
+                    color: data.chooseGender==-1? kPrimaryColor : Colors.white,
                     border: Border.all(color: kgreyColor),
                     borderRadius: BorderRadius.circular(15)),
                 child: Row(
@@ -150,7 +149,7 @@ class _IAmScreenState extends State<IAmScreen> {
 
               CustomButton(title: "Continue", onclick: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (ctx) => LookingFor()));
+                    MaterialPageRoute(builder: (ctx) => AboutMeScreen()));
               }),
               Gap(20)
             ],

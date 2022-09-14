@@ -16,6 +16,7 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -29,16 +30,16 @@ class SignUpScreen extends StatelessWidget {
                     Gap(50),
                     Image.asset(
                       "assets/images/synclogo.png",
-                      height: 100,
-                      width: 100,
+                      height: height*0.12,
+                      width: height*0.12,
                     ),
-                    Gap(60),
+                    Gap(height*0.060),
                     CustomText(
                         title: "Sign up to continue",
                         fontWeight: FontWeight.w700,
                         color: kBlackColor,
                         fontSize: 18),
-                    Gap(32),
+                    Gap(height*0.032),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 40),
                       child: CustomButton(
@@ -47,7 +48,7 @@ class SignUpScreen extends StatelessWidget {
                       }),
                     ),
                     SizedBox(
-                      height: 20,
+                      height:height*0.020,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 40),
@@ -59,7 +60,7 @@ class SignUpScreen extends StatelessWidget {
                           onclick: () {Navigator.push(context, MaterialPageRoute(builder: (builder)=>MobileNumberScreen()));}),
                     ),
                     SizedBox(
-                      height: 50,
+                      height: height*0.050,
                     ),
                   ],
                 )),
@@ -92,7 +93,7 @@ class SignUpScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Gap(24),
+                    Gap(height*0.050),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -118,17 +119,17 @@ class SignUpScreen extends StatelessWidget {
                             title: "Terms of use",
                             fontWeight: FontWeight.w400,
                             color: kPrimaryColor,
-                            fontSize: 14)),
+                            fontSize: height*0.018)),
                         Gap(20),
                         TextButton(
                             onPressed: (){}, child: CustomText(
                             title: "Privacy Policy",
                             fontWeight: FontWeight.w400,
                             color: kPrimaryColor,
-                            fontSize: 14))
+                            fontSize:height*0.018))
                       ],
                     ),
-                    Gap(48)
+                    Gap(height*0.048)
                   ],
                 ))
           ],

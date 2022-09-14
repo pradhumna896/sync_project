@@ -68,4 +68,9 @@ void bottomNavStatus(int index){
     isSelected=index;
     notifyListeners();
   }
+
+  int selectInterest=0;
+  void isSelectInterest(){
+    selectInterest ++;
+  }
 }

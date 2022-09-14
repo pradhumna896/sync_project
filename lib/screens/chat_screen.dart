@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 // import '../../../Dawners/lib/helper/custom_text.dart';
 import 'package:syncdating/helper/constants.dart';
 import 'package:syncdating/screens/photo_fullscreen.dart';
+import 'package:syncdating/screens/profile_screen.dart';
 
 import '../components/custom_text.dart';
 import '../model/message_modal.dart';
@@ -75,31 +76,36 @@ class ChatScreen extends StatelessWidget {
                 ),
                 Gap(15),
                 Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CustomText(
-                          title: "Grace",
-                          fontWeight: FontWeight.w700,
-                          color: kBlackColor,
-                          fontSize: 24),
-                      Row(
-                        children: [
-                          Container(
-                            height: 6,
-                            width: 6,
-                            decoration: BoxDecoration(
-                                color: kPrimaryColor, shape: BoxShape.circle),
-                          ),
-                          Gap(5),
-                          CustomText(
-                              title: "Online",
-                              fontWeight: FontWeight.w400,
-                              color: Color.fromRGBO(0, 0, 0, 0.4),
-                              fontSize: 12),
-                        ],
-                      )
-                    ],
+                  child: InkWell(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (ctx)=>ProfileScreen()));
+                    },
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomText(
+                            title: "Grace",
+                            fontWeight: FontWeight.w700,
+                            color: kBlackColor,
+                            fontSize: 24),
+                        Row(
+                          children: [
+                            Container(
+                              height: 6,
+                              width: 6,
+                              decoration: BoxDecoration(
+                                  color: kPrimaryColor, shape: BoxShape.circle),
+                            ),
+                            Gap(5),
+                            CustomText(
+                                title: "Online",
+                                fontWeight: FontWeight.w400,
+                                color: Color.fromRGBO(0, 0, 0, 0.4),
+                                fontSize: 12),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 InkWell(

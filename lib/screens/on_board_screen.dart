@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 // import '../../../Dawners/lib/helper/custom_text.dart';
 import 'package:syncdating/helper/constants.dart';
 import 'package:syncdating/model/onboard_model.dart';
+import 'package:syncdating/screens/login_screen.dart';
 import 'package:syncdating/screens/signup_screen.dart';
 import 'package:syncdating/widget/home_slider.dart';
 
@@ -17,6 +19,7 @@ class OnBoardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final data = Provider.of<AppController>(context);
+    final height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -33,25 +36,25 @@ class OnBoardingScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Column(
                           children: [
-                            SizedBox(height: 32,),
+                            SizedBox(height: height*0.040,),
                             Image.asset(
-                                OnBoardModal.onBoardModalList[index].image),
-                            SizedBox(height: 32,),
+                                OnBoardModal.onBoardModalList[index].image,height: height/2,),
+                            SizedBox(height: height*0.032,),
                             CustomText(
                                 title: OnBoardModal.onBoardModalList[index].title,
                                 fontWeight: FontWeight.w700,
                                 color: kPrimaryColor,
-                                fontSize: 24),
-                            SizedBox(height: 10,),
+                                fontSize: height*0.030),
+                            SizedBox(height: height*0.010,),
                             CustomText(textAlign: TextAlign.center,title: OnBoardModal.onBoardModalList[index].subTitle, fontWeight: FontWeight.w400,
                                 color: kSecondaryColor,
-                                fontSize: 14)
+                                fontSize: height*0.018)
                           ],
                         ),
                       );
                     })),
             HomeSlider(),
-            SizedBox(height: 42,),
+            SizedBox(height: height*0.050,),
 
              Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40),
@@ -59,8 +62,8 @@ class OnBoardingScreen extends StatelessWidget {
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>SignUpScreen()));
               }, title: 'Create an account',),
             ),
-            const SizedBox(
-              height: 20,
+            SizedBox(
+              height: height*0.030,
             ),
             RichText(
               text: WidgetSpan(
@@ -74,7 +77,9 @@ class OnBoardingScreen extends StatelessWidget {
                     fontSize: 16,
                   ),
                   InkWell(
-                    onTap: (){},
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (ctx)=>const LoginScreen()));
+                    },
                     child: CustomText(
                       color: Color(0xffE94057),
                       fontWeight: FontWeight.w400,
@@ -86,7 +91,7 @@ class OnBoardingScreen extends StatelessWidget {
               )),
             ),
             SizedBox(
-              height: 64,
+              height: height*0.065,
             )
           ],
         ),
