@@ -110,7 +110,11 @@ void bottomNavStatus(int index){
     print(item.isSelected);
     int index = imagesList.indexWhere((element) => element.id == item.id);
     print(index);
-   imagesList[index].isSelected = true;
+   imagesList[index] = item;
+
+   imagesList.forEach((element) {
+     print(element.isSelected);
+   });
     notifyListeners();
   }
 
@@ -122,7 +126,7 @@ void bottomNavStatus(int index){
       if (photo == null) return;
       final tempImage = File(photo.path);
       pickedImage = tempImage;
-      ImageModal newImageModal = ImageModal(isSelected: image.isSelected, imagePath:pickedImage, id: image.id);
+      ImageModal newImageModal = ImageModal(isSelected: true, imagePath:pickedImage, id: image.id);
       print(pickedImage);
       updateImagetList(newImageModal);
 

@@ -108,7 +108,7 @@ class _IAmScreenState extends State<IAmScreen> {
                             data.chooseGenderStatus(-1);
                           },
                           value: dropdownValue,
-                         dropdownColor: kPrimaryColor,
+
 
                           iconEnabledColor:data.chooseGender==-1? Colors.white: kBlackColor,
 
@@ -133,7 +133,7 @@ class _IAmScreenState extends State<IAmScreen> {
                               value: value,
                               child: CustomText(
                                 title: value,
-                                color: kBlackColor,
+                                color: data.chooseGender==-1?Colors.white:kBlackColor,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                               ),

@@ -152,11 +152,11 @@ class ChatScreen extends StatelessWidget {
                               margin: EdgeInsets.all(5),
                               shape: RoundedRectangleBorder(
                                   borderRadius: message.isSendByMe
-                                      ? BorderRadius.only(
+                                      ? const BorderRadius.only(
                                           bottomRight: Radius.circular(15),
                                           topLeft: Radius.circular(15),
                                           topRight: Radius.circular(15))
-                                      : BorderRadius.only(
+                                      : const BorderRadius.only(
                                           bottomLeft: Radius.circular(15),
                                           topLeft: Radius.circular(15),
                                           topRight: Radius.circular(15))),
@@ -184,7 +184,7 @@ class ChatScreen extends StatelessWidget {
               Gap(5)
 
 
-            
+
             ],
           )),
     );

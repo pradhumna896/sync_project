@@ -12,6 +12,8 @@ import '../helper/constants.dart';
 class EmojiWidget extends GetView<EmojiController> {
   EmojiController controller = EmojiController();
 
+
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -36,6 +38,9 @@ class EmojiWidget extends GetView<EmojiController> {
                     child: TextFormField(
                   controller: controller.textEditingController,
                   focusNode: controller.focusNode,
+                  onTap: (){
+
+                  },
                   decoration: InputDecoration(
                       suffixIcon: Padding(
                         padding: const EdgeInsets.all(14.0),
@@ -62,7 +67,9 @@ class EmojiWidget extends GetView<EmojiController> {
                 )),
                 Gap(10),
                 InkWell(
-                  onTap: () {},
+                  onTapCancel: (){
+                    controller.isEmogiVisible.value = !controller.isEmogiVisible.value;
+                  },
                   child: Container(
                     height: 48,
                     width: 48,

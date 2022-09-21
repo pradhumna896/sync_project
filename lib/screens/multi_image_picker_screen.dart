@@ -43,7 +43,17 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
                   }),
                 ],
               ),
-              Gap(30),
+              Gap(20),
+              Container(height: 100,width: 100,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: Colors.grey)
+              ),
+                child:provider.imagesList[0].isSelected? ClipRRect(
+                    borderRadius: BorderRadius.circular(50),
+                    child: Image.file(provider.imagesList[0].imagePath!,fit: BoxFit.cover,)):Icon(Icons.camera_alt),
+              ),
+              Gap(10),
               CustomText(
                   title: "Add Your Photos",
                   fontWeight: FontWeight.w800,
@@ -54,41 +64,7 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
                   fontWeight: FontWeight.w600,
                   color: kBlackColor,
                   fontSize: 14),
-              // GridView.builder(
-              //   shrinkWrap: true,
-              //     scrollDirection: Axis.vertical,
-              //     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              //       mainAxisSpacing: 10,
-              //         childAspectRatio: 3/2,
-              //         crossAxisSpacing: 10,
-              //         crossAxisCount: 3, mainAxisExtent: 200),
-              //     itemBuilder: (BuildContext context ,index){
-              //    return  Stack(
-              //      children: [
-              //        Container(
-              //          child: Card(
-              //            shape: RoundedRectangleBorder(
-              //                borderRadius: BorderRadius.circular(15)),
-              //          ),
-              //        ),
-              //        Positioned(
-              //          right: 0,
-              //          bottom: 0,
-              //          child: Card(
-              //            shape: RoundedRectangleBorder(
-              //                borderRadius: BorderRadius.circular(20)),
-              //            child: Padding(
-              //              padding: const EdgeInsets.all(4.0),
-              //              child: Icon(
-              //                Icons.add,
-              //                color: kPrimaryColor,
-              //              ),
-              //            ),
-              //          ),
-              //        )
-              //      ],
-              //    );
-              // }),
+
               Gap(20),
 
               Expanded(
@@ -100,13 +76,13 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
                           childAspectRatio: 3 / 2),
                       itemBuilder: (BuildContext context, index) {
                         return Stack(children: [
-                          provider.pickedImage != null
+                          provider.imagesList[index].isSelected
                               ? Container(
                             margin: EdgeInsets.all(5),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(15),
                               child: Image.file(
-                                provider.pickedImage!,
+                                provider.imagesList[index].imagePath!,
                                 fit: BoxFit.cover,
                               ),
                             ),

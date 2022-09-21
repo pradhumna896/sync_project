@@ -113,28 +113,41 @@ class _MainScreenState extends State<MainScreen> {
 
   // for buttons
   Widget buildButtons(){
-    // final provider = Provider.of<CardProvider>(context);
+    final provider = Provider.of<CardProvider>(context);
     // final users = provider.users;
+    final status = provider.getStatus();
+    final isLike = status == CardStatus.Like;
+    final isDislike = status == CardStatus.Dislike;
+    final isSuperLike = status == CardStatus.SuperLike;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         ElevatedButton(
-            style: ButtonStyle(backgroundColor: MaterialStateColor.resolveWith((states) => Colors.white)),
+            style: ButtonStyle(
+
+              backgroundColor: getColor(Colors.white, Colors.white,isDislike),
+              side: getBorder(Colors.white , Colors.deepOrange,isDislike)
+            ),
             onPressed: (){
               final provider = Provider.of<CardProvider>(context,listen: false);
               provider.dislike();
             }, child: Icon(Icons.close,color: Colors.deepOrange,)),
 
         ElevatedButton(
-            style: ButtonStyle(backgroundColor: MaterialStateColor.resolveWith((states) => Colors.white)),
+            style: ButtonStyle(backgroundColor: MaterialStateColor.resolveWith((states) => Colors.white),
+            side: getBorder(Colors.white, Color(0xff8A2387),isSuperLike)
+            ),
             onPressed: (){
               final provider = Provider.of<CardProvider>(context,listen: false);
               provider.superLike();
             }, child: Icon(Icons.star,color: Color(0xff8A2387),)),
         ElevatedButton(
             style: ButtonStyle(
-               
-                backgroundColor: MaterialStateColor.resolveWith((states) => kPrimaryColor)),
+               backgroundColor: getColor(kPrimaryColor, Colors.red.shade300,isLike),
+              side: getBorder(kPrimaryColor, Colors.white,isLike)
+              
+                ),
+            
             onPressed: (){
               final provider = Provider.of<CardProvider>(context,listen: false);
               provider.Like();
@@ -142,6 +155,28 @@ class _MainScreenState extends State<MainScreen> {
       ],
     );
   }
+  MaterialStateProperty<Color> getColor(Color color,Color colorOnPressed,bool force){
+    final getColor = (Set<MaterialState> states){
+      if(force || states.contains(MaterialState.pressed)){
+        return colorOnPressed;
+      }else{
+        return color;
+      }
+    };
+    return MaterialStateProperty.resolveWith(getColor);
+  }
+
+  MaterialStateProperty<BorderSide> getBorder(Color color,Color colorOnPressed,bool force){
+    final getBorder = (Set<MaterialState> states){
+      if(force || states.contains(MaterialState.pressed)){
+        return BorderSide(color: colorOnPressed,width: 2);
+      }else{
+        return BorderSide(color: color,width: 2);
+      }
+    };
+    return MaterialStateProperty.resolveWith(getBorder);
+  }
+
 
   Widget buildCards() {
     final provider = Provider.of<CardProvider>(context);
