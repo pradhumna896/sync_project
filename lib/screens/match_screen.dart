@@ -7,8 +7,8 @@ import 'package:syncdating/helper/constants.dart';
 
 import '../components/custom_text.dart';
 
-class MatchScreen extends StatelessWidget {
-  const MatchScreen({Key? key}) : super(key: key);
+class MatchScreenProfile extends StatelessWidget {
+  const MatchScreenProfile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

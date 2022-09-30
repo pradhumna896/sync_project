@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:provider/provider.dart';
 import 'package:syncdating/Screens/on_board_screen.dart';
 import 'package:syncdating/helper/constants.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (create)=>AppController()),
         ChangeNotifierProvider(create: (create)=>CardProvider())
       ],
-      child: MaterialApp(
+      child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(

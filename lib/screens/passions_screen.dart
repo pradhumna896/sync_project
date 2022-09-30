@@ -9,6 +9,7 @@ import 'package:syncdating/components/custom_skip_button.dart';
 
 // import '../../../Dawners/lib/helper/custom_text.dart';
 import 'package:syncdating/helper/constants.dart';
+import 'package:syncdating/helper/dimentions/dimentions.dart';
 import 'package:syncdating/provider/app_controller.dart';
 
 import '../components/custom_text.dart';
@@ -113,7 +114,7 @@ class _PassionsScreenState extends State<PassionsScreen> {
                           ),
                         );
                       })),
-              Gap(10),
+              Gap(Dimentions.height10),
               CustomButton(
                   title: "Continue",
                   onclick: () {

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:syncdating/helper/dimentions/dimentions.dart';
 
 import '../helper/constants.dart';
 
@@ -19,7 +20,7 @@ class CustomBackButoon extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
            ),
-        child: Center(child: Icon(Icons.arrow_back_ios,color: iconColor,size: 18,)),
+        child: Center(child: Icon(Icons.arrow_back_ios,color: iconColor,size: Dimentions.size18,)),
       ),
     );
   }

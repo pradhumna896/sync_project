@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:syncdating/helper/dimentions/dimentions.dart';
 
 import '../helper/constants.dart';
 // import '../../../Dawners/lib/helper/custom_text.dart';
@@ -31,10 +32,9 @@ class CustomButton extends StatelessWidget {
 
         style: ElevatedButton.styleFrom(
 
-            minimumSize: Size(double.maxFinite, MediaQuery.of(context).size.height*0.065),
-            primary: buttonColor,
+            minimumSize: Size(double.maxFinite, Dimentions.height44), backgroundColor: buttonColor,
             shape: RoundedRectangleBorder(side: BorderSide(color: borderColor),
-                borderRadius: BorderRadius.circular(15))),
+                borderRadius: BorderRadius.circular(8))),
         onPressed: onclick,
         child: CustomText(
           title: title,

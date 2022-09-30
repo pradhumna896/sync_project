@@ -7,6 +7,8 @@ import 'package:syncdating/helper/constants.dart';
 import 'package:syncdating/widget/custom_textfield.dart';
 
 import '../components/custom_logo_container.dart';
+import 'mobile_number_screen.dart';
+import 'my_gmail_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -31,26 +33,42 @@ class LoginScreen extends StatelessWidget {
                     title: "Login",
                     fontWeight: FontWeight.w700,
                     color: kBlackColor,
-                    fontSize: 34),
+                    fontSize: 24),
                 CustomText(
-                    title: "Login to see who's new in your area",
+                    title: "Login to continue",
                     fontWeight: FontWeight.w400,
                     color: kBlackColor,
                     fontSize: 16),
                 Gap(20),
-                CustomTextField(label: "UserName", keybordType: TextInputType.name,),
+                CustomButton(
+                    title: "Continue with email", onclick: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>MyGmailScreen()));
+                }),
+                SizedBox(
+                  height:20,
+                ),
+                CustomButton(
+                    titleColor: kPrimaryColor,
+                    buttonColor: Colors.white,
+                    borderColor: kgreyColor,
+                    title: "Use phone number",
+                    onclick: () {Navigator.push(context, MaterialPageRoute(builder: (builder)=>MobileNumberScreen()));}),
                 Gap(10),
-                CustomTextField(label: "Password", keybordType: TextInputType.visiblePassword,),
-                Gap(10),
-                TextButton(
-                    onPressed: () {},
-                    child: CustomText(
-                      title: "Forgot Password ?",
-                      color: Color.fromRGBO(0, 0, 0, 0.4),
-                      fontWeight: FontWeight.w700,
-                      fontSize: 16,
-                    )),
-                CustomButton(title: "Login", onclick: () {}),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton(
+                        onPressed: () {},
+                        child: CustomText(
+                          title: "Forgot Password ?",
+                          color: Color.fromRGBO(0, 0, 0, 0.4),
+                          fontWeight: FontWeight.w700,
+                          fontSize: 16,
+                          textAlign: TextAlign.end,
+                        )),
+                  ],
+                ),
+
                 Gap(20),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 40),

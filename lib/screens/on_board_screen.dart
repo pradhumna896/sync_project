@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 // import '../../../Dawners/lib/helper/custom_text.dart';
 import 'package:syncdating/helper/constants.dart';
+import 'package:syncdating/helper/dimentions/dimentions.dart';
 import 'package:syncdating/model/onboard_model.dart';
 import 'package:syncdating/screens/login_screen.dart';
+import 'package:syncdating/screens/my_gmail_screen.dart';
 import 'package:syncdating/screens/signup_screen.dart';
 import 'package:syncdating/widget/home_slider.dart';
 
 import '../components/custom_button.dart';
+import '../components/custom_logo_container.dart';
 import '../components/custom_text.dart';
 import '../helper/style.dart';
 import '../provider/app_controller.dart';
@@ -38,61 +42,79 @@ class OnBoardingScreen extends StatelessWidget {
                           children: [
                             SizedBox(height: height*0.040,),
                             Image.asset(
-                                OnBoardModal.onBoardModalList[index].image,height: height/2,),
-                            SizedBox(height: height*0.032,),
+                                OnBoardModal.onBoardModalList[index].image,height: Dimentions.height360,),
+                            SizedBox(height: Dimentions.height5,),
                             CustomText(
                                 title: OnBoardModal.onBoardModalList[index].title,
                                 fontWeight: FontWeight.w700,
                                 color: kPrimaryColor,
-                                fontSize: height*0.030),
-                            SizedBox(height: height*0.010,),
+                                fontSize: Dimentions.font24),
+                            Gap(Dimentions.height5),
+
+
                             CustomText(textAlign: TextAlign.center,title: OnBoardModal.onBoardModalList[index].subTitle, fontWeight: FontWeight.w400,
                                 color: kSecondaryColor,
-                                fontSize: height*0.018)
+                                fontSize: Dimentions.font16)
                           ],
                         ),
                       );
                     })),
+            Gap(Dimentions.height5),
             HomeSlider(),
-            SizedBox(height: height*0.050,),
+            Gap(Dimentions.height30),
+            CustomText(title: "Sign In With", fontWeight: FontWeight.w700, color: kBlackColor, fontSize: 18),
+            Gap(Dimentions.height10),
+
+            Padding(
+              padding:
+              EdgeInsets.symmetric(horizontal: Dimentions.width40),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Gap(Dimentions.height5),
+
+                  CustomLogoContainer(
+                    image: 'assets/svg/facebook.svg', onclick: () {  },
+                  ),
+                  Gap(Dimentions.height20),
+                  CustomLogoContainer(
+                    image: 'assets/svg/google.svg', onclick: () {  },
+                  ),
+                  Gap(Dimentions.height20),
+                  CustomLogoContainer(
+                    image: 'assets/svg/apple.svg', onclick: () {  },
+                  ),
+                  Gap(Dimentions.height5)
+                ],
+              ),
+            ),
+             Gap(Dimentions.height10),
 
              Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40),
+              padding: EdgeInsets.symmetric(horizontal: Dimentions.width40),
               child: CustomButton(onclick: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>SignUpScreen()));
-              }, title: 'Create an account',),
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>MyGmailScreen()));
+              }, title: 'Or Email',),
             ),
-            SizedBox(
-              height: height*0.030,
-            ),
-            RichText(
-              text: WidgetSpan(
-                  child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CustomText(
-                    color: Color(0xff000000),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(onPressed: (){}, child: CustomText(
+                    title: "Terms of use",
                     fontWeight: FontWeight.w400,
-                    title: 'Already have an account?',
-                    fontSize: 16,
-                  ),
-                  InkWell(
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (ctx)=>const LoginScreen()));
-                    },
-                    child: CustomText(
-                      color: Color(0xffE94057),
-                      fontWeight: FontWeight.w400,
-                      title: ' Sign In',
-                      fontSize: 16,
-                    ),
-                  ),
-                ],
-              )),
+                    color: kPrimaryColor,
+                    fontSize: Dimentions.font18)),
+                Gap(Dimentions.width20),
+                TextButton(
+                    onPressed: (){}, child: CustomText(
+                    title: "Privacy Policy",
+                    fontWeight: FontWeight.w400,
+                    color: kPrimaryColor,
+                    fontSize:Dimentions.font18))
+              ],
             ),
-            SizedBox(
-              height: height*0.065,
-            )
+            Gap(Dimentions.height15)
           ],
         ),
       ),

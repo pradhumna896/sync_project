@@ -17,7 +17,7 @@ class MassegesScreen extends StatelessWidget {
       children: [
         Gap(20),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 30),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -33,7 +33,7 @@ class MassegesScreen extends StatelessWidget {
                   width: 52,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: kgreyColor)),
+                      ),
                   child: Center(
                       child: SvgPicture.asset("assets/svg/massegesicon.svg")),
                 ),
@@ -43,7 +43,7 @@ class MassegesScreen extends StatelessWidget {
         ),
         Gap(20),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 30),
           child: SizedBox(
             height: 48,
             child: TextFormField(
@@ -81,7 +81,7 @@ class MassegesScreen extends StatelessWidget {
                               builder: (builder) => ChatScreen()));
                     },
                     child: Container(
-                      margin: EdgeInsets.only(left: 20,right: 20,top: 10),
+                      margin: EdgeInsets.only(left: 30,right: 30,top: 10),
                       child: Row(
                         children: [
                           Container(

@@ -80,19 +80,22 @@ class _IAmScreenState extends State<IAmScreen> {
                             CustomText(
                                 title: GenderModal.genderModalList[index].title,
                                 fontWeight: FontWeight.w400,
-                                color: data.chooseGender == index ? Color(
+                                color: data.chooseGender == index ? const Color(
                                     0xffFFFFFF) : kBlackColor,
                                 fontSize: 16),
-                            SvgPicture.asset(
-                                GenderModal.genderModalList[index].image,color: data.chooseGender == index ? Color(
-                                0xffFFFFFF) : kBlackColor,)
+                            Visibility(
+                              visible: data.chooseGender==index?true:false,
+                              child: SvgPicture.asset(
+                                  GenderModal.genderModalList[index].image,color:  const Color(
+                                  0xffFFFFFF) ),
+                            )
                           ],),
                       ),
                     ),
                   )),),
-              Gap(20),
+              const Gap(20),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 height: 56,
                 width: double.maxFinite,
                 decoration: BoxDecoration(
@@ -151,9 +154,9 @@ class _IAmScreenState extends State<IAmScreen> {
 
               CustomButton(title: "Continue", onclick: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (ctx) => LookingFor()));
+                    MaterialPageRoute(builder: (ctx) => const LookingFor()));
               }),
-              Gap(20)
+              const Gap(20)
             ],
           ),
         ),

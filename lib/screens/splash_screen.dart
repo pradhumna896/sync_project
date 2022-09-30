@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:syncdating/Screens/on_board_screen.dart';
 import 'package:syncdating/helper/dimentions/dimentions.dart';
 
+import 'onboard_screen_second.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -18,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
     Timer(const Duration(seconds:3 ), () {
-      Navigator.push(context, MaterialPageRoute(builder: (builder)=>const OnBoardingScreen()));
+      Navigator.push(context, MaterialPageRoute(builder: (builder)=> OnboardScreenSecond()));
     });
   }
   @override

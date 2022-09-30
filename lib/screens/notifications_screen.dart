@@ -86,6 +86,7 @@ class _NotificationOptionsState extends State<NotificationOptions> {
   SingingCharacter? _character = SingingCharacter.lafayette;
 
   List notification = ["New Matches", "Receive Messages", "Like & Super Like"];
+  bool isSwitch = true;
 
   @override
   Widget build(BuildContext context) {
@@ -110,8 +111,12 @@ class _NotificationOptionsState extends State<NotificationOptions> {
                       color: kBlackColor,
                       fontWeight: FontWeight.w400,
                       fontSize: 16,),
-                    trailing: Switch(value: true, onChanged: (value) {
-                  value = false;
+                    trailing: Switch(
+                        activeColor: kPrimaryColor,
+                        value:isSwitch, onChanged: (value) {
+                          setState((){
+                            isSwitch=!isSwitch;
+                          });
                 }),
           ),),
       ),

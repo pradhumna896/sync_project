@@ -13,6 +13,7 @@ import 'package:syncdating/components/custom_back_button.dart';
 import 'package:syncdating/components/custom_button.dart';
 // import '../../../Dawners/lib/helper/custom_text.dart';
 import 'package:syncdating/helper/constants.dart';
+import 'package:syncdating/helper/dimentions/dimentions.dart';
 import 'package:syncdating/provider/app_controller.dart';
 import 'package:syncdating/provider/card_provider.dart';
 import 'package:syncdating/screens/filtter_screen.dart';
@@ -53,9 +54,9 @@ class _MainScreenState extends State<MainScreen> {
     final urlImages = provider.urlImage;
     final data = Provider.of<AppController>(context);
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 40),
+      padding: const EdgeInsets.symmetric(horizontal: 30),
       child: Column(children: [
-        Gap(20),
+        Gap(Dimentions.height20),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -66,12 +67,8 @@ class _MainScreenState extends State<MainScreen> {
                     title: "Discover",
                     fontWeight: FontWeight.w700,
                     color: kBlackColor,
-                    fontSize: 24),
-                CustomText(
-                    title: "Chicago, II",
-                    fontWeight: FontWeight.w400,
-                    color: kBlackColor,
-                    fontSize: 12)
+                    fontSize: Dimentions.font24),
+
               ],
             ),
             InkWell(
@@ -85,18 +82,17 @@ class _MainScreenState extends State<MainScreen> {
                });
               },
               child: Container(
-                height: 52,
-                width: 52,
+
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
-                    border: Border.all(color: kgreyColor)),
+                  ),
                 child: Center(
                     child: SvgPicture.asset("assets/svg/massegesicon.svg")),
               ),
             )
           ],
         ),
-        Gap(20),
+        Gap(Dimentions.height30),
         Expanded(
           child: Container(
             alignment: Alignment.center,
@@ -104,9 +100,9 @@ class _MainScreenState extends State<MainScreen> {
             child: buildCards(),
           ),
         ),
-        Gap(20),
+        Gap(Dimentions.height30),
         urlImages.isEmpty?Container():buildButtons(),
-        Gap(25)
+        Gap(Dimentions.height25)
       ]),
     );
   }

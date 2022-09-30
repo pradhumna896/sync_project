@@ -10,6 +10,7 @@ import 'package:syncdating/screens/multi_image_picker_screen.dart';
 import 'package:syncdating/screens/notification_screen_first.dart';
 import 'package:syncdating/screens/notifications_screen.dart';
 import 'package:syncdating/screens/privacy_policy.dart';
+import 'package:syncdating/screens/viewScreen.dart';
 
 import '../screens/invite_screen.dart';
 
@@ -102,26 +103,31 @@ class UserProfileScreen extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Container(
-                            padding:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                border: Border.all(color: Colors.white)),
-                            child: Row(
-                              children: [
-                                Icon(
-                                  Icons.visibility,
-                                  color: Colors.white,
-                                  size: 14,
-                                ),
-                                Gap(5),
-                                CustomText(
-                                    title: "View",
-                                    fontWeight: FontWeight.w400,
+                          InkWell(
+                            onTap:(){
+                              Navigator.push(context, MaterialPageRoute(builder: (ctx)=>ViewScreen()));
+                            },
+                            child: Container(
+                              padding:
+                              EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  border: Border.all(color: Colors.white)),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.visibility,
                                     color: Colors.white,
-                                    fontSize: 14)
-                              ],
+                                    size: 14,
+                                  ),
+                                  Gap(5),
+                                  CustomText(
+                                      title: "View",
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.white,
+                                      fontSize: 14)
+                                ],
+                              ),
                             ),
                           ),
                           // Container(
@@ -211,32 +217,7 @@ class UserProfileScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Card(
-              margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 20, vertical: 10),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.logout_outlined,
-                      color: kBlackColor,
-                    ),
-                    Gap(10),
-                    CustomText(
-                        title: "Sign Out",
-                        fontWeight: FontWeight.w600,
-                        color: kBlackColor,
-                        fontSize: 18),
-                    Spacer(),
-                    Icon(
-                      Icons.arrow_forward,
-                      color: kBlackColor,
-                    )
-                  ],
-                ),
-              ),
-            )
+
           ],
         ));
   }
