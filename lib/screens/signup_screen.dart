@@ -75,6 +75,7 @@ class SignUpScreen extends StatelessWidget {
                         children: [
                           const Expanded(
                               child: Divider(
+                                
                             height: 0.5,
                             color: Colors.grey,
                           )),

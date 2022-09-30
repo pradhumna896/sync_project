@@ -17,9 +17,9 @@ class CustomLogoContainer extends StatelessWidget {
     return InkWell(
       onTap: onclick,
       child: Container(
-        height: height*0.084,
-        width: height*0.084,
-        decoration: BoxDecoration(border: Border.all(color: kgreyColor),
+        height: height*0.060,
+        width: height*0.060,
+        decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15)),
 
         child: Center(child: SvgPicture.asset(image),),),

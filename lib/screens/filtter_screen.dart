@@ -20,7 +20,7 @@ class _FilterState extends State<Filter> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 150),
+
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
@@ -30,7 +30,7 @@ class _FilterState extends State<Filter> {
         padding: const EdgeInsets.symmetric(horizontal: 40),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.max,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Gap(10),
             Row(
@@ -84,7 +84,7 @@ class _FilterState extends State<Filter> {
                                 bottomLeft: Radius.circular(15))),
                         child: Center(
                             child: CustomText(
-                                title: "Girls",
+                                title: "Male",
                                 fontWeight: FontWeight.w700,
                                 color: filter == 0
                                     ? Color(0xffffffff)
@@ -105,7 +105,7 @@ class _FilterState extends State<Filter> {
                         ),
                         child: Center(
                             child: CustomText(
-                                title: "Boys",
+                                title: "Female",
                                 fontWeight: FontWeight.w700,
                                 color: filter == 1
                                     ? Color(0xffffffff)
@@ -140,42 +140,12 @@ class _FilterState extends State<Filter> {
               ]),
             ),
             Gap(40),
-            TextFormField(
-              decoration: InputDecoration(
-                  labelText: "Location",
-                  labelStyle: TextStyle(),
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(0xffE8E6EA)),
-                      borderRadius: BorderRadius.circular(15))),
-            ),
-            Gap(30),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                CustomText(
-                    title: "Distance",
-                    fontWeight: FontWeight.w700,
-                    color: kBlackColor,
-                    fontSize: 16),
-                CustomText(
-                    title: "40km",
-                    fontWeight: FontWeight.w400,
-                    color: kBlackColor,
-                    fontSize: 14),
-              ],
-            ),
-            Gap(20),
-            SizedBox(
-              height: 20,
-              child: ExpandableSlider.adaptive(
-                shrunkWidth: MediaQuery.of(context).size.width,
-                min: 10,
-                max: 100,
-                value: 50,
-                onChanged: (double) {},
-              ),
-            ),
-            Gap(20),
+
+
+
+
+
+
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -202,7 +172,8 @@ class _FilterState extends State<Filter> {
                 onChanged: (double) {},
               ),
             ),
-            Spacer(),
+            Gap(40),
+
             CustomButton(title: "Continue", onclick: () {Navigator.pop(context);}),
             Gap(30)
           ],

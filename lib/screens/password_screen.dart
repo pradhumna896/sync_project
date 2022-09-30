@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:syncdating/screens/home_screen.dart';
-import 'package:syncdating/screens/password_screen.dart';
 import 'package:syncdating/widget/custom_textfield.dart';
 
 import '../components/custom_button.dart';
@@ -13,8 +12,8 @@ import '../helper/constants.dart';
 import 'gmail_new_user_screen.dart';
 import 'otp_screen.dart';
 
-class MyGmailScreen extends StatelessWidget {
-  MyGmailScreen({Key? key}) : super(key: key);
+class PasswordScreen extends StatelessWidget {
+  PasswordScreen({Key? key}) : super(key: key);
   final _formkey = GlobalKey<FormState>();
 
   @override
@@ -24,17 +23,15 @@ class MyGmailScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 40),
         child: Form(
           key: _formkey,
-          child: Column(
+          child:Column(children: [
+            Expanded(
 
-            children: [
-              Expanded(child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-
-                  children: [
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
                   Gap(128),
                   CustomText(
-                      title: "My email",
+                      title: "Password",
                       fontWeight: FontWeight.w700,
                       color: kBlackColor,
                       fontSize: 34),
@@ -44,35 +41,47 @@ class MyGmailScreen extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                       color: kBlackColor,
                       fontSize: 14),
-                  Gap(32),
+                  Gap(10),
                   TextFormField(
                     keyboardType: TextInputType.visiblePassword,
-                    validator: (value) {
-                      return value!.contains('@') && value.length >= 6
-                          ? null
-                          : "Please Enter A Valid Email";
-                    },
                     decoration: InputDecoration(
-                        hintText: "Enter Email",
+                        hintText: "Password",
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15))),
                   ),
-                  Gap(10),
-
+                  Gap(5),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => GmailNewUserScreen()));
+                          },
+                          child: CustomText(
+                              title: "Forgot Password ?",
+                              fontWeight: FontWeight.w700,
+                              color: kPrimaryColor,
+                              fontSize: 16)),
+                    ],
+                  ),
                   Gap(50),
-                ],),
-              )),
-              CustomButton(
-                  title: "Continue",
-                  onclick: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>PasswordScreen()));
-                  }),
-              Gap(40)
-            ],
-          ),
+
+                ],
+              ),
+            ),
+            CustomButton(
+                title: "Continue",
+                onclick: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => HomeScreen()));
+                }),
+            Gap(40)
+          ],),
         ),
       ),
     );

@@ -33,7 +33,7 @@ class MassegesScreen extends StatelessWidget {
                   width: 52,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: kgreyColor)),
+                      ),
                   child: Center(
                       child: SvgPicture.asset("assets/svg/massegesicon.svg")),
                 ),

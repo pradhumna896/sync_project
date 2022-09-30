@@ -135,5 +135,43 @@ void bottomNavStatus(int index){
       debugPrint(error.toString());
     }
   }
+
+
+
+  int basicPriceIndex = 1;
+
+  void basicPriceStatus(int index){
+    print(index);
+    basicPriceIndex = index;
+    notifyListeners();
+  }
+
+
+  int standardPriceIndex = 1;
+  void standardPriceStatus(int index){
+    print(index);
+    standardPriceIndex = index;
+    notifyListeners();
+  }
+
+
+  int premiumPriceIndex = 1;
+  void premiumPriceStatus(int index){
+    print(index);
+    premiumPriceIndex = index;
+    notifyListeners();
+  }
+
+  int tabBarColor = 0;
+  void tabBarColorStatus(int index){
+    tabBarColor = index;
+    notifyListeners();
+  }
+  int showMe = 0;
+  void showMeStatus(int index){
+    showMe= index;
+    notifyListeners();
+  }
+
 }
 

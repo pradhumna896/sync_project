@@ -6,8 +6,8 @@ import 'package:syncdating/components/custom_text.dart';
 import 'package:syncdating/helper/constants.dart';
 import 'package:syncdating/widget/custom_textfield.dart';
 
-class ChangeNumberScreen extends StatelessWidget {
-  const ChangeNumberScreen({Key? key}) : super(key: key);
+class AccountRecoveryScreen extends StatelessWidget {
+  const AccountRecoveryScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class ChangeNumberScreen extends StatelessWidget {
             color: kBlackColor,
             fontSize: 24,
             fontWeight: FontWeight.w700,
-            title: "Change Number"),
+            title: "Account Recovery"),
       ),
       body: Center(
         child: Padding(
@@ -37,22 +37,15 @@ class ChangeNumberScreen extends StatelessWidget {
                 height: height * 0.12,
                 width: height * 0.12,
               ),
+              Gap(20),
+              CustomText(
+                  title:
+                      "Change your phone Number, or lost access to your Facebook Account? we can help you login with your email. ",
+                  fontWeight: FontWeight.w400,
+                  color: kBlackColor,
+                  fontSize: 14,textAlign: TextAlign.center,),
               Gap(40),
-              Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                children: [
-                    CustomTextField(
-                        label: "Enter Current Number",
-                        keybordType: TextInputType.phone),
-                    Gap(20),
-                    CustomTextField(
-                        label: "Enter New Number",
-                        keybordType: TextInputType.phone),
-                ],
-              ),
-                  )),
-              CustomButton(title: "Update Number", onclick: () {}),
+              CustomButton(title: "Login with Email", onclick: () {}),
               Gap(20)
             ],
           ),

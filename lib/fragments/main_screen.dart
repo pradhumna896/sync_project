@@ -67,11 +67,7 @@ class _MainScreenState extends State<MainScreen> {
                     fontWeight: FontWeight.w700,
                     color: kBlackColor,
                     fontSize: 24),
-                CustomText(
-                    title: "Chicago, II",
-                    fontWeight: FontWeight.w400,
-                    color: kBlackColor,
-                    fontSize: 12)
+
               ],
             ),
             InkWell(
@@ -85,11 +81,10 @@ class _MainScreenState extends State<MainScreen> {
                });
               },
               child: Container(
-                height: 52,
-                width: 52,
+
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
-                    border: Border.all(color: kgreyColor)),
+                  ),
                 child: Center(
                     child: SvgPicture.asset("assets/svg/massegesicon.svg")),
               ),

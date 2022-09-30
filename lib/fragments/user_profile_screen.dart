@@ -211,32 +211,7 @@ class UserProfileScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Card(
-              margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 20, vertical: 10),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.logout_outlined,
-                      color: kBlackColor,
-                    ),
-                    Gap(10),
-                    CustomText(
-                        title: "Sign Out",
-                        fontWeight: FontWeight.w600,
-                        color: kBlackColor,
-                        fontSize: 18),
-                    Spacer(),
-                    Icon(
-                      Icons.arrow_forward,
-                      color: kBlackColor,
-                    )
-                  ],
-                ),
-              ),
-            )
+
           ],
         ));
   }

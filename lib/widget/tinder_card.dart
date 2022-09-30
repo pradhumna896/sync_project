@@ -90,41 +90,46 @@ class _TinderCardState extends State<TinderCard> {
                 fit: BoxFit.cover,
                 alignment: Alignment(-0.3, 0)),
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              InkWell(
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (ctx) => ProfileScreen()));
-                },
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 5),
-                  width: double.maxFinite,
-                  height: 70,
-                  decoration: BoxDecoration(
-                      color: Colors.black54,
-                      borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(15),
-                          bottomLeft: Radius.circular(15))),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CustomText(
-                          title: "Jessica Parker, 23",
-                          fontWeight: FontWeight.w700,
-                          color: Colors.white,
-                          fontSize: 24),
-                      CustomText(
-                          title: "Professional model",
-                          fontWeight: FontWeight.w400,
-                          color: Colors.white,
-                          fontSize: 14)
-                    ],
-                  ),
-                ),
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Colors.transparent,Colors.black],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                stops: [0.7,1]
               )
-            ],
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (ctx) => ProfileScreen()));
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+                    width: double.maxFinite,
+                    height: 70,
+                    color: Colors.transparent,
+
+
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomText(
+                            title: "Jessica Parker, 23",
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white,
+                            fontSize: 24),
+
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       );
@@ -138,6 +143,7 @@ class _TinderCardState extends State<TinderCard> {
       case CardStatus.Like:
         final child = buildStamp(
           angle: -0.5,
+          textColor: kPrimaryColor,
           color: kPrimaryColor,
           title: "LIKE",
           iconColor: kPrimaryColor,
@@ -150,6 +156,7 @@ class _TinderCardState extends State<TinderCard> {
           angle: 0.5,
           color: kPrimaryColor,
           title: "NOPE",
+          textColor: Colors.deepOrange,
           iconColor: Colors.deepOrange,
           opacity: opacity,
         );
@@ -157,13 +164,14 @@ class _TinderCardState extends State<TinderCard> {
         return Positioned(top: 40,right: 20, child: child);
       case CardStatus.SuperLike:
         final child = buildStamp(
+          textColor: const Color(0xff8A2387),
           color: kPrimaryColor,
           title: "SHORTLISTED",
           iconColor: Colors.deepOrange,
           opacity: opacity,
         );
 
-        return Positioned(top: 20,left: 60, child: child);
+        return Positioned(top: 20,left: 40, child: child);
       default:
         return Container();
     }
@@ -171,6 +179,7 @@ class _TinderCardState extends State<TinderCard> {
 
   Widget buildStamp({
     double angle = 0,
+    required Color textColor,
     required Color color,
     required String title,
     required Color iconColor,
@@ -182,7 +191,7 @@ class _TinderCardState extends State<TinderCard> {
         angle: angle,
         child: Container(
           decoration: BoxDecoration(
-              border: Border.all(color: kPrimaryColor),
+              border: Border.all(color: textColor,width: 2),
               ),
           child: Row(
             children: [
@@ -192,7 +201,7 @@ class _TinderCardState extends State<TinderCard> {
                 child: Center(
                   child: CustomText(
                       title: title,
-                      color: kPrimaryColor,
+                      color: textColor,
                       fontSize: 24,
                       fontWeight: FontWeight.w800),
                 ),

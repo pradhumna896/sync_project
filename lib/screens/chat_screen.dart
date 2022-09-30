@@ -115,11 +115,10 @@ class ChatScreen extends StatelessWidget {
                     InkWell(
                       onTap: () {},
                       child: Container(
-                        height: 52,
-                        width: 52,
+
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
-                            border: Border.all(color: kgreyColor)),
+                            ),
                         child: Center(
                           child: SvgPicture.asset("assets/svg/moreone.svg"),
                         ),
