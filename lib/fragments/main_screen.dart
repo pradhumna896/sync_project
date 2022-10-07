@@ -13,7 +13,6 @@ import 'package:syncdating/components/custom_back_button.dart';
 import 'package:syncdating/components/custom_button.dart';
 // import '../../../Dawners/lib/helper/custom_text.dart';
 import 'package:syncdating/helper/constants.dart';
-import 'package:syncdating/helper/dimentions/dimentions.dart';
 import 'package:syncdating/provider/app_controller.dart';
 import 'package:syncdating/provider/card_provider.dart';
 import 'package:syncdating/screens/filtter_screen.dart';
@@ -54,9 +53,9 @@ class _MainScreenState extends State<MainScreen> {
     final urlImages = provider.urlImage;
     final data = Provider.of<AppController>(context);
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30),
+      padding: const EdgeInsets.symmetric(horizontal: 40),
       child: Column(children: [
-        Gap(Dimentions.height20),
+        Gap(20),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -67,7 +66,7 @@ class _MainScreenState extends State<MainScreen> {
                     title: "Discover",
                     fontWeight: FontWeight.w700,
                     color: kBlackColor,
-                    fontSize: Dimentions.font24),
+                    fontSize: 24),
 
               ],
             ),
@@ -92,7 +91,7 @@ class _MainScreenState extends State<MainScreen> {
             )
           ],
         ),
-        Gap(Dimentions.height30),
+        Gap(20),
         Expanded(
           child: Container(
             alignment: Alignment.center,
@@ -100,9 +99,9 @@ class _MainScreenState extends State<MainScreen> {
             child: buildCards(),
           ),
         ),
-        Gap(Dimentions.height30),
+        Gap(20),
         urlImages.isEmpty?Container():buildButtons(),
-        Gap(Dimentions.height25)
+        Gap(25)
       ]),
     );
   }

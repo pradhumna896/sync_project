@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:syncdating/helper/constants.dart';
-import 'package:syncdating/helper/dimentions/dimentions.dart';
 
 class CustomLogoContainer extends StatelessWidget {
   VoidCallback onclick;
@@ -18,8 +17,8 @@ class CustomLogoContainer extends StatelessWidget {
     return InkWell(
       onTap: onclick,
       child: Container(
-        height: Dimentions.height44,
-        width: Dimentions.width44,
+        height: height*0.060,
+        width: height*0.060,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15)),
 
