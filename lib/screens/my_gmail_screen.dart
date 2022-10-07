@@ -11,6 +11,7 @@ import '../components/custom_back_button.dart';
 import '../components/custom_button.dart';
 
 // import '../../../Dawners/lib/helper/custom_text.dart';
+import '../components/custom_logo_container.dart';
 import '../components/custom_text.dart';
 import '../helper/constants.dart';
 import 'gmail_new_user_screen.dart';
@@ -35,14 +36,18 @@ class _MyGmailScreenState extends State<MyGmailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        // decoration: BoxDecoration(image:
+        // DecorationImage(image: AssetImage("assets/images/newlogimage.png"),fit: BoxFit.fill)),
         child: Padding(
           padding:  EdgeInsets.symmetric(horizontal:Dimentions.width40 ),
           child: Form(
             key: _formkey,
             child: Column(
               children: [
-                Gap(Dimentions.height20),
+                Gap(Dimentions.height44),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -57,7 +62,7 @@ class _MyGmailScreenState extends State<MyGmailScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Gap(Dimentions.height120),
+                      Gap(Dimentions.height30),
                       CustomText(
                           title: "My email",
                           fontWeight: FontWeight.w700,
@@ -149,7 +154,7 @@ class _MyGmailScreenState extends State<MyGmailScreen> {
                   ),
                 )),
                 CustomButton(
-                    title: "Continue",
+                    title: "Sign In",
                     onclick: () {
                       print(email);
                       if (isEmail == email) {
@@ -164,7 +169,37 @@ class _MyGmailScreenState extends State<MyGmailScreen> {
                                 builder: (context) => ProfileDetailsScreen()));
                       }
                     }),
-                Gap(Dimentions.height39)
+
+                Gap(10),
+                CustomText(title: "Or",
+                  fontWeight: FontWeight.w700,
+                  fontSize: 16,
+                  color: kBlackColor,),
+                Gap(10),
+                Padding(
+                  padding:
+                  EdgeInsets.symmetric(horizontal: Dimentions.width40),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Gap(Dimentions.height5),
+
+                      CustomLogoContainer(
+                        image: 'assets/svg/facebook.svg', onclick: () {  },
+                      ),
+                      Gap(Dimentions.height20),
+                      CustomLogoContainer(
+                        image: 'assets/svg/google.svg', onclick: () {  },
+                      ),
+                      Gap(Dimentions.height20),
+                      CustomLogoContainer(
+                        image: 'assets/svg/apple.svg', onclick: () {  },
+                      ),
+                      Gap(Dimentions.height5)
+                    ],
+                  ),
+                ),
+                Gap(100)
               ],
             ),
           ),

@@ -12,6 +12,7 @@ import 'package:syncdating/widget/home_slider.dart';
 import '../helper/dimentions/dimentions.dart';
 import '../model/onboard_second_screen_model.dart';
 import '../provider/app_controller.dart';
+import 'my_gmail_screen.dart';
 import 'new_login_screen.dart';
 
 class OnboardScreenSecond extends StatelessWidget {
@@ -27,16 +28,30 @@ class OnboardScreenSecond extends StatelessWidget {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+              padding: EdgeInsets.symmetric(horizontal: Dimentions.width40, vertical:Dimentions.height20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  CustomBackButoon(onclick: () {}),
-                  CustomSkipButton(onclick: () {})
+                  CustomBackButoon(onclick: () {
+                    if(data.homeSliderIndex<0){
+
+    pageController.animateToPage(pageController.page!.toInt()-1, duration: Duration(seconds: 1),
+    curve: Curves.ease);
+
+
+                    }
+                  }),
+                  CustomSkipButton(onclick: () {if(data.homeSliderIndex>0){
+
+                    pageController.animateToPage(pageController.page!.toInt()+1, duration: Duration(seconds: 1),
+                        curve: Curves.ease);
+
+
+                  }})
                 ],
               ),
             ),
-            Gap(10),
+            Gap(Dimentions.height10),
             Expanded(
               child: PageView.builder(
                   itemCount:
@@ -50,25 +65,25 @@ class OnboardScreenSecond extends StatelessWidget {
                     return Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          padding:  EdgeInsets.symmetric(horizontal: Dimentions.width20),
                           child: CustomText(textAlign: TextAlign.start,
                               title: OnboardSecondScreenModel
                                   .onboardSecondScreenList[index].title,
                               fontWeight: FontWeight.w500,
                               color: kBlackColor,
-                              fontSize: 34),
+                              fontSize: Dimentions.font34),
                         ),
-                        Gap(10),
+                        Gap(Dimentions.height10),
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          padding:  EdgeInsets.symmetric(horizontal: Dimentions.width20),
                           child: CustomText(
                               title: OnboardSecondScreenModel
                                   .onboardSecondScreenList[index].subTitle,
                               fontWeight: FontWeight.w400,
                               color: kBlackColor,
-                              fontSize: 24),
+                              fontSize: Dimentions.font24),
                         ),
-                        Gap(20),
+                        Gap(Dimentions.height20),
                         SvgPicture.asset(OnboardSecondScreenModel
                             .onboardSecondScreenList[index].image)
                       ],
@@ -76,34 +91,34 @@ class OnboardScreenSecond extends StatelessWidget {
                   }),
             ),
             HomeSlider(),
-            Gap(20),
+            Gap(Dimentions.height20),
             Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 40),
+                padding:  EdgeInsets.symmetric(horizontal: Dimentions.width40),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Container(
-                      height: 44,
+                      height:Dimentions.height44,
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
 
                               backgroundColor: kPrimaryColor,
                               shape: RoundedRectangleBorder(side: BorderSide(color: kPrimaryColor),
-                                  borderRadius: BorderRadius.circular(15))),
+                                  borderRadius: BorderRadius.circular(Dimentions.height15))),
                           onPressed: () {
                             if(data.homeSliderIndex==OnboardSecondScreenModel.onboardSecondScreenList.length-1){
-                              Navigator.push(context, MaterialPageRoute(builder: (ctx)=>NewLoginScreen()));
+                              Navigator.push(context, MaterialPageRoute(builder: (ctx)=>MyGmailScreen()));
                             }else{
                               pageController.animateToPage(pageController.page!.toInt()+1, duration: Duration(seconds: 1),
                                   curve: Curves.ease);
                             }
                           },
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            padding:  EdgeInsets.symmetric(horizontal: Dimentions.width15),
                             child: CustomText(
                               title: "Next",
                               color: Colors.white,
-                              fontSize: 18,
+                              fontSize: Dimentions.font18,
                               fontWeight: FontWeight.w500,
                             ),
                           )),

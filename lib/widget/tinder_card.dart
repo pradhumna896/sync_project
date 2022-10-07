@@ -112,8 +112,8 @@ class _TinderCardState extends State<TinderCard> {
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal: Dimentions.width15, vertical: Dimentions.height5),
                     width: double.maxFinite,
-                    height: 70,
-                    color: Colors.transparent,
+                    height: 50,
+                    color: Colors.black26,
 
 
                     child: Column(

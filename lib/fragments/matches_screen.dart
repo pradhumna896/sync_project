@@ -113,7 +113,7 @@ class MatchesScreen extends StatelessWidget {
                             : Colors.transparent,
                       ),
                       padding:
-                          EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                          EdgeInsets.symmetric(horizontal: Dimentions.width15, vertical: Dimentions.height5),
                       child: CustomText(
                           textAlign: TextAlign.center,
                           title: "View Profile",
@@ -146,7 +146,9 @@ class MatchesScreen extends StatelessWidget {
                   )
                 ]),
             Expanded(
-              child: TabBarView(children: [
+              child: TabBarView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: [
                 likeMatches(),
                 disLikeMatches(),
                 viewProfileMatches(),

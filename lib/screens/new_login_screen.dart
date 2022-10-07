@@ -7,6 +7,7 @@ import 'package:syncdating/helper/constants.dart';
 
 import '../components/custom_logo_container.dart';
 import '../helper/dimentions/dimentions.dart';
+import 'my_gmail_screen.dart';
 
 class NewLoginScreen extends StatelessWidget {
   const NewLoginScreen({Key? key}) : super(key: key);
@@ -28,39 +29,8 @@ class NewLoginScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              TextFormField(
-                decoration: InputDecoration(
 
-                    hintText: "Email",
-                    hintStyle: TextStyle(),
-                    prefixIcon: Icon(Icons.email_rounded),
-                    prefixIconColor: kPrimaryColor,
-                    focusColor: kPrimaryColor
-                ),
-              ),
-              TextFormField(
-
-                decoration: InputDecoration(
-                    contentPadding: EdgeInsets.symmetric(vertical: 20),
-
-                    hintText: "*******",
-                    hintStyle: TextStyle(),
-                    prefixIcon: Icon(Icons.lock_outline),
-                    prefixIconColor: kPrimaryColor,
-                    focusColor: kPrimaryColor
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  TextButton(onPressed: () {},
-                      child: CustomText(title: "Forgot Password?",
-                        fontWeight: FontWeight.w700,
-                        fontSize: 14,
-                        color: kBlackColor,)),
-                ],
-              ),
-              CustomButton(title: "Sign In", onclick: (){}),
+              CustomButton(title: "Sign In", onclick: (){Navigator.push(context,MaterialPageRoute(builder: (ctx)=>MyGmailScreen()));}),
               Gap(10),
               CustomText(title: "Or",
                 fontWeight: FontWeight.w700,
