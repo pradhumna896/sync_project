@@ -49,19 +49,19 @@ class _LookingForState extends State<LookingFor> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   CustomBackButoon(onclick: () {
                     Navigator.pop(context);
                   }),
-                  CustomSkipButton(
-                    onclick: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (builder) => const PassionsScreen()));
-                    },
-                  )
+                  // CustomSkipButton(
+                  //   onclick: () {
+                  //     Navigator.push(
+                  //         context,
+                  //         MaterialPageRoute(
+                  //             builder: (builder) => const PassionsScreen()));
+                  //   },
+                  // )
                 ],
               ),
               Gap(30),

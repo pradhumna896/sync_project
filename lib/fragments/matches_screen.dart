@@ -13,8 +13,17 @@ import '../helper/constants.dart';
 import '../provider/app_controller.dart';
 import '../screens/match_profile_screen.dart';
 
-class MatchesScreen extends StatelessWidget {
-  const MatchesScreen({Key? key}) : super(key: key);
+class MatchesScreen extends StatefulWidget {
+  MatchesScreen({Key? key}) : super(key: key);
+
+  @override
+  State<MatchesScreen> createState() => _MatchesScreenState();
+}
+
+class _MatchesScreenState extends State<MatchesScreen> {
+  var items = ['Like', 'ShortListed', 'Who viewed your profile', 'Matches'];
+
+  String title = "Like";
 
   @override
   Widget build(BuildContext context) {
@@ -22,32 +31,89 @@ class MatchesScreen extends StatelessWidget {
     return DefaultTabController(
       length: 4,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+        padding: EdgeInsets.symmetric(
+            horizontal: Dimentions.width30, vertical: Dimentions.height20),
         child: Column(
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 CustomText(
                     title: "Matches",
                     fontWeight: FontWeight.w700,
                     color: kBlackColor,
-                    fontSize: 34),
+                    fontSize: Dimentions.font34),
                 // InkWell(
-                //   onTap: () {},
-                //   child: Container(
-                //     height: 52,
-                //     width: 52,
-                //     decoration: BoxDecoration(
-                //         borderRadius: BorderRadius.circular(15),
-                //         border: Border.all(color: kgreyColor)),
-                //     child: Center(
-                //         child: SvgPicture.asset("assets/svg/sort_two.svg")),
-                //   ),
+                //     onTap: () {
+                //       showModalBottomSheet(
+                //           context: context,
+                //           builder: (BuildContext context) {
+                //             return CustomBottomSeet();
+                //           });
+                //     },
+                //     child: Image.asset("assets/images/filterr.png")),
+
+                // DropdownButtonHideUnderline(
+                //   child: DropdownButton(
+                //
+                //     icon: Image.asset("assets/images/filterr.png"),
+                //       dropdownColor: Color(0xffDCEDF9),
+                //       itemHeight: kMinInteractiveDimension,
+                //       style: TextStyle(
+                //           color: Color(0xff0E1012),
+                //           fontFamily: "NunitoSans",
+                //           fontWeight: FontWeight.w600,
+                //           fontSize: 12),
+                //       elevation: 5,
+                //       onTap: () {},
+                //       hint: Text(
+                //         title,
+                //         style: TextStyle(
+                //             color: Color(0xff0E1012),
+                //             fontFamily: "NunitoSans",
+                //             fontWeight: FontWeight.w600,
+                //             fontSize: 12),
+                //       ),
+                //       borderRadius: BorderRadius.circular(14),
+                //       items: const [
+                //         DropdownMenuItem(
+                //           value: "Like",
+                //           child: Text("Like"),
+                //         ),
+                //         DropdownMenuItem(
+                //           child: Text("ShotListed"),
+                //           value: "ShotListed",
+                //         ),
+                //         DropdownMenuItem(
+                //           child: Text("who viewed your profile"),
+                //           value: "who viewed your profile",
+                //         ),
+                //         DropdownMenuItem(
+                //           child: Text("Matches"),
+                //           value: "Matches",
+                //         )
+                //       ],
+                //       onChanged: (value) {
+                //         setState(() {
+                //           title = value.toString();
+                //         });
+                //       }),
+                //
+                //   // InkWell(
+                //   //   onTap: () {},
+                //   //   child: Container(
+                //   //     height: 52,
+                //   //     width: 52,
+                //   //     decoration: BoxDecoration(
+                //   //         borderRadius: BorderRadius.circular(15),
+                //   //         border: Border.all(color: kgreyColor)),
+                //   //     child: Center(
+                //   //         child: SvgPicture.asset("assets/svg/sort_two.svg")),
+                //   //   ),
+                //   // )
                 // )
               ],
             ),
-            Gap(10),
+            Gap(Dimentions.height10),
             CustomText(
                 title:
                     "This is a list of people who have liked you and your matches.",
@@ -75,7 +141,7 @@ class MatchesScreen extends StatelessWidget {
                             : Colors.transparent,
                       ),
                       padding:
-                          EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                          const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                       child: CustomText(
                           title: "Like",
                           fontWeight: FontWeight.w700,
@@ -146,6 +212,13 @@ class MatchesScreen extends StatelessWidget {
                   )
                 ]),
             Expanded(
+              // child: title == "Like"
+              //     ? likeMatches()
+              //     : title == "ShortListed"
+              //         ? disLikeMatches()
+              //         : title == "Matches"
+              //             ? matches()
+              //             : viewProfileMatches(),
               child: TabBarView(
                   physics: const NeverScrollableScrollPhysics(),
                   children: [
@@ -166,6 +239,7 @@ class MatchesScreen extends StatelessWidget {
       child: Column(
         children: [
           Gap(Dimentions.height20),
+          Row(children: [CustomRadioWidget(title:"Received", onClick: (){}),Gap(10),CustomRadioWidget(title:"Send", onClick: (){}),],),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -943,8 +1017,10 @@ class MatchesScreen extends StatelessWidget {
               itemBuilder: (BuildContext context, index) {
                 return InkWell(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (ctx) => MatchScreenProfile()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (ctx) => MatchScreenProfile()));
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -1146,6 +1222,108 @@ class MatchesScreen extends StatelessWidget {
                   ),
                 );
               })
+        ],
+      ),
+    );
+  }
+}
+class CustomBottomSeet extends StatelessWidget {
+  const CustomBottomSeet({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final provider = Provider.of<AppController>(context);
+    return  Padding(
+      padding: const EdgeInsets.symmetric(
+          horizontal: 40, vertical: 40),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CustomText(
+              title: "Like",
+              fontWeight: FontWeight.w600,
+              color: kBlackColor,
+              fontSize: 18),
+          Row(
+            children: [
+              CustomRadioWidget(
+                  title: "Send", onClick: () {
+                    if(provider.Send){
+                      provider.Send =!provider.Send;
+                    }
+              }),
+              Gap(20),
+              CustomRadioWidget(
+                title: "Recieve",
+                onClick: () {},
+              )
+            ],
+          ),
+          Gap(5),
+          Divider(height: 1,),
+          TextButton(
+            onPressed: () {},
+            child: CustomText(
+                title: "ShortListed",
+                fontWeight: FontWeight.w600,
+                color: kBlackColor,
+                fontSize: 18),
+          ),
+          Divider(height: 1,),
+          TextButton(
+            onPressed: (){
+              Navigator.pop(context);
+
+            },
+            child: CustomText(
+                title: "Who viewed your profile",
+                fontWeight: FontWeight.w600,
+                color: kBlackColor,
+                fontSize: 18),
+          ),
+          Divider(height: 1,),
+          TextButton(
+            onPressed: (){},
+            child: CustomText(
+                title: "Matches",
+                fontWeight: FontWeight.w600,
+                color: kBlackColor,
+                fontSize: 18),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+
+class CustomRadioWidget extends StatelessWidget {
+  String title;
+  VoidCallback onClick;
+
+  CustomRadioWidget({Key? key, required this.title, required this.onClick})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onClick,
+      child: Row(
+        children: [
+          Container(
+            height: 15,
+            width: 15,
+            decoration: BoxDecoration(
+                border: Border.all(color: kPrimaryColor),
+                shape: BoxShape.circle),
+          ),
+          Gap(5),
+          CustomText(
+              title: title,
+              fontWeight: FontWeight.w500,
+              color: kBlackColor,
+              fontSize: 16),
         ],
       ),
     );

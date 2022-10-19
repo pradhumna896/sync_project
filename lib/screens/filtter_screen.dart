@@ -17,6 +17,7 @@ class Filter extends StatefulWidget {
 
 class _FilterState extends State<Filter> {
   int filter = 0;
+  RangeValues currentRangeValues = const RangeValues(21, 45);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -150,33 +151,42 @@ class _FilterState extends State<Filter> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 CustomText(
-                    title: "Age",
-                    fontWeight: FontWeight.w700,
+                    title: "Age Range",
+                    fontWeight: FontWeight.w800,
                     color: kBlackColor,
-                    fontSize: 16),
+                    fontSize: 18),
                 CustomText(
-                    title: "20-39",
-                    fontWeight: FontWeight.w400,
+                    title: "${currentRangeValues.start.toInt()}-${currentRangeValues.end.toInt()}",
+                    fontWeight: FontWeight.w800,
                     color: kBlackColor,
-                    fontSize: 14),
+                    fontSize: 18),
               ],
             ),
-            Gap(20),
-            SizedBox(
-              height: 20,
-              child: ExpandableSlider.adaptive(
-                shrunkWidth: MediaQuery.of(context).size.width,
-                min: 10,
-                max: 100,
-                value: 50,
-                onChanged: (double) {},
-              ),
+        Gap(5),
+        SizedBox(
+          height: 20,
+          child: RangeSlider(
+
+            onChanged: (RangeValues values) {
+              print("START: ${currentRangeValues.start.toInt()}, End: ${currentRangeValues.end.toInt()}");
+              setState(() {
+                currentRangeValues = values;
+              });
+            },
+            labels: RangeLabels(
+              currentRangeValues.start.round().toString(),
+              currentRangeValues.end.round().toString(),
             ),
+            values: currentRangeValues,
+            max: 70,
+            min: 18,
+          ),),
             Gap(40),
+
 
             CustomButton(title: "Continue", onclick: () {Navigator.pop(context);}),
             Gap(30)
-          ],
+        ],
         ),
       ),
     );

@@ -43,19 +43,19 @@ class _PassionsScreenState extends State<PassionsScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   CustomBackButoon(onclick: () {
                     Navigator.pop(context);
                   }),
-                  CustomSkipButton(
-                    onclick: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (builder) => FriendsScreen()));
-                    },
-                  )
+                  // CustomSkipButton(
+                  //   onclick: () {
+                  //     Navigator.push(
+                  //         context,
+                  //         MaterialPageRoute(
+                  //             builder: (builder) => FriendsScreen()));
+                  //   },
+                  // )
                 ],
               ),
               Gap(30),

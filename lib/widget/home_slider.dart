@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:syncdating/helper/constants.dart';
+import 'package:syncdating/helper/dimentions/dimentions.dart';
 import 'package:syncdating/provider/app_controller.dart';
 
 class HomeSlider extends StatelessWidget {
@@ -18,11 +19,11 @@ class HomeSlider extends StatelessWidget {
             padding: const EdgeInsets.only(left: 5.0),
             child: Container(
 
-                  height: 8,
-                  width: 8,
+                  height: Dimentions.height8,
+                  width: Dimentions.width8,
                   decoration: BoxDecoration(
                       color:data.homeSliderIndex==index? kPrimaryColor: Colors.grey,
-                      borderRadius: BorderRadius.circular(8)),
+                      borderRadius: BorderRadius.circular(Dimentions.height8)),
                 ),
           )),
     );

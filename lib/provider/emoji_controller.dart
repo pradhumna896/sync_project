@@ -11,7 +11,9 @@ class EmojiController extends GetxController{
   void onInit(){
     super.onInit();
     focusNode.addListener(() {
-      isEmogiVisible.value =false;
+      if(focusNode.hasFocus){
+        isEmogiVisible.value =false;
+      }
     });
   }
 

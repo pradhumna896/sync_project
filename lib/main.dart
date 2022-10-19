@@ -5,6 +5,7 @@ import 'package:syncdating/Screens/on_board_screen.dart';
 import 'package:syncdating/helper/constants.dart';
 import 'package:syncdating/provider/app_controller.dart';
 import 'package:syncdating/provider/card_provider.dart';
+import 'package:syncdating/screens/profile_details_screen.dart';
 import 'package:syncdating/screens/splash_screen.dart';
 
 void main() {
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
             )
           )
         ),
-        home:SplashScreen(),
+        home:const SplashScreen()
       ),
     );
   }

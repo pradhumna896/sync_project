@@ -166,7 +166,7 @@ class _TinderCardState extends State<TinderCard> {
         return Positioned(top: 40,right: 20, child: child);
       case CardStatus.SuperLike:
         final child = buildStamp(
-          textColor: const Color(0xff8A2387),
+          textColor: const Color(0xffee0ce7),
           color: kPrimaryColor,
           title: "SHORTLISTED",
           iconColor: Colors.deepOrange,

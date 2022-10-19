@@ -102,7 +102,7 @@ class OnboardScreenSecond extends StatelessWidget {
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
 
-                              backgroundColor: kPrimaryColor,
+                              primary: kPrimaryColor,
                               shape: RoundedRectangleBorder(side: BorderSide(color: kPrimaryColor),
                                   borderRadius: BorderRadius.circular(Dimentions.height15))),
                           onPressed: () {
@@ -125,7 +125,7 @@ class OnboardScreenSecond extends StatelessWidget {
                     )
                   ],
                 )),
-            Gap(40)
+            Gap(Dimentions.height25)
           ],
         ),
       ),

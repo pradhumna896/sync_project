@@ -187,5 +187,12 @@ void bottomNavStatus(int index){
     notifyListeners();
   }
 
+  bool Send = false;
+  bool Secieve = false;
+  void isButtonStatus(bool status){
+
+
+  }
+
 }
 

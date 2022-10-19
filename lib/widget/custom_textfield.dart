@@ -2,11 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../helper/constants.dart';
+import '../helper/dimentions/dimentions.dart';
 
 class CustomTextField extends StatelessWidget {
   String label;
+  TextEditingController controller;
   TextInputType keybordType;
-  CustomTextField({required this.label,required this.keybordType,
+  CustomTextField({required this.label,required this.keybordType,required this.controller,
     Key? key,
   }) : super(key: key);
 
@@ -14,8 +16,9 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Container(
-      height: height*0.065,
+      height: Dimentions.height44,
       child: TextFormField(
+        controller: controller,
         textInputAction: TextInputAction.next,
         keyboardType: keybordType,
         style: TextStyle(

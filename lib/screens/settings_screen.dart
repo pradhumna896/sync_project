@@ -13,6 +13,7 @@ import 'package:syncdating/settingsScreen/show_me_screen.dart';
 import 'package:syncdating/settingsScreen/term_Condition_screen.dart';
 import 'package:syncdating/settingsScreen/username_screen.dart';
 
+import '../settingsScreen/payment_history.dart';
 import '../widget/custom_appbar_title.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -25,6 +26,7 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   bool isSwitch = false;
   RangeValues currentRangeValues = const RangeValues(21, 45);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,11 +64,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
               const Gap(10),
               privacyPolicy(context),
               const Gap(10),
+              const Gap(10),
+              deleteAccount(),
               legalWidget(context),
               const Gap(10),
               logout(),
-              const Gap(10),
-              deleteAccount()
             ],
           ),
         ),
@@ -78,14 +80,42 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Card(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomText(
                 title: "Delete Account",
-                fontWeight: FontWeight.w800,
-                color: kPrimaryColor,
-                fontSize: 20),
+                fontWeight: FontWeight.w700,
+                color: kBlackColor,
+                fontSize: 18),
+            InkWell(
+              onTap: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Dialog(
+                        backgroundColor: Colors.transparent,
+                        child: ChooseDeleteAcount(),
+                      );
+                    });
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CustomText(
+                      title: "If away for",
+                      fontWeight: FontWeight.w400,
+                      color: kBlackColor,
+                      fontSize: 14),
+                  CustomText(
+                      title: "3 Month",
+                      fontWeight: FontWeight.w400,
+                      color: kBlackColor,
+                      fontSize: 14)
+                ],
+              ),
+            )
           ],
         ),
       ),
@@ -216,21 +246,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     fontSize: 18),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                CustomText(
-                    title: "Payment History",
-                    fontWeight: FontWeight.w400,
-                    color: kBlackColor,
-                    fontSize: 14),
-                Gap(5),
-                Icon(
-                  Icons.arrow_forward_ios,
-                  color: Colors.black26,
-                  size: 14,
-                )
-              ],
+            InkWell(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (_)=>PaymentHistory()));
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CustomText(
+                      title: "Payment History",
+                      fontWeight: FontWeight.w400,
+                      color: kBlackColor,
+                      fontSize: 14),
+                  Gap(5),
+                  Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.black26,
+                    size: 14,
+                  )
+                ],
+              ),
             )
           ],
         ),
@@ -256,8 +291,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             Gap(5),
             InkWell(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (_)=>EmailNotificationScreen()));
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) => EmailNotificationScreen()));
               },
               child: Row(
                 children: [
@@ -338,8 +376,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   Card ageRange(BuildContext context) {
-
-
     return Card(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
@@ -354,7 +390,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     color: kBlackColor,
                     fontSize: 18),
                 CustomText(
-                    title: "${currentRangeValues.start.toInt()}-${currentRangeValues.end.toInt()}",
+                    title:
+                        "${currentRangeValues.start.toInt()}-${currentRangeValues.end.toInt()}",
                     fontWeight: FontWeight.w800,
                     color: kBlackColor,
                     fontSize: 18),
@@ -364,9 +401,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
             SizedBox(
               height: 20,
               child: RangeSlider(
-
                 onChanged: (RangeValues values) {
-                  print("START: ${currentRangeValues.start.toInt()}, End: ${currentRangeValues.end.toInt()}");
+                  print(
+                      "START: ${currentRangeValues.start.toInt()}, End: ${currentRangeValues.end.toInt()}");
                   setState(() {
                     currentRangeValues = values;
                   });
@@ -390,11 +427,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     fontSize: 14),
                 Switch(
                     activeColor: kPrimaryColor,
-                    value:isSwitch, onChanged: (value) {
-                  setState((){
-                    isSwitch=!isSwitch;
-                  });
-                })
+                    value: isSwitch,
+                    onChanged: (value) {
+                      setState(() {
+                        isSwitch = !isSwitch;
+                      });
+                    })
               ],
             )
           ],
@@ -440,6 +478,63 @@ class _SettingsScreenState extends State<SettingsScreen> {
               )
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class ChooseDeleteAcount extends StatelessWidget {
+  const ChooseDeleteAcount({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CustomText(
+                title: "Self-Destruct if inactive for...",
+                fontWeight: FontWeight.w700,
+                color: kBlackColor,
+                fontSize: 18),
+            Column(
+                children: List.generate(
+                    4,
+                    (index) => InkWell(
+                      onTap: (){},
+                      child: Row(
+                            children: [
+                              Radio(
+                                  value: true,
+                                  groupValue: true,
+                                  onChanged: (value) {}),
+                              CustomText(
+                                  title: "1 Month",
+                                  fontWeight: FontWeight.w500,
+                                  color: kBlackColor,
+                                  fontSize: 16)
+                            ],
+                          ),
+                    ))),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                TextButton(
+                    onPressed: () {Navigator.pop(context);},
+                    child: CustomText(
+                      title: "Cancel",
+                      color: kPrimaryColor,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ))
+              ],
+            )
+          ],
         ),
       ),
     );

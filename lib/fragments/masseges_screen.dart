@@ -19,25 +19,25 @@ class MassegesScreen extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               CustomText(
                   title: "Messages",
                   fontWeight: FontWeight.w700,
                   color: kBlackColor,
                   fontSize: 34),
-              InkWell(
-                onTap: () {},
-                child: Container(
-                  height: 52,
-                  width: 52,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      ),
-                  child: Center(
-                      child: SvgPicture.asset("assets/svg/massegesicon.svg")),
-                ),
-              )
+              // InkWell(
+              //   onTap: () {},
+              //   child: Container(
+              //     height: 52,
+              //     width: 52,
+              //     decoration: BoxDecoration(
+              //         borderRadius: BorderRadius.circular(15),
+              //         ),
+              //     child: Center(
+              //         child: SvgPicture.asset("assets/svg/massegesicon.svg")),
+              //   ),
+              // )
             ],
           ),
         ),

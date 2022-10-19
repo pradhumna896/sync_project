@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'dart:io';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -9,11 +11,17 @@ import 'package:image_picker/image_picker.dart';
 
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:syncdating/components/country_state_picker.dart';
+
+import 'package:syncdating/components/custom_back_button.dart';
 import 'package:syncdating/components/custom_button.dart';
+import 'package:syncdating/helper/api_helper.dart';
+import 'package:syncdating/helper/api_network.dart';
 
 // import '../../../Dawners/lib/helper/custom_text.dart';
 import 'package:syncdating/helper/constants.dart';
 import 'package:syncdating/helper/dimentions/dimentions.dart';
+import 'package:syncdating/model/add_profile_model.dart';
 import 'package:syncdating/provider/app_controller.dart';
 import 'package:syncdating/screens/about_me_screen.dart';
 import 'package:syncdating/screens/friends_screen.dart';
@@ -22,9 +30,14 @@ import 'package:table_calendar/table_calendar.dart';
 
 import '../components/custom_skip_button.dart';
 import '../components/custom_text.dart';
+
+import '../model/show_country_model.dart';
 import '../widget/custom_calender.dart';
+import '../widget/custom_drop_down.dart';
 import '../widget/custom_textfield.dart';
+import 'package:http/http.dart'as http;
 import 'multi_image_picker_screen.dart';
+import 'package:dropdown_text_search/src/flutter_dropdown_text_search.dart';
 
 class ProfileDetailsScreen extends StatefulWidget {
   ProfileDetailsScreen({Key? key}) : super(key: key);
@@ -34,7 +47,166 @@ class ProfileDetailsScreen extends StatefulWidget {
 }
 
 class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
+  @override
+  initState(){
+    super.initState();
+    getCountry();
+  }
+  bool isSubmit = false;
   File? pickedImage;
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
+  TextEditingController countryController = TextEditingController();
+  TextEditingController stateController = TextEditingController();
+  TextEditingController cityController = TextEditingController();
+  TextEditingController religionController = TextEditingController();
+  TextEditingController casteController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController mobileController = TextEditingController();
+  void addProfileDetails()async{
+    if(firstNameController.text.isEmpty){
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Enter First Name"),
+        backgroundColor: Colors.red,
+      ));
+      return;
+    }
+    if(lastNameController.text.isEmpty){
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Enter Last Name"),
+        backgroundColor: Colors.red,
+      ));
+      return;
+    }
+    if(selectedDate.toString().isEmpty){
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Please Choose DOB"),
+        backgroundColor: Colors.red,
+      ));
+      return;
+    }
+    if(chooseCountry.isEmpty){
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Please Choose Country"),
+        backgroundColor: Colors.red,
+      ));
+      return;
+    }
+    if(chooseState.isEmpty){
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Please Choose State"),
+        backgroundColor: Colors.red,
+      ));
+      return;
+    }
+    if(chooseCity.isEmpty){
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Please Choose City"),
+        backgroundColor: Colors.red,
+      ));
+      return;
+    }
+    if(religionController.text.isEmpty){
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Enter Religion Name"),
+        backgroundColor: Colors.red,
+      ));
+      return;
+    }
+    if(casteController.text.isEmpty){
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Choose Caste"),
+        backgroundColor: Colors.red,
+      ));
+      return;
+    }
+    if(emailController.text.isEmpty){
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Enter Email ID"),
+        backgroundColor: Colors.red,
+      ));
+      return;
+    }
+    if(mobileController.text.isEmpty){
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Enter Mobile Number"),
+        backgroundColor: Colors.red,
+      ));
+      return;
+    }
+    if(pickedImage.toString().isEmpty){
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("please Choose Image"),
+        backgroundColor: Colors.red,
+      ));
+      return;
+    }
+    setState((){
+      isSubmit = true;
+    });
+
+
+
+    Uri uri = Uri.parse(ApiNetwork.addProfile);
+    var request = http.MultipartRequest('POST', uri);
+    request.fields.addAll({
+      'id':'1',
+      'email':emailController.text,
+      'first_name':firstNameController.text,
+      'last_name':lastNameController.text,
+      'dob':selectedDate.toString(),
+      'country':chooseCountry,
+      'email':emailController.text,
+      'state':chooseState,
+
+      'city':chooseCity,
+      'religion':religionController.text,
+      'coste':casteController.text,
+      'mobile':mobileController.text,
+    });
+
+    request.files
+        .add(await http.MultipartFile.fromPath('image', pickedImage!.path));
+    http.StreamedResponse response = await request.send();
+
+
+
+
+    try{
+      if(response.statusCode==200){
+        setState((){
+          isSubmit = false;
+        });
+        var resp = await response.stream.bytesToString();
+
+        AddProfileModel addData = AddProfileModel.fromJson(jsonDecode(resp));
+        print(addData);
+        if(addData.message=="profile detail add  successfully"){
+
+          Navigator.push(context, MaterialPageRoute(builder: (ctx)=>IAmScreen()));
+        }
+
+
+      }else{
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("SomeThing wrong"),
+          backgroundColor: Colors.red,
+        ));
+      }
+
+    }catch(e){
+
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Please check Internet"),
+        backgroundColor: Colors.red,
+      ));
+      setState((){
+        isSubmit = false;
+      });
+
+    }
+
+  }
 
   pickImage(ImageSource imageType) async {
     try {
@@ -62,7 +234,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                 InkWell(
                   onTap: () {
                     pickImage(ImageSource.gallery);
-                    Navigator.pop(context);
+
                   },
                   child: ListTile(
                     leading: Icon(
@@ -79,7 +251,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                 InkWell(
                   onTap: () {
                     pickImage(ImageSource.camera);
-                    Navigator.pop(context);
+
                   },
                   child: ListTile(
                     leading: Icon(
@@ -120,6 +292,16 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
       });
     }
   }
+  List<String> countryName =[];
+  List<String>  stateName = ["a","b"];
+  List<String>  cityName = ["a","b"];
+  List<String>  religionName = ["a","b"];
+  List<String>  casteName = ["a","b"];
+
+  late String chooseCountry;
+  late String chooseState;
+  late String chooseCity;
+
 
   @override
   Widget build(BuildContext context) {
@@ -134,12 +316,10 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
           children: [
             Gap(20),
             Row(
-              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                CustomSkipButton(
+                CustomBackButoon(
                   onclick: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (builder) => IAmScreen()));
+                    Navigator.pop(context);
                   },
                 )
               ],
@@ -187,11 +367,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                                   bottom: 0,
                                   child: InkWell(
                                       onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (ctx) =>
-                                                     MultiImagePickerScreen()));
+
                                       },
                                       child: SvgPicture.asset(
                                           "assets/svg/camera.svg")))
@@ -201,11 +377,13 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                   ),
                   Gap(height * 0.05),
                   CustomTextField(
+                    controller: firstNameController,
                     label: "First Name",
                     keybordType: TextInputType.name,
                   ),
                   Gap(14),
                   CustomTextField(
+                    controller: lastNameController,
                       label: "Last Name", keybordType: TextInputType.name),
                   Gap(10),
                   Container(
@@ -236,42 +414,79 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                     ),
                   ),
                   Gap(10),
-                  CustomTextField(
-                    label: "Country",
-                    keybordType: TextInputType.text,
-                  ),
+                  SelectStateCountry(onCountryChanged: (country){
+                    chooseCountry=country.toString();
+                    print(chooseCountry);
+                    }, onStateChanged: (state){chooseState=state;  } , onCityChanged: (city){chooseCity=city;}),
+
+                 //  CustomDropDown(title: "Country",countryController: countryController, item:countryName, height: height),
+                 //  Gap(10),
+                 //  CustomDropDown(title: "State",countryController: stateController, item:stateName , height: height),
+                 //  Gap(10),
+                 // CustomDropDown(title: "City", countryController: cityController, item:cityName, height: height),
+                  Gap(10),
+                  CustomDropDown(title: "Religion", countryController: religionController, item:religionName, height: height),
+                  Gap(10),
+                  CustomDropDown(title: "Caste", countryController: casteController, item:casteName , height: height),
                   Gap(10),
                   CustomTextField(
-                    label: "State",
-                    keybordType: TextInputType.text,
-                  ),
-                  Gap(10),
-                  CustomTextField(
-                      label: "City", keybordType: TextInputType.text),
-                  Gap(10),
-                  CustomTextField(
-                    label: "Religion",
-                    keybordType: TextInputType.text,
-                  ),
-                  Gap(10),
-                  CustomTextField(
-                    label: "Caste",
-                    keybordType: TextInputType.text,
-                  ),
-                  Gap(10),
-                  CustomTextField(
+                    controller: emailController,
                       label: "Email", keybordType: TextInputType.text),
+                  Gap(5),
+
+
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Gap(10),
+                      Icon(
+                        Icons.info_outline,
+                        color: kPrimaryColor,
+                        size: 12,
+                      ),
+                      Gap(5),
+                      Expanded(
+                        child: CustomText(
+                            title: "Please remember the email-id for further use and for retrieval of your account.",
+                            fontWeight: FontWeight.w400,
+                            color: kPrimaryColor,
+                            fontSize: 10),
+                      )
+                    ],
+                  ),
                   const Gap(10),
                   CustomTextField(
+                    controller: mobileController,
                       label: "Mobile", keybordType: TextInputType.number),
+                  Gap(5),
+                  // SelectState(style: TextStyle(
+                  //     fontSize: height*0.020,
+                  //     fontWeight: FontWeight.w400,
+                  //     fontFamily: "Sk-Modernist",
+                  //     color: kBlackColor),
+                  //   onCountryChanged: (value) {
+                  //     setState(() {
+                  //       countryValue = value;
+                  //     });
+                  //   },
+                  //   onStateChanged:(value) {
+                  //     setState(() {
+                  //       stateValue = value;
+                  //     });
+                  //   },
+                  //   onCityChanged:(value) {
+                  //     setState(() {
+                  //       cityValue = value;
+                  //     });
+                  //   },
+                  //
+                  // ),
                   const Gap(30),
-                  CustomButton(
+                  isSubmit?Center(child: CircularProgressIndicator(),):CustomButton(
                       title: "Confirm",
                       onclick: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => IAmScreen()));
+                        addProfileDetails();
+
                       })
                 ],
               ),
@@ -281,4 +496,29 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
       ),
     );
   }
+  late String countryValue;
+  late String stateValue;
+  late String cityValue;
+   List<ShowCountryModel> country = [];
+
+   getCountry()async{
+
+    final response = await http.post(Uri.parse(ApiNetwork.showCountry));
+
+    if(response.statusCode==200){
+
+      List jsonResponse = jsonDecode(response.body);
+      country = List<ShowCountryModel>.from(jsonResponse.map((e) => ShowCountryModel.fromJson(e)));
+      print(country.length);
+
+    }
+
+    if(country.isNotEmpty){
+      country.forEach((element) {
+        countryName.add(element.name!);
+      });
+    }
+   }
 }
+
+

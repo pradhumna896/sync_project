@@ -6,6 +6,7 @@ import 'package:syncdating/components/custom_text.dart';
 import 'package:syncdating/helper/constants.dart';
 import 'package:syncdating/model/user_profile_detals_modal.dart';
 import 'package:syncdating/screens/change_number_screen.dart';
+import 'package:syncdating/screens/edit_profile_screen.dart';
 import 'package:syncdating/screens/multi_image_picker_screen.dart';
 import 'package:syncdating/screens/notification_screen_first.dart';
 import 'package:syncdating/screens/notifications_screen.dart';
@@ -78,20 +79,20 @@ class UserProfileScreen extends StatelessWidget {
                                   fontWeight: FontWeight.w700,
                                   color: Colors.white,
                                   fontSize: 18),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Icon(
-                                    Icons.location_on_outlined,
-                                    color: Colors.white,
-                                  ),
-                                  CustomText(
-                                      title: "Bhopal, India",
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.white,
-                                      fontSize: 16)
-                                ],
-                              )
+                               // Row(
+                              //   crossAxisAlignment: CrossAxisAlignment.start,
+                              //   children: [
+                              //     Icon(
+                              //       Icons.location_on_outlined,
+                              //       color: Colors.white,
+                              //     ),
+                              //     CustomText(
+                              //         title: "Bhopal, India",
+                              //         fontWeight: FontWeight.w600,
+                              //         color: Colors.white,
+                              //         fontSize: 16)
+                              //   ],
+                              // )
                             ],
                           )
                         ],
@@ -143,7 +144,7 @@ class UserProfileScreen extends StatelessWidget {
                           InkWell(
                             onTap: () {
                               Navigator.push(context, MaterialPageRoute(
-                                  builder: (ctx) => MultiImagePickerScreen()));
+                                  builder: (ctx) => EditProfileScreen()));
                             },
                             child: Container(
                               padding:

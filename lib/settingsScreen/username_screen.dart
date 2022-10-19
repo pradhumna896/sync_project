@@ -7,7 +7,8 @@ import 'package:syncdating/widget/custom_appbar_title.dart';
 import 'package:syncdating/widget/custom_textfield.dart';
 
 class UserNameScreen extends StatelessWidget {
-  const UserNameScreen({Key? key}) : super(key: key);
+   UserNameScreen({Key? key}) : super(key: key);
+  TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +30,7 @@ class UserNameScreen extends StatelessWidget {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             child: CustomTextField(
+              controller:controller ,
                 keybordType: TextInputType.name, label: "Sync.com/@"),
           ),
           Gap(50),

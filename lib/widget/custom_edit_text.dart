@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 import '../helper/constants.dart';
 
 class CustomEditText extends StatelessWidget {
-  const CustomEditText({Key? key}) : super(key: key);
+  int maxLine;
+
+   CustomEditText({Key? key, this.maxLine=1}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 44,
       child: TextFormField(
+        maxLines: maxLine,
         textInputAction: TextInputAction.next,
 
         style: TextStyle(

@@ -130,16 +130,16 @@ class _MainScreenState extends State<MainScreen> {
 
         ElevatedButton(
             style: ButtonStyle(backgroundColor: MaterialStateColor.resolveWith((states) => Colors.white),
-            side: getBorder(Colors.white, Color(0xff8A2387),isSuperLike)
+            side: getBorder(Colors.white, Color(0xffe50cde),isSuperLike)
             ),
             onPressed: (){
               final provider = Provider.of<CardProvider>(context,listen: false);
               provider.superLike();
-            }, child: Icon(Icons.star,color: Color(0xff8A2387),)),
+            }, child: Icon(Icons.star,color: Color(0xffea07e3),)),
         ElevatedButton(
             style: ButtonStyle(
-               backgroundColor: getColor(kPrimaryColor, Colors.red.shade300,isLike),
-              side: getBorder(kPrimaryColor, Colors.white,isLike)
+
+              side: getBorder(kPrimaryColor, Colors.green,isLike)
               
                 ),
             

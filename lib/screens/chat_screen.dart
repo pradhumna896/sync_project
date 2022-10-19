@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
 // import '../../../Dawners/lib/helper/custom_text.dart';
@@ -16,7 +17,7 @@ import '../components/custom_text.dart';
 import '../model/message_modal.dart';
 import '../widget/emogi_widget.dart';
 
-class ChatScreen extends StatelessWidget {
+class ChatScreen extends GetView<EmojiWidget> {
   ChatScreen({Key? key}) : super(key: key);
 
   List<Message> messages = [
