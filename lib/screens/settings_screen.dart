@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:expandable_slider/expandable_slider.dart';
@@ -5,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:syncdating/components/custom_back_button.dart';
 import 'package:syncdating/components/custom_text.dart';
+import 'package:syncdating/helper/api_network.dart';
 import 'package:syncdating/helper/constants.dart';
+import 'package:syncdating/model/privacy_policy_model.dart';
 import 'package:syncdating/screens/privacy_policy.dart';
 import 'package:syncdating/settingsScreen/email_notification_screen.dart';
 import 'package:syncdating/settingsScreen/push_notification.dart';
@@ -26,6 +29,7 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   bool isSwitch = false;
   RangeValues currentRangeValues = const RangeValues(21, 45);
+
 
   @override
   Widget build(BuildContext context) {

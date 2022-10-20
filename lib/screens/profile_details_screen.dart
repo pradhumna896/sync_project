@@ -36,8 +36,7 @@ import '../widget/custom_calender.dart';
 import '../widget/custom_drop_down.dart';
 import '../widget/custom_textfield.dart';
 import 'package:http/http.dart'as http;
-import 'multi_image_picker_screen.dart';
-import 'package:dropdown_text_search/src/flutter_dropdown_text_search.dart';
+
 
 class ProfileDetailsScreen extends StatefulWidget {
   ProfileDetailsScreen({Key? key}) : super(key: key);
@@ -54,6 +53,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
   }
   bool isSubmit = false;
   File? pickedImage;
+  String chooseimage = '';
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController countryController = TextEditingController();
@@ -64,6 +64,14 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController mobileController = TextEditingController();
   void addProfileDetails()async{
+    if(chooseimage.isEmpty){
+
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("please Choose Image"),
+        backgroundColor: Colors.red,
+      ));
+      return;
+    }
     if(firstNameController.text.isEmpty){
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text("Enter First Name"),
@@ -134,19 +142,10 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
       ));
       return;
     }
-    if(pickedImage.toString().isEmpty){
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text("please Choose Image"),
-        backgroundColor: Colors.red,
-      ));
-      return;
-    }
+
     setState((){
       isSubmit = true;
     });
-
-
-
     Uri uri = Uri.parse(ApiNetwork.addProfile);
     var request = http.MultipartRequest('POST', uri);
     request.fields.addAll({
@@ -168,9 +167,6 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
     request.files
         .add(await http.MultipartFile.fromPath('image', pickedImage!.path));
     http.StreamedResponse response = await request.send();
-
-
-
 
     try{
       if(response.statusCode==200){
@@ -215,6 +211,8 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
       final tempImage = File(photo.path);
       setState(() {
         pickedImage = tempImage;
+        chooseimage = pickedImage.toString();
+
       });
 
       Get.back();
@@ -234,6 +232,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                 InkWell(
                   onTap: () {
                     pickImage(ImageSource.gallery);
+
 
                   },
                   child: ListTile(
@@ -367,6 +366,8 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                                   bottom: 0,
                                   child: InkWell(
                                       onTap: () {
+                                        showImage();
+
 
                                       },
                                       child: SvgPicture.asset(

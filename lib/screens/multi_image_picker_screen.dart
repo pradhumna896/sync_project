@@ -250,7 +250,7 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
                     Navigator.pop(context);
                   },
                   child: ListTile(
-                    leading: Icon(
+                    leading: const Icon(
                       Icons.photo_camera_back,
                       color: kPrimaryColor,
                     ),

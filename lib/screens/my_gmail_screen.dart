@@ -22,7 +22,7 @@ import '../components/custom_text.dart';
 import '../helper/constants.dart';
 import 'gmail_new_user_screen.dart';
 import 'otp_screen.dart';
-import 'package:http/http.dart'as http;
+import 'package:http/http.dart' as http;
 
 class MyGmailScreen extends StatefulWidget {
   MyGmailScreen({Key? key}) : super(key: key);
@@ -34,165 +34,127 @@ class MyGmailScreen extends StatefulWidget {
 class _MyGmailScreenState extends State<MyGmailScreen> {
   final _formkey = GlobalKey<FormState>();
 
-  bool email =false;
-  bool isNotExsit = false;
+  bool email = false;
+  bool isNotExit = false;
   bool isSubmit = false;
-
 
   var isNot = "@";
   TextEditingController emailController = TextEditingController();
   TextEditingController passlController = TextEditingController();
   TextEditingController confirmPassController = TextEditingController();
 
-  void checkEmail()async{
-    setState((){
+  void checkEmail() async {
+    setState(() {
       isSubmit = true;
     });
-    if(emailController.text.isEmpty){
-      setState((){
+    if (emailController.text.isEmpty) {
+      setState(() {
         isSubmit = false;
       });
 
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text("Enter Email Name"),
+        content: Text("Enter Email ID"),
         backgroundColor: Colors.red,
       ));
 
       return;
-
     }
 
-    try{
+    try {
       Uri uri = Uri.parse(ApiNetwork.checkEmail);
-      Map<String , String>map={
-        'email':emailController.text,
-
+      Map<String, String> map = {
+        'email': emailController.text,
       };
-      final response = await http.post(uri,body: map);
-      if(response.statusCode == 200){
-        setState((){
+      final response = await http.post(uri, body: map);
+      if (response.statusCode == 200) {
+        setState(() {
           isSubmit = false;
         });
-        CheckEmailModel check = CheckEmailModel.fromJson(jsonDecode(response.body));
-        if(check.result=="Already Register"){
-          setState((){email = true;});
-          print("${email} email");
-        }else{
-          setState((){
-            isNotExsit = true;
+        CheckEmailModel check =
+            CheckEmailModel.fromJson(jsonDecode(response.body));
+        if (check.result == "Already Register") {
+          setState(() {
+            email = true;
           });
-          print("${isNotExsit} isNotemail");
+          print("${email} email");
+        } else {
+          setState(() {
+            isNotExit = true;
+          });
+          print("${isNotExit} isNotemail");
         }
-      }else{
+      } else {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text("Some thing wrong"),
           backgroundColor: Colors.red,
         ));
-        setState((){
+        setState(() {
           isSubmit = false;
         });
       }
-
-    }catch(e){
+    } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text("please check Internet"),
         backgroundColor: Colors.red,
       ));
-      setState((){
+      setState(() {
         isSubmit = false;
       });
     }
   }
-  void signUp()async{
-    if(emailController.text.isEmpty){
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text("Enter Email Name"),
-        backgroundColor: Colors.red,
-      ));
-      return;
-    }
-    if(passlController.text.isEmpty){
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text("Enter password Name"),
-        backgroundColor: Colors.red,
-      ));
-      return;
-    }
-    if(confirmPassController.text.isEmpty){
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text("Re-Enter password Name"),
-        backgroundColor: Colors.red,
-      ));
-      return;
-    }
-  try{
-    Uri uri = Uri.parse(ApiNetwork.signUp);
-    Map<String , String>map={
-      'email':emailController.text,
-      'password':passlController.text,
-      'confirm_password':confirmPassController.text,
-    };
-    final response = await http.post(uri,body: map);
-    if(response.statusCode == 200){
-      print(response.body);
 
-      SignUpModel sign = SignUpModel.fromJson(jsonDecode(response.body));
-      if(sign.result=="signup Successfull"){
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => ProfileDetailsScreen()));
-      }
-    }
-
-  }catch(e){
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-      content: Text("please check Internet"),
-      backgroundColor: Colors.red,
-    ));
-  }
-  }
-  void logIn()async{
-    if(emailController.text.isEmpty){
+  void signUp() async {
+    if (emailController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text("Enter Email Name"),
+        content: Text("Enter Email ID"),
         backgroundColor: Colors.red,
       ));
       return;
     }
-    if(passlController.text.isEmpty){
+    if (passlController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text("Enter password Name"),
+        content: Text("Enter password"),
         backgroundColor: Colors.red,
       ));
       return;
     }
-    try{
-      Uri uri = Uri.parse(ApiNetwork.signIn);
-      Map<String , String>map={
-        'email':emailController.text,
-        'password':passlController.text,
-
+    if (confirmPassController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Re-Enter password"),
+        backgroundColor: Colors.red,
+      ));
+      return;
+    }
+    try {
+      setState(() {
+        isSubmit = true;
+      });
+      Uri uri = Uri.parse(ApiNetwork.signUp);
+      Map<String, String> map = {
+        'email': emailController.text,
+        'password': passlController.text,
+        'confirm_password': confirmPassController.text,
       };
-      final response = await http.post(uri,body: map);
-      if(response.statusCode == 200){
-        SignInModel log = SignInModel.fromJson(jsonDecode(response.body));
-        if(log.result=="Login Successfull"){
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => HomeScreen()));
+      final response = await http.post(uri, body: map);
+      if (response.statusCode == 200) {
+        setState(() {
+          isSubmit = false;
+        });
+        print(response.body);
 
-        }else{
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            content: Text("please Enter correct password"),
-            backgroundColor: Colors.red,
-          ));
-
+        SignUpModel sign = SignUpModel.fromJson(jsonDecode(response.body));
+        if (sign.result == "signup Successfull") {
+          setState(() {
+            isSubmit = false;
+          });
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => ProfileDetailsScreen()));
         }
       }
-
-    }catch(e){
+    } catch (e) {
+      setState(() {
+        isSubmit = false;
+      });
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text("please check Internet"),
         backgroundColor: Colors.red,
@@ -200,27 +162,81 @@ class _MyGmailScreenState extends State<MyGmailScreen> {
     }
   }
 
-
+  void logIn() async {
+    if (emailController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Enter Email ID"),
+        backgroundColor: Colors.red,
+      ));
+      return;
+    }
+    if (passlController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Enter password "),
+        backgroundColor: Colors.red,
+      ));
+      return;
+    }
+    try {
+      setState(() {
+        isSubmit = true;
+      });
+      Uri uri = Uri.parse(ApiNetwork.signIn);
+      Map<String, String> map = {
+        'email': emailController.text,
+        'password': passlController.text,
+      };
+      final response = await http.post(uri, body: map);
+      if (response.statusCode == 200) {
+        setState(() {
+          isSubmit = false;
+        });
+        SignInModel log = SignInModel.fromJson(jsonDecode(response.body));
+        if (log.result == "Login Successfull") {
+          setState(() {
+            isSubmit = false;
+          });
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => HomeScreen()));
+        } else {
+          setState(() {
+            isSubmit = false;
+          });
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text("please Enter correct password"),
+            backgroundColor: Colors.red,
+          ));
+        }
+      }
+    } catch (e) {
+      setState(() {
+        isSubmit = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("please check Internet"),
+        backgroundColor: Colors.red,
+      ));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-
         elevation: 0,
         backgroundColor: Colors.transparent,
         leading: CustomBackButoon(onclick: () {
-        Navigator.pop(context);
-      }),),
+          Navigator.pop(context);
+        }),
+      ),
       body: Padding(
-        padding:  EdgeInsets.symmetric(horizontal:Dimentions.width40 ),
+        padding: EdgeInsets.symmetric(horizontal: Dimentions.width40),
         child: Form(
           key: _formkey,
           child: SingleChildScrollView(
             child: Column(
               children: [
                 Gap(Dimentions.height44),
-
                 Gap(Dimentions.height30),
                 CustomText(
                     title: "Sign In With email",
@@ -230,43 +246,26 @@ class _MyGmailScreenState extends State<MyGmailScreen> {
                 Row(
                   children: [
                     CustomText(
-                        title:
-                            "Please enter your valid email.",
+                        title: "Please enter your valid email.",
                         fontWeight: FontWeight.w400,
                         color: kBlackColor,
                         fontSize: Dimentions.font14),
                   ],
                 ),
                 Gap(Dimentions.height33),
-                TextFormField(
-                  controller: emailController,
-
-
-                  textInputAction: TextInputAction.done,
-                  keyboardType: TextInputType.visiblePassword,
-                  validator: (value) {
-                    return value!.contains('@') && value.length >= 6
-                        ? null
-                        : "Please Enter A Valid Email";
-                  },
-                  decoration: InputDecoration(
-                      hintText: "Enter Email",
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15))),
-                ),
+                CustomTextField(
+                    label: "Enter Email",
+                    keybordType: TextInputType.emailAddress,
+                    controller: emailController),
                 Gap(Dimentions.height15),
                 Visibility(
-                  visible: email? true : false,
+                  visible: email ? true : false,
                   child: Column(
                     children: [
-                      TextFormField(
-                        controller: passlController,
-                        keyboardType: TextInputType.visiblePassword,
-                        decoration: InputDecoration(
-                            hintText: "Password",
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15))),
-                      ),
+                      CustomTextField(
+                          label: "Enter Password",
+                          keybordType: TextInputType.visiblePassword,
+                          controller: passlController),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
@@ -288,69 +287,65 @@ class _MyGmailScreenState extends State<MyGmailScreen> {
                   ),
                 ),
                 Visibility(
-                    visible:
-                    isNotExsit ? true : false,
+                    visible: isNotExit ? true : false,
                     child: Column(
                       children: [
-                        TextFormField(
-                          controller: passlController,
-                          keyboardType: TextInputType.visiblePassword,
-                          decoration: InputDecoration(
-                              hintText: "Password",
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15))),
-                        ),
+                        CustomTextField(
+                            label: "Create Password",
+                            keybordType: TextInputType.visiblePassword,
+                            controller: passlController),
                         Gap(Dimentions.height15),
-                        TextFormField(
-                          controller: confirmPassController,
-                          keyboardType: TextInputType.visiblePassword,
-                          decoration: InputDecoration(
-                              hintText: "Re-Enter Password",
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15))),
-                        ),
+                        CustomTextField(
+                            label: "Confirm PassWord",
+                            keybordType: TextInputType.visiblePassword,
+                            controller: confirmPassController),
                       ],
                     )),
                 Gap(15),
-               isSubmit?Center(child: CircularProgressIndicator(),): CustomButton(
-                    title: "Sign In",
-                    onclick: () {
-                      print(email);
-                      if (email) {
-                        logIn();
-
-                      } else if(isNotExsit){
-                        print("helo");
-                        signUp();
-                      }else{
-                        checkEmail();
-                      }
-                    }),
-
+                isSubmit
+                    ? Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : CustomButton(
+                        title: "Sign In",
+                        onclick: () {
+                          print(email);
+                          if (email) {
+                            logIn();
+                          } else if (isNotExit) {
+                            print("helo");
+                            signUp();
+                          } else {
+                            checkEmail();
+                          }
+                        }),
                 Gap(10),
-                CustomText(title: "Or",
+                CustomText(
+                  title: "Or",
                   fontWeight: FontWeight.w700,
                   fontSize: 16,
-                  color: kBlackColor,),
+                  color: kBlackColor,
+                ),
                 Gap(10),
                 Padding(
-                  padding:
-                  EdgeInsets.symmetric(horizontal: Dimentions.width40),
+                  padding: EdgeInsets.symmetric(horizontal: Dimentions.width40),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Gap(Dimentions.height5),
-
                       CustomLogoContainer(
-                        image: 'assets/svg/facebook.svg', onclick: () {  },
+                        image: 'assets/svg/facebook.svg',
+                        onclick: () {},
                       ),
                       Gap(Dimentions.height20),
                       CustomLogoContainer(
-                        image: 'assets/svg/google.svg', onclick: () {  },
+                        image: 'assets/svg/google.svg',
+                        onclick: () {},
                       ),
                       Gap(Dimentions.height20),
                       CustomLogoContainer(
-                        image: 'assets/svg/apple.svg', onclick: () {  },
+                        image: 'assets/svg/apple.svg',
+                        onclick: () {},
                       ),
                       Gap(Dimentions.height5)
                     ],

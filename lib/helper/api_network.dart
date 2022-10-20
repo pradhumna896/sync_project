@@ -7,4 +7,6 @@ class ApiNetwork{
   static const showCountry = baseUrl + "process.php?action=show_country";
   static const aboutMe = baseUrl +"process.php?action=about";
   static const iAmA = baseUrl + "process.php?action=i_am_a";
+  static const privacy = baseUrl + "process.php?action=privacy_policy";
+  static const termCondition = baseUrl+ "process.php?action=terms_condition";
 }

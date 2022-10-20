@@ -6,6 +6,8 @@ import 'package:syncdating/helper/constants.dart';
 import 'package:syncdating/widget/custom_appbar_title.dart';
 import 'package:syncdating/widget/custom_textfield.dart';
 
+import '../helper/dimentions/dimentions.dart';
+
 class UserNameScreen extends StatelessWidget {
    UserNameScreen({Key? key}) : super(key: key);
   TextEditingController controller = TextEditingController();
@@ -40,7 +42,7 @@ class UserNameScreen extends StatelessWidget {
                   title: "Confirm",
                   fontWeight: FontWeight.w600,
                   color: kPrimaryColor,
-                  fontSize: 16)),
+                  fontSize:Dimentions.font16)),
           Gap(10),
           TextButton(
               onPressed: () {},
@@ -48,7 +50,7 @@ class UserNameScreen extends StatelessWidget {
                   title: "Delete",
                   fontWeight: FontWeight.w600,
                   color: kPrimaryColor,
-                  fontSize: 16))
+                  fontSize: Dimentions.font16))
         ],
       ),
     );
