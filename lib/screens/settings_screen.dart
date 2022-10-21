@@ -8,7 +8,9 @@ import 'package:syncdating/components/custom_back_button.dart';
 import 'package:syncdating/components/custom_text.dart';
 import 'package:syncdating/helper/api_network.dart';
 import 'package:syncdating/helper/constants.dart';
+import 'package:syncdating/helper/sessionmanager.dart';
 import 'package:syncdating/model/privacy_policy_model.dart';
+import 'package:syncdating/screens/onboard_screen_second.dart';
 import 'package:syncdating/screens/privacy_policy.dart';
 import 'package:syncdating/settingsScreen/email_notification_screen.dart';
 import 'package:syncdating/settingsScreen/push_notification.dart';
@@ -126,24 +128,32 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  Card logout() {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(
-              Icons.logout_sharp,
-              color: Colors.black,
-            ),
-            const Gap(5),
-            CustomText(
-                title: "Logout",
-                fontWeight: FontWeight.w800,
-                color: kBlackColor,
-                fontSize: 20),
-          ],
+  InkWell logout() {
+    return InkWell(
+      onTap: (){
+        SessionManager.logout();
+        Navigator.pushAndRemoveUntil(context,MaterialPageRoute(builder: (_)=>OnboardScreenSecond()), (
+            route) => false);
+
+      },
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(
+                Icons.logout_sharp,
+                color: Colors.black,
+              ),
+              const Gap(5),
+              CustomText(
+                  title: "Logout",
+                  fontWeight: FontWeight.w800,
+                  color: kBlackColor,
+                  fontSize: 20),
+            ],
+          ),
         ),
       ),
     );
@@ -210,7 +220,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             InkWell(
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (_) => PrivacyPolicy()));
+                    MaterialPageRoute(builder: (_) => const PrivacyPolicy()));
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -220,8 +230,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       fontWeight: FontWeight.w400,
                       color: kBlackColor,
                       fontSize: 14),
-                  Gap(5),
-                  Icon(
+                  const Gap(5),
+                  const Icon(
                     Icons.arrow_forward_ios,
                     color: Colors.black26,
                     size: 14,

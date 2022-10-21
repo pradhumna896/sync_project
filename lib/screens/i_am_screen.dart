@@ -97,107 +97,112 @@ class _IAmScreenState extends State<IAmScreen> {
                   color: kBlackColor,
                   fontSize: 34),
               Gap(90),
-
-              Column(children: List.generate(
-                  GenderModal.genderModalList.length, (index) =>
-                  InkWell(
-                    onTap: () {
-                      data.chooseGenderStatus(index);
-                      gender= GenderModal.genderModalList[index].title;
-                      print(gender);
-                    },
-                    child: Container(
-                      margin: EdgeInsets.symmetric(vertical: 5),
-                      height: 56,
-                      width: double.maxFinite,
-                      decoration: BoxDecoration(
-                          color: data.chooseGender == index
-                              ? kPrimaryColor
-                              : Colors.transparent,
-                          borderRadius: BorderRadius.circular(15),
-                          border: Border.all(color: kgreyColor)
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            CustomText(
-                                title: GenderModal.genderModalList[index].title,
-                                fontWeight: FontWeight.w400,
-                                color: data.chooseGender == index ? const Color(
-                                    0xffFFFFFF) : kBlackColor,
-                                fontSize: 16),
-                            Visibility(
-                              visible: data.chooseGender==index?true:false,
-                              child: SvgPicture.asset(
-                                  GenderModal.genderModalList[index].image,color:  const Color(
-                                  0xffFFFFFF) ),
-                            )
-                          ],),
-                      ),
-                    ),
-                  )),),
-              const Gap(20),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                height: 56,
-                width: double.maxFinite,
-                decoration: BoxDecoration(
-                  color: data.chooseGender==-1? kPrimaryColor : Colors.white,
-                    border: Border.all(color: kgreyColor),
-                    borderRadius: BorderRadius.circular(15)),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton<String>(
-                          onTap: (){
-                            data.chooseGenderStatus(-1);
-                          },
-                          value: dropdownValue,
-
-
-                          iconEnabledColor:data.chooseGender==-1? Colors.white: kBlackColor,
-
-                          icon: const Icon(Icons.keyboard_arrow_down),
-                          elevation: 16,
-                          style: const TextStyle(color: Colors.white),
-                          underline: Container(
-                            height: 2,
-                            color: Colors.deepPurpleAccent,
+              Expanded(child: SingleChildScrollView(
+                child: Column(children: [
+                  Column(children: List.generate(
+                      GenderModal.genderModalList.length, (index) =>
+                      InkWell(
+                        onTap: () {
+                          data.chooseGenderStatus(index);
+                          gender= GenderModal.genderModalList[index].title;
+                          print(gender);
+                        },
+                        child: Container(
+                          margin: EdgeInsets.symmetric(vertical: 5),
+                          height: 56,
+                          width: double.maxFinite,
+                          decoration: BoxDecoration(
+                              color:  Colors.transparent,
+                              borderRadius: BorderRadius.circular(15),
+                              border: Border.all(color:data.chooseGender == index
+                                  ? kPrimaryColor
+                                  : kgreyColor)
                           ),
-                          onChanged: (String? value) {
-                            gender = value!;
-                            print(gender);
-
-                            // This is called when the user selects an item.
-                            setState(() {
-
-                              dropdownValue = value;
-                            });
-                          },
-                          items:
-                          list.map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: CustomText(
-                                title: value,
-                                color: data.chooseGender==-1?Colors.white:kBlackColor,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            );
-                          }).toList(),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                CustomText(
+                                    title: GenderModal.genderModalList[index].title,
+                                    fontWeight: FontWeight.w400,
+                                    color: kBlackColor,
+                                    fontSize: 16),
+                                Visibility(
+                                  visible: data.chooseGender==index?true:false,
+                                  child: SvgPicture.asset(
+                                      GenderModal.genderModalList[index].image,color:  const Color(
+                                      0xff000000) ),
+                                )
+                              ],),
+                          ),
                         ),
-                      ),
+                      )),),
+                  const Gap(10),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    height: 56,
+                    width: double.maxFinite,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: data.chooseGender==-1? kPrimaryColor : kgreyColor),
+                        borderRadius: BorderRadius.circular(15)),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: DropdownButtonHideUnderline(
+
+                            child: DropdownButton<String>(
+                              onTap: (){
+                                data.chooseGenderStatus(-1);
+                              },
+                              value: dropdownValue,
+
+
+                              iconEnabledColor:kBlackColor,
+
+                              icon: const Icon(Icons.keyboard_arrow_down),
+                              elevation: 16,
+                              style: const TextStyle(color: Colors.white),
+                              underline: Container(
+                                height: 2,
+                                color: Colors.deepPurpleAccent,
+                              ),
+                              onChanged: (String? value) {
+                                gender = value!;
+                                print(gender);
+
+                                // This is called when the user selects an item.
+                                setState(() {
+
+                                  dropdownValue = value;
+                                });
+                              },
+                              items:
+                              list.map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: CustomText(
+                                    title: value,
+                                    color: kBlackColor,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              ),
+                  ),
+                ],),
+              )),
 
 
-              Spacer(),
+
+
+
 
               CustomButton(title: "Continue", onclick: () {
                 postIamA();

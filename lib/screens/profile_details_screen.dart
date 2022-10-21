@@ -21,6 +21,7 @@ import 'package:syncdating/helper/api_network.dart';
 // import '../../../Dawners/lib/helper/custom_text.dart';
 import 'package:syncdating/helper/constants.dart';
 import 'package:syncdating/helper/dimentions/dimentions.dart';
+import 'package:syncdating/helper/sessionmanager.dart';
 import 'package:syncdating/model/add_profile_model.dart';
 import 'package:syncdating/provider/app_controller.dart';
 import 'package:syncdating/screens/about_me_screen.dart';
@@ -39,7 +40,8 @@ import 'package:http/http.dart'as http;
 
 
 class ProfileDetailsScreen extends StatefulWidget {
-  ProfileDetailsScreen({Key? key}) : super(key: key);
+  String email;
+  ProfileDetailsScreen({Key? key,required this.email}) : super(key: key);
 
   @override
   State<ProfileDetailsScreen> createState() => _ProfileDetailsScreenState();
@@ -49,7 +51,9 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
   @override
   initState(){
     super.initState();
+    emailController.text = widget.email;
     getCountry();
+
   }
   bool isSubmit = false;
   File? pickedImage;
@@ -149,7 +153,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
     Uri uri = Uri.parse(ApiNetwork.addProfile);
     var request = http.MultipartRequest('POST', uri);
     request.fields.addAll({
-      'id':'1',
+      'id':SessionManager.getUserID(),
       'email':emailController.text,
       'first_name':firstNameController.text,
       'last_name':lastNameController.text,
@@ -160,7 +164,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
 
       'city':chooseCity,
       'religion':religionController.text,
-      'coste':casteController.text,
+      'cast':casteController.text,
       'mobile':mobileController.text,
     });
 
@@ -176,7 +180,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
         var resp = await response.stream.bytesToString();
 
         AddProfileModel addData = AddProfileModel.fromJson(jsonDecode(resp));
-        print(addData);
+        print(resp);
         if(addData.message=="profile detail add  successfully"){
 
           Navigator.push(context, MaterialPageRoute(builder: (ctx)=>IAmScreen()));
@@ -304,6 +308,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     final provider = Provider.of<AppController>(context);
@@ -416,7 +421,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                   ),
                   Gap(10),
                   SelectStateCountry(onCountryChanged: (country){
-                    chooseCountry=country.toString();
+                    chooseCountry=country.toString().substring(3,);
                     print(chooseCountry);
                     }, onStateChanged: (state){chooseState=state;  } , onCityChanged: (city){chooseCity=city;}),
 
@@ -431,7 +436,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                   CustomDropDown(title: "Caste", countryController: casteController, item:casteName , height: height),
                   Gap(10),
                   CustomTextField(
-                    controller: emailController,
+                    controller:emailController,
                       label: "Email", keybordType: TextInputType.text),
                   Gap(5),
 
@@ -440,12 +445,12 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Gap(10),
-                      Icon(
+                      const Icon(
                         Icons.info_outline,
                         color: kPrimaryColor,
                         size: 12,
                       ),
-                      Gap(5),
+                      Gap(Dimentions.height5),
                       Expanded(
                         child: CustomText(
                             title: "Please remember the email-id for further use and for retrieval of your account.",
@@ -455,11 +460,11 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                       )
                     ],
                   ),
-                  const Gap(10),
+       Gap(Dimentions.height10),
                   CustomTextField(
                     controller: mobileController,
                       label: "Mobile", keybordType: TextInputType.number),
-                  Gap(5),
+                  Gap(Dimentions.height5),
                   // SelectState(style: TextStyle(
                   //     fontSize: height*0.020,
                   //     fontWeight: FontWeight.w400,
@@ -482,7 +487,7 @@ class _ProfileDetailsScreenState extends State<ProfileDetailsScreen> {
                   //   },
                   //
                   // ),
-                  const Gap(30),
+                   Gap(Dimentions.height30),
                   isSubmit?Center(child: CircularProgressIndicator(),):CustomButton(
                       title: "Confirm",
                       onclick: () {

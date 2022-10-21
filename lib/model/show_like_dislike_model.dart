@@ -1,4 +1,43 @@
-class AddProfileModel {
+class ShowUserLikeModel {
+  String? id;
+  String? userId;
+  String? profileId;
+  String? likeStatus;
+  String? strtotime;
+  User? user;
+
+  ShowUserLikeModel(
+      {this.id,
+        this.userId,
+        this.profileId,
+        this.likeStatus,
+        this.strtotime,
+        this.user});
+
+  ShowUserLikeModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    userId = json['user_id'];
+    profileId = json['profile_id'];
+    likeStatus = json['like_status'];
+    strtotime = json['strtotime'];
+    user = json['user'] != null ? new User.fromJson(json['user']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['user_id'] = this.userId;
+    data['profile_id'] = this.profileId;
+    data['like_status'] = this.likeStatus;
+    data['strtotime'] = this.strtotime;
+    if (this.user != null) {
+      data['user'] = this.user!.toJson();
+    }
+    return data;
+  }
+}
+
+class User {
   String? id;
   String? email;
   String? password;
@@ -9,16 +48,14 @@ class AddProfileModel {
   String? state;
   String? city;
   String? religion;
-  String? cast;
+  String? coste;
   String? mobile;
   String? image;
   String? gender;
   String? about;
   String? strtotime;
-  String? blockStatus;
-  String? message;
 
-  AddProfileModel(
+  User(
       {this.id,
         this.email,
         this.password,
@@ -29,16 +66,14 @@ class AddProfileModel {
         this.state,
         this.city,
         this.religion,
-        this.cast,
+        this.coste,
         this.mobile,
         this.image,
         this.gender,
         this.about,
-        this.strtotime,
-        this.blockStatus,
-        this.message});
+        this.strtotime});
 
-  AddProfileModel.fromJson(Map<String, dynamic> json) {
+  User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     email = json['email'];
     password = json['password'];
@@ -49,14 +84,12 @@ class AddProfileModel {
     state = json['state'];
     city = json['city'];
     religion = json['religion'];
-    cast = json['cast'];
+    coste = json['coste'];
     mobile = json['mobile'];
     image = json['image'];
     gender = json['gender'];
     about = json['about'];
     strtotime = json['strtotime'];
-    blockStatus = json['block_status'];
-    message = json['message'];
   }
 
   Map<String, dynamic> toJson() {
@@ -71,14 +104,12 @@ class AddProfileModel {
     data['state'] = this.state;
     data['city'] = this.city;
     data['religion'] = this.religion;
-    data['cast'] = this.cast;
+    data['coste'] = this.coste;
     data['mobile'] = this.mobile;
     data['image'] = this.image;
     data['gender'] = this.gender;
     data['about'] = this.about;
     data['strtotime'] = this.strtotime;
-    data['block_status'] = this.blockStatus;
-    data['message'] = this.message;
     return data;
   }
 }

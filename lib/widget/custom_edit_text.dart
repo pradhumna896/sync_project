@@ -4,16 +4,19 @@ import '../helper/constants.dart';
 
 class CustomEditText extends StatelessWidget {
   int maxLine;
+  TextEditingController controller;
 
-   CustomEditText({Key? key, this.maxLine=1}) : super(key: key);
+   CustomEditText({Key? key, this.maxLine=1,required this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 44,
       child: TextFormField(
+        controller: controller,
         maxLines: maxLine,
         textInputAction: TextInputAction.next,
+
 
         style: TextStyle(
             fontSize: 18,
@@ -22,6 +25,7 @@ class CustomEditText extends StatelessWidget {
             color: kBlackColor),
         cursorColor: kPrimaryColor,
         decoration: InputDecoration(
+          hintText: "hello",
 
           filled: true,
             fillColor: Colors.grey.shade200,

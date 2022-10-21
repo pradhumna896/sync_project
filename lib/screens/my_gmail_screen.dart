@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:syncdating/helper/api_network.dart';
 import 'package:syncdating/helper/dimentions/dimentions.dart';
+import 'package:syncdating/helper/sessionmanager.dart';
 import 'package:syncdating/model/check_email_model.dart';
 import 'package:syncdating/model/sign_in_model.dart';
 import 'package:syncdating/model/sign_up_model.dart';
@@ -142,13 +143,16 @@ class _MyGmailScreenState extends State<MyGmailScreen> {
         });
         print(response.body);
 
+
         SignUpModel sign = SignUpModel.fromJson(jsonDecode(response.body));
+
         if (sign.result == "signup Successfull") {
+          SessionManager.setUserID(sign.id.toString());
           setState(() {
             isSubmit = false;
           });
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => ProfileDetailsScreen()));
+              MaterialPageRoute(builder: (context) => ProfileDetailsScreen(email: emailController.text,)));
         }
       }
     } catch (e) {
@@ -193,6 +197,7 @@ class _MyGmailScreenState extends State<MyGmailScreen> {
         });
         SignInModel log = SignInModel.fromJson(jsonDecode(response.body));
         if (log.result == "Login Successfull") {
+          SessionManager.setUserID(log.id.toString());
           setState(() {
             isSubmit = false;
           });
@@ -266,6 +271,7 @@ class _MyGmailScreenState extends State<MyGmailScreen> {
                           label: "Enter Password",
                           keybordType: TextInputType.visiblePassword,
                           controller: passlController),
+                      Gap(5),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
@@ -328,7 +334,7 @@ class _MyGmailScreenState extends State<MyGmailScreen> {
                 ),
                 Gap(10),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: Dimentions.width40),
+                  padding: EdgeInsets.symmetric(horizontal: Dimentions.width30),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -351,7 +357,7 @@ class _MyGmailScreenState extends State<MyGmailScreen> {
                     ],
                   ),
                 ),
-                Gap(100)
+
               ],
             ),
           ),

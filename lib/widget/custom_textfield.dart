@@ -19,7 +19,7 @@ class CustomTextField extends StatelessWidget {
       height: Dimentions.height44,
       child: TextFormField(
         controller: controller,
-        textInputAction: TextInputAction.next,
+
         keyboardType: keybordType,
         style: TextStyle(
             fontSize: height*0.020,

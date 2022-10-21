@@ -12,6 +12,7 @@ class SessionManager{
   static const _authToken = 'token';
   static const _referralCode = 'referral_code';
   static const _categoryid = "category_id";
+  static const _image = "image";
 
   static Future init()async =>
       _preferences = await SharedPreferences.getInstance();
@@ -86,6 +87,13 @@ class SessionManager{
   static dynamic getAuthToken() {
     return _preferences!.getString(_authToken);
   }
+  static dynamic setImage(String image){
+    return _preferences!.setString(_image,image);
+  }
+  static dynamic getImage(){
+    return _preferences!.getString(_image);
+  }
+
 
   static dynamic logout() {
     _preferences!.remove(_userEMAIL);
@@ -96,6 +104,7 @@ class SessionManager{
     _preferences!.remove(_isLOGIN);
     _preferences!.remove(_authToken);
     _preferences!.remove(_categoryid);
+    _preferences!.remove(_image);
   }
 
 

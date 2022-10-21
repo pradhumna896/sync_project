@@ -8,6 +8,7 @@ import 'package:syncdating/components/custom_skip_button.dart';
 import 'package:syncdating/helper/api_network.dart';
 // import '../../../Dawners/lib/helper/custom_text.dart';
 import 'package:syncdating/helper/constants.dart';
+import 'package:syncdating/helper/sessionmanager.dart';
 import 'package:syncdating/model/about_me_model.dart';
 import 'package:syncdating/screens/i_am_screen.dart';
 import 'package:syncdating/screens/passions_screen.dart';
@@ -41,7 +42,7 @@ class _AboutMeScreenState extends State<AboutMeScreen> {
    try{
      Uri uri  = Uri.parse(ApiNetwork.aboutMe);
      Map<String , String > map ={
-       'id':'1',
+       'id':SessionManager.getUserID(),
        'about':aboutMeController.text,
      };
      final response = await http.post(uri,body: map);

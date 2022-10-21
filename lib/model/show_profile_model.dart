@@ -1,4 +1,4 @@
-class AddProfileModel {
+class ShowProfileModel {
   String? id;
   String? email;
   String? password;
@@ -16,9 +16,10 @@ class AddProfileModel {
   String? about;
   String? strtotime;
   String? blockStatus;
+  String? path;
   String? message;
 
-  AddProfileModel(
+  ShowProfileModel(
       {this.id,
         this.email,
         this.password,
@@ -36,9 +37,10 @@ class AddProfileModel {
         this.about,
         this.strtotime,
         this.blockStatus,
+        this.path,
         this.message});
 
-  AddProfileModel.fromJson(Map<String, dynamic> json) {
+  ShowProfileModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     email = json['email'];
     password = json['password'];
@@ -56,6 +58,7 @@ class AddProfileModel {
     about = json['about'];
     strtotime = json['strtotime'];
     blockStatus = json['block_status'];
+    path = json['path'];
     message = json['message'];
   }
 
@@ -78,6 +81,7 @@ class AddProfileModel {
     data['about'] = this.about;
     data['strtotime'] = this.strtotime;
     data['block_status'] = this.blockStatus;
+    data['path'] = this.path;
     data['message'] = this.message;
     return data;
   }

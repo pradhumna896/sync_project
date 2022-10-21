@@ -1,7 +1,11 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:syncdating/helper/api_network.dart';
+import 'package:http/http.dart'as http;
+import 'package:syncdating/model/like_dislike_model.dart';
 enum CardStatus {Like,Dislike,SuperLike}
 
 class CardProvider extends ChangeNotifier {
@@ -74,18 +78,21 @@ class CardProvider extends ChangeNotifier {
     _angle=20;
     _position += Offset(2*_screenSize.width, 0);
     _nextCard();
+    addLikeDislike('1');
     notifyListeners();
   }
   void superLike() {
     _angle = 0;
     _position -= Offset(0,_screenSize.height);
     _nextCard();
+    addLikeDislike('2');
     notifyListeners();
   }
   void dislike(){
     _angle = -20;
     _position -= Offset(2*_screenSize.width,0);
     _nextCard();
+    addLikeDislike('0');
     notifyListeners();
   }
 
@@ -161,5 +168,23 @@ class CardProvider extends ChangeNotifier {
 
     ].reversed.toList();
     notifyListeners();
+  }
+
+  addLikeDislike(likeStatus)async{
+    Uri uri = Uri.parse(ApiNetwork.likeDislike);
+    Map<String , String> map = {
+      'user_id':"1",
+      'profile_id':'1',
+      'like_status':likeStatus
+    };
+    final response = await http.post(uri,body:map);
+
+    if(response.statusCode==200){
+      LikeDislikeModel addLike = LikeDislikeModel.fromJson(jsonDecode(response.body));
+      if(addLike.result==" Successfull"){
+        print(addLike.likeStatus);
+      }
+    }
+
   }
 }

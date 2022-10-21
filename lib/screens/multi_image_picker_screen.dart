@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:syncdating/components/custom_back_button.dart';
 import 'package:syncdating/components/custom_text.dart';
 import 'package:syncdating/helper/constants.dart';
+import 'package:syncdating/helper/sessionmanager.dart';
 import 'package:syncdating/model/image_modal.dart';
 import 'package:syncdating/provider/app_controller.dart';
 
@@ -18,7 +19,8 @@ import '../widget/custom_textfield.dart';
 import 'edit_profile_screen.dart';
 
 class MultiImagePickerScreen extends StatefulWidget {
-  MultiImagePickerScreen({Key? key}) : super(key: key);
+
+  MultiImagePickerScreen({Key? key,}) : super(key: key);
 
   @override
   State<MultiImagePickerScreen> createState() => _MultiImagePickerScreenState();
@@ -60,7 +62,11 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
                 provider.imagesList[0].imagePath!,
                 fit: BoxFit.cover,
               ))
-              : Icon(Icons.camera_alt),
+              : ClipRRect(
+              borderRadius: BorderRadius.circular(50),
+              child: Image.network(SessionManager.getImage(),fit: BoxFit.cover,)
+              // Image.network(widget.image,fit: BoxFit.cover,)
+          ),
         ),
         Gap(10),
         CustomText(
@@ -78,19 +84,20 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
         Column(
           children: [
             GridView.builder(
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: provider.imagesList.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
                     mainAxisExtent: 120,
                     childAspectRatio: 3 / 2),
                 itemBuilder: (BuildContext context, index) {
                   return Stack(
+                    fit: StackFit.expand,
                     children: [
                       provider.imagesList[index].isSelected
                           ? Container(
-                        margin: EdgeInsets.all(5),
+                        margin: const EdgeInsets.all(5),
                         child: ClipRRect(
 
                           borderRadius: BorderRadius.circular(15),
@@ -101,7 +108,7 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
                         ),
                       )
                           : Container(
-                        margin: EdgeInsets.all(5),
+                        margin: const EdgeInsets.all(5),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
                           color: Colors.grey.withOpacity(0.3),
@@ -115,11 +122,11 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
                             showImage(provider.imagesList[index]);
                           },
                           child: Container(
-                            padding: EdgeInsets.all(5),
-                            decoration: BoxDecoration(
+                            padding: const EdgeInsets.all(5),
+                            decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: kPrimaryColor),
-                            child: Icon(
+                            child: const Icon(
                               Icons.add,
                               color: Colors.white,
                             ),

@@ -186,6 +186,7 @@ class _TinderCardState extends State<TinderCard> {
     required String title,
     required Color iconColor,
     required double opacity,
+
   }) {
     return Opacity(
       opacity: opacity,

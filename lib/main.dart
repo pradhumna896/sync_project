@@ -3,12 +3,16 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:provider/provider.dart';
 import 'package:syncdating/Screens/on_board_screen.dart';
 import 'package:syncdating/helper/constants.dart';
+import 'package:syncdating/helper/sessionmanager.dart';
 import 'package:syncdating/provider/app_controller.dart';
 import 'package:syncdating/provider/card_provider.dart';
+import 'package:syncdating/screens/home_screen.dart';
 import 'package:syncdating/screens/profile_details_screen.dart';
 import 'package:syncdating/screens/splash_screen.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await SessionManager.init();
   runApp(const MyApp());
 }
 
@@ -37,7 +41,7 @@ class MyApp extends StatelessWidget {
             )
           )
         ),
-        home:const SplashScreen()
+        home:SessionManager.getisLoggedIn()?HomeScreen(): SplashScreen()
       ),
     );
   }

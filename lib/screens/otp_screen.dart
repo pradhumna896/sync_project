@@ -85,7 +85,7 @@ class _OtpScreenState extends State<OtpScreen> {
 
                   onSubmit: (val){
                     if(val.length==4){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileDetailsScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileDetailsScreen(email: "email",)));
                     }
                   },
 

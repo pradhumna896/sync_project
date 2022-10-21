@@ -69,7 +69,7 @@ class GmailNewUserScreen extends StatelessWidget {
                 CustomButton(
                     title: "Continue",
                     onclick: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (ctx)=>ProfileDetailsScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (ctx)=>ProfileDetailsScreen(email: "email",)));
 
 
                     }),
